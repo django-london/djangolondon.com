@@ -205,6 +205,17 @@ header {
     max-width: 65ch;
     margin-inline: auto;
   }
+
+  & a {
+    text-decoration-line: none;
+    text-decoration-color: var(--color-light);
+
+
+    &:hover,
+    &:focus {
+      text-decoration-line: underline;
+    }
+  }
 }
 
 main {

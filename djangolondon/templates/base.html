@@ -5,7 +5,7 @@
 <head>
   <meta charset=UTF-8>
 
-  <title>Django London</title>
+  <title>{% if title %}{{ title }} | {% endif %}Django London</title>
 
   <meta name=viewport content="width=device-width, initial-scale=1">
 
@@ -14,7 +14,15 @@
 
 <body hx-ext=morph>
 
-{% block body %}{% endblock %}
+<header class=flow>
+  <div class=inner>
+    <h1><a href=/>Django London</a></h1>
+    <p>We meet monthly to discuss Django, Python, the web, and related topics.</p>
+  </div>
+</header>
+<main class=flow>
+{% block main %}{% endblock %}
+</main>
 
 </body>
 </html>

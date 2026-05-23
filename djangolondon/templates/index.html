@@ -1,20 +1,15 @@
 {% extends "base.html" %}
 
-{% block body %}
-<header class=flow>
-  <div class=inner>
-    <h1>Django London</h1>
-    <p>We meet monthly to discuss Django, Python, the web, and related topics.</p>
-  </div>
-</header>
-<main class=flow>
-  <h2>Links</h2>
-  <ul class=links-list role="list">
-    <li><a href=https://www.meetup.com/djangolondon/>Meetup.com</a></li>
-    <li><a href=https://fosstodon.org/@djangolondon>Mastodon</a></li>
-    <li><a href=https://www.linkedin.com/company/djangolondon>LinkedIn</a></li>
-    <li><a href=https://www.youtube.com/channel/UCNfEKvjjUemcg4wbb3cO5og>YouTube</a></li>
-    <li><a href=https://github.com/djangolondon/>GitHub</a></li>
-  </ul>
-</main>
-{% endblock body %}
+{% block main %}
+<h2>Code of Conduct</h2>
+<p>Our meetups are governed by a <a href=/code-of-conduct/>Code of Conduct</a>. Please take a few minutes to read it.</p>
+
+<h2>Links</h2>
+<ul class=links-list>
+  <li><a href=https://www.meetup.com/djangolondon/>Meetup.com</a></li>
+  <li><a href=https://fosstodon.org/@djangolondon>Mastodon</a></li>
+  <li><a href=https://www.linkedin.com/company/djangolondon>LinkedIn</a></li>
+  <li><a href=https://www.youtube.com/channel/UCNfEKvjjUemcg4wbb3cO5og>YouTube</a></li>
+  <li><a href=https://github.com/djangolondon/>GitHub</a></li>
+</ul>
+{% endblock main %}

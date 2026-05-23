@@ -9,6 +9,14 @@ class IndexTests(TestCase):
         assert response.status_code == HTTPStatus.OK
 
 
+class CodeOfConductTests(TestCase):
+    def test_success(self):
+        response = self.client.get("/code-of-conduct/")
+        assert response.status_code == HTTPStatus.OK
+        assert "<title>Code of Conduct | Django London</title>" in response.text
+        assert "Be Awesome to Each Other" in response.text
+
+
 class FaviconTests(TestCase):
     def test_success(self):
         response = self.client.get("/favicon.ico")

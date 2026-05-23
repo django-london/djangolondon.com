@@ -9,6 +9,14 @@ def index(request):
     return render(request, "index.html")
 
 
+def code_of_conduct(request):
+    return render(
+        request,
+        "code-of-conduct.html",
+        {"title": "Code of Conduct"},
+    )
+
+
 @require_GET
 @cache_control(max_age=60 * 60 * 24, immutable=True, public=True)  # one day
 def favicon(request: HttpRequest) -> HttpResponse:
