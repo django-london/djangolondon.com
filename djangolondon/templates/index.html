@@ -1,8 +1,20 @@
 {% extends "base.html" %}
 
 {% block body %}
+<header class=flow>
+  <div class=inner>
+    <h1>Django London</h1>
+    <p>We meet monthly to discuss Django, Python, the web, and related topics.</p>
+  </div>
+</header>
 <main class=flow>
-  <h1>Django London</h1>
-  <p>We meet monthly to discuss Django, Python, the web, and related topics.</p>
+  <h2>Links</h2>
+  <ul class=links-list role="list">
+    <li><a href=https://www.meetup.com/djangolondon/>Meetup.com</a></li>
+    <li><a href=https://fosstodon.org/@djangolondon>Mastodon</a></li>
+    <li><a href=https://www.linkedin.com/company/djangolondon>LinkedIn</a></li>
+    <li><a href=https://www.youtube.com/channel/UCNfEKvjjUemcg4wbb3cO5og>YouTube</a></li>
+    <li><a href=https://github.com/djangolondon/>GitHub</a></li>
+  </ul>
 </main>
 {% endblock body %}

@@ -79,6 +79,8 @@ textarea:not([rows]) {
 :root {
   --color-dark: #252525;
   --color-light: #efefef;
+  --color-django-green: #092e20;
+  --color-django-green-light: #198058;
   --color-link: #268bd2;
   /* https://utopia.fyi/type/calculator?c=320,18,1.25,1240,18,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   --size-step-0: clamp(1rem, calc(0.96rem + 0.22vw), 1.13rem);
@@ -91,7 +93,6 @@ textarea:not([rows]) {
 body {
   background: var(--color-light);
   color: var(--color-dark);
-  padding: 2em;
   font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
   font-weight: normal;
   font-size: var(--size-step-0);
@@ -192,4 +193,48 @@ button {
   font-weight: 700;
   padding-inline: 0.5em;
   border: 1px var(--color-dark);
+}
+
+header {
+  background: var(--color-django-green);
+  color: var(--color-light);
+  padding: 2em;
+  margin: -2em -2em 0;
+
+  & .inner {
+    max-width: 65ch;
+    margin-inline: auto;
+  }
+}
+
+main {
+  max-width: 65ch;
+  margin-inline: auto;
+  padding-block: 2em;
+}
+
+.links-list {
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1em;
+
+  & li {
+    list-style: none;
+  }
+
+  & a {
+    display: inline-block;
+    background: var(--color-django-green);
+    color: var(--color-light);
+    padding: 0.3em 0.8em;
+    border-radius: 0.3em;
+    text-decoration: none;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+      background: var(--color-django-green-light);
+    }
+  }
 }
