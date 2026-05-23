@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -t djangolondon .
+        run: docker build --build-arg UV_NO_DEV=0 -t djangolondon .
 
       - name: Run tests
         run: docker run --rm djangolondon uv run pytest

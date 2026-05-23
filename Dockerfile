@@ -5,10 +5,12 @@ COPY --from=ghcr.io/astral-sh/uv:0.11.16 /uv /uvx /bin/
 WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
-    UV_NO_DEV=1 \
     UV_COMPILE_BYTECODE=0 \
     UV_LINK_MODE=copy \
     UV_PYTHON_PREFERENCE=only-system
+
+ARG UV_NO_DEV=1
+ENV UV_NO_DEV=$UV_NO_DEV
 
 RUN --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
@@ -17,7 +19,7 @@ RUN --mount=type=bind,source=uv.lock,target=uv.lock \
 COPY . /app
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --verbose
+    uv sync --locked
 
 RUN uv run manage.py collectstatic --noinput
 
