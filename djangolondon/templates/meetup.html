@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markdown %}
 
 {% block main %}
 <div class=inner>
@@ -9,7 +10,7 @@
   <section>
     <h3>{{ talk.title }}</h3>
     <h4>{{ talk.speaker }}</h4>
-    {% if talk.description %}<p>{{ talk.description|linebreaksbr }}</p>{% endif %}
+    {% if talk.description %}{{ talk.description|markdown }}{% endif %}
     {% if talk.blogpost_url %}<p><a href={{ talk.blogpost_url }}>Blog post</a></p>{% endif %}
   </section>
   {% endfor %}

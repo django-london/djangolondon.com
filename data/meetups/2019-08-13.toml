@@ -1,0 +1,11 @@
+title = "August Django Meetup"
+date = 2019-08-13T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/263725224/"
+skills_matter_url = "https://skillsmatter.com/meetups/12719-london-django-meetup-august"
+
+[[talks]]
+title = "What Makes us Passionate"
+description = "A non-technical talk about individual and team motivation. From debunking of the carrot-and-stick paradigm to the more modern approach of positive psychology."
+
+[talks.speaker]
+name = "Marco Alabruzzo"

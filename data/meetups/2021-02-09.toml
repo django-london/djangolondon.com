@@ -1,0 +1,18 @@
+title = "February Django Meetup"
+date = 2021-02-09T19:30:00Z
+meetup_url = "https://www.meetup.com/djangolondon/events/276111901/"
+
+[[talks]]
+title = "How to make your web app more secure and ISO 27001 compliant"
+description = "In this talk, we will be sharing the steps we carried out to make our Django web app compliant to the ISO 27001 (framework for information security systems) and the lessons we learned while doing it. You need not necessarily need to join it for ISO, we will take you through quite a few generic security bits that would be applicable to most Django apps that are in production. This will require you to have at least intermediate level experience with web apps and APIs."
+
+[talks.speaker]
+name = "Viren Rajput"
+
+[[talks]]
+title = "New testing features in Django 3.2"
+blogpost_url = "https://adamj.eu/tech/2021/02/10/new-testing-features-in-django-3.2/"
+description = "A preview of test-related features coming in Django 3.2, which will be released in April."
+
+[talks.speaker]
+name = "Adam Johnson"

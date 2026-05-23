@@ -1,0 +1,45 @@
+title = "January Django Meetup"
+date = 2016-01-19T19:00:00+01:00
+meetup_url = "http://www.meetup.com/djangolondon/events/227547663/"
+skills_matter_url = "https://skillsmatter.com/meetups/7721-heroku-tour"
+
+[[talks]]
+title = "Factoryboy: Creating data for unit tests in an easy way"
+description = "Factoryboy is a Python library that replaces fixtures, useful when writing unit tests and some generated data is needed."
+skills_matter_url = "https://skillsmatter.com/skillscasts/7414-factoryboy-creating-data-for-unit-tests-in-an-easy-way"
+
+[talks.speaker]
+name = "Andrea Grandi"
+
+[[talks]]
+title = "What is Django Channels?"
+description = "A brief glance at Django channels. What, why and where will you use them."
+skills_matter_url = "https://skillsmatter.com/skillscasts/7381-a-brief-glance-at-django-channels-what-why-and-where-will-you-use-them"
+
+[talks.speaker]
+name = "Anand Kumria"
+
+[[talks]]
+title = "Heroku tour"
+description = "A brief introduction to Heroku: what it is, when it is convenient to use it, strengths and caveats, and how to build an application that can get the most from a cloud platform infrastructure."
+slides_url = "http://slides.com/marcoala/2016-heroku#/"
+skills_matter_url = "https://skillsmatter.com/skillscasts/7344-london-django-meetup"
+
+[talks.speaker]
+name = "Marco Alabruzzo"
+
+[[talks]]
+title = "Creating a custom Django Middleware"
+description = "Basic tutorial to learn about Django middlewares and how to create one."
+skills_matter_url = "https://skillsmatter.com/skillscasts/7415-creating-a-custom-django-middleware"
+
+[talks.speaker]
+name = "Andrea Grandi"
+
+[[talks]]
+title = "Getting the most out of Class Based Views"
+description = "An overview of the key features of Django's powerful class based views, and why you should use them.  Particularly suitable for Django improvers, but there should be something in there for more experienced developers too."
+skills_matter_url = "https://skillsmatter.com/skillscasts/7351-getting-the-most-out-of-class-based-views"
+
+[talks.speaker]
+name = "David Seddon"

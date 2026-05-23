@@ -1,0 +1,17 @@
+title = "March Django Meetup"
+date = 2021-03-09T19:30:00Z
+meetup_url = "https://www.meetup.com/djangolondon/events/276714774/"
+
+[[talks]]
+title = "Django, Ontono & Me"
+description = "An overview of my journey with Django, in particular related to my project [Ontono](https://ontono.com/), a platform for experts."
+
+[talks.speaker]
+name = "Cammil Taank"
+
+[[talks]]
+title = "Handsontable with Django"
+description = "[Handsontable.com](https://handsontable.com/) is leader in smartsheet. In this talk, I will discuss about integration of handsontable, Django, Javascript, Django channels, pivottable etc. We will discuss multiple users can edit spreadsheet at same time. Save data automatically to mysql back-end."
+
+[talks.speaker]
+name = "Damanjeet Singh"

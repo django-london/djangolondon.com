@@ -35,6 +35,7 @@ class Talk(models.Model):
     description = models.TextField(blank=True)
     blogpost_url = models.URLField(blank=True)
     slides_url = models.URLField(blank=True)
+    skills_matter_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.title
@@ -70,5 +71,6 @@ def load_static_data(sender, **kwargs):
                     "description": talk_data.get("description", "").strip(),
                     "blogpost_url": talk_data.get("blogpost_url", ""),
                     "slides_url": talk_data.get("slides_url", ""),
+                    "skills_matter_url": talk_data.get("skills_matter_url", ""),
                 },
             )

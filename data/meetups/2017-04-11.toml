@@ -1,0 +1,41 @@
+title = "April Django Meetup"
+date = 2017-04-11T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/238464120/"
+skills_matter_url = "https://skillsmatter.com/meetups/9144-london-django-april-meetup"
+
+[[talks]]
+title = "Introduction to JWT authentication"
+description = """
+The basic principles of JWT authentication and the differences compared to sessions.
+Harry is a developer at pawsquad.com, and volunteers at omnifolio.org.
+"""
+slides_url = "https://github.com/djangolondon/djangolondon.github.io/blob/main/_meetups/Slides/2017-04-11/json-web-tokens.pdf"
+skills_matter_url = "https://skillsmatter.com/skillscasts/9849-london-django-april-meetup"
+
+[talks.speaker]
+name = "Harry Papaloizou"
+
+[[talks]]
+title = "Denormalization (or, How I Learned to Stop Worrying and Love Data Redundancy)"
+description = """
+A practical guide on when to denormalize a database, and the golden rules to do it right.
+Marco is a web guy that values process over technology and user experience over everything. He has made e-commerce websites, marketing tools and financial tools. 
+Currently he's helping Festicket create hassle-free festival packages.
+"""
+slides_url = "http://slides.com/marcoala/denormalization/"
+skills_matter_url = "https://skillsmatter.com/skillscasts/10105-denormalization-or-how-i-learned-to-stop-worrying-and-love-data-redundancy"
+
+[talks.speaker]
+name = "Marco Alabruzzo"
+
+[[talks]]
+title = "DRY Your Serializers"
+description = """
+Ian will be talking about his package django-rest-framework-serializer-extensions - a collection of useful tools to DRY up your Django Rest Framework serializers. 
+Ian is lead software engineer at Housekeep, a home cleaning startup.
+"""
+slides_url = "https://github.com/djangolondon/djangolondon.github.io/blob/main/_meetups/Slides/2017-04-11/dry-serializers.pdf"
+skills_matter_url = "https://skillsmatter.com/skillscasts/10106-django-rest-framework-serializers"
+
+[talks.speaker]
+name = "Ian Clark"

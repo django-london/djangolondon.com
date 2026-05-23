@@ -1,0 +1,26 @@
+title = "December Django Meetup"
+date = 2016-12-13T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/235644842/"
+skills_matter_url = "https://skillsmatter.com/meetups/8538-london-django-meetup"
+
+[[talks]]
+title = "FieldBuilder Snippet"
+description = """
+A quick talk on the limitations of ModelForm, and how to use its full firepower with more flexibility.
+Marco is a web guy that values process over technology and user experience over everything. He has made e-commerce, B2B applications and marketing websites. Currently at Growth Street, he's helping businesses grow by building straightforward finance tools that allow SMEs to monitor and control their cash flow.
+"""
+skills_matter_url = "https://skillsmatter.com/skillscasts/9249-london-django-meetup"
+
+[talks.speaker]
+name = "Marco Alabruzzo"
+
+[[talks]]
+title = "Django Quiz"
+description = """
+Like a dad at Christmas lunch, Adam has organized a quiz to test how well you know using Django and its history.  Will you win the fantastic prize?
+Adam Johnson is Head of Devops at YPlan and author of django-mysql library. Adam has been working with Django for 3 and a half years.
+"""
+skills_matter_url = "https://skillsmatter.com/skillscasts/9475-django-under-the-hood-2016"
+
+[talks.speaker]
+name = "Adam Johnson"

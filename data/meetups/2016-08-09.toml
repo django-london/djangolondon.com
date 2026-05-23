@@ -1,0 +1,32 @@
+title = "Django August Meetup"
+date = 2016-08-09T19:00:00+01:00
+meetup_url = "http://www.meetup.com/djangolondon/events/232623366/"
+skills_matter_url = "https://skillsmatter.com/meetups/8046-london-django-august-meetup"
+
+[[talks]]
+title = "Sharing Files Securely with Korra"
+description = """
+Back when he worked for the government, Daniel was struck by the fact that even an elaborate institution like his employer had no safe means of transferring files. Instead, would-be secure documents were emailed from person to person, unencrypted, across public networks because there was no viable alternative for those involved.
+This gave rise to a quick & dirty way to make file sharing safer whilst still not requiring non-technical users to understand or install complex software. Korra is a simple Django-based web service that employs symmetric encryption and makes sharing files securely easy for everyone.
+"""
+skills_matter_url = "https://skillsmatter.com/skillscasts/8011-sharing-files-securely-with-korra"
+
+[talks.speaker]
+name = "Daniel Quinn"
+
+[[talks]]
+title = "PyCharm"
+description = "A walkthrough of the PyCharm features that aid in Django development."
+skills_matter_url = "https://skillsmatter.com/skillscasts/8731-pycharm"
+
+[talks.speaker]
+name = "Antonio Martin"
+
+[[talks]]
+title = "A quick introduction to unit testing Django projects with tox"
+description = "How and why you should use tox instead of manage.py to run Django unit tests like all the cool kids."
+slides_url = "http://slides.com/jerrytaylor/a-quick-introduction-to-unit-testing-django-projects-with-tox#/"
+skills_matter_url = "https://skillsmatter.com/skillscasts/8732-a-quick-introduction-to-unit-testing-django-projects-with-tox"
+
+[talks.speaker]
+name = "Jeremy Taylor"

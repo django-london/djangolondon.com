@@ -1,0 +1,22 @@
+title = "October Django Meetup"
+date = 2018-10-09T19:00:00+01:00
+meetup_url = "https://www.meetup.com/londondjango/events/qsqvcqyxnbmb/"
+skills_matter_url = "https://skillsmatter.com/meetups/11289-london-django-meetup-group"
+
+[[talks]]
+title = "Lint Your Architecture"
+description = "Code bases have a nasty habit of becoming a complicated web of circular dependencies. To stop this happening, you need constraints on your project's structure. Meet Layer Linter, a tool to control the dependencies between modules in your Python project. https://layer-linter.readthedocs.io/en/latest/readme.html"
+slides_url = "http://slides.com/davidseddon/lint-your-architecture#/"
+skills_matter_url = "https://skillsmatter.com/skillscasts/12972-lint-your-architecture"
+
+[talks.speaker]
+name = "David Seddon"
+
+[[talks]]
+title = "My Experience on Using Postgresql in Production for a Data Heavy Project"
+description = "This talk gives an insight on - optimising queries - understanding some postgresql internals - understanding postgresql locks - sharing experience on what can go wrong in production and how you can prevent it - some tips about postgresql from the experience i gained at my current company"
+slides_url = "/meetups/Slides/2018-10-09/django-sql.pdf"
+skills_matter_url = "https://skillsmatter.com/skillscasts/12973-my-experience-on-using-postgresql-in-production-for-a-data-heavy-project"
+
+[talks.speaker]
+name = "Charalampos Papaloizou"

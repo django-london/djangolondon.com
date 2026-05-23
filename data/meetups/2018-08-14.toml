@@ -1,0 +1,21 @@
+title = "August Django Meetup"
+date = 2018-08-14T19:00:00+01:00
+meetup_url = "https://www.meetup.com/The-London-Django-Meetup-Group/events/lnlcbqyxlbsb/"
+skills_matter_url = "https://skillsmatter.com/meetups/11250-london-django-meetup-group"
+
+[[talks]]
+title = "What we Think of GraphQL, 88 Million Queries Later"
+description = "An exploration of GraphQL with Rob Kirberich."
+skills_matter_url = "https://skillsmatter.com/skillscasts/12644-what-we-think-of-graphql-88-million-queries-later"
+
+[talks.speaker]
+name = "Rob Kirberich"
+
+[[talks]]
+title = "Craig Goes to Scotland to Learn About Python"
+description = "Craig shares gives his personal experiences and highlights from his time at EuroPython 2018 in Edinburgh."
+slides_url = "https://www.craiga.id.au/talks/europython2018/"
+skills_matter_url = "https://skillsmatter.com/skillscasts/12646-craig-goes-to-scotland-to-learn-about-python"
+
+[talks.speaker]
+name = "Craig Anderson"

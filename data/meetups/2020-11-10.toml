@@ -1,0 +1,17 @@
+title = "November Django Meetup"
+date = 2020-11-10T19:30:00Z
+meetup_url = "https://www.meetup.com/djangolondon/events/274347862/"
+
+[[talks]]
+title = "Django Data Browser"
+description = "[Django Data Browser](https://pypi.org/project/django-data-browser/), what is it, what can it do for you, how do you set it up, how do you use it."
+
+[talks.speaker]
+name = "Gordon Wrigley"
+
+[[talks]]
+title = "Serverless Data Tasks with Python and Hark"
+description = "This talk is about [Hark Lang](https://github.com/condense9/hark-lang) - a new way to think about computation on serverless infrastructure. Hark is a language for building programs that run Python in a virtual machine on cloud functions. Prior knowledge of serverless concepts will help, but isn't essential."
+
+[talks.speaker]
+name = "Ric da Silva"

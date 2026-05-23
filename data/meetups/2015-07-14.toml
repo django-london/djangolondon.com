@@ -1,0 +1,32 @@
+title = "The London Django pub meetup"
+date = 2015-07-14T19:00:00+01:00
+meetup_url = "http://www.meetup.com/djangolondon/events/223297765/"
+
+[[talks]]
+title = "Things I wish I'd known about Django"
+description = "All that stuff I'd wish I'd known when I started."
+skills_matter_url = "https://speakerdeck.com/jamescooke/things-i-wish-id-known-about-django"
+
+[talks.speaker]
+name = "James Cooke"
+
+[[talks]]
+title = "Django's Check Framework"
+description = "What is Django's [System Check Framework](https://docs.djangoproject.com/en/1.8/ref/checks/)? And how do you use it?"
+slides_url = "https://github.com/adamchainz/django-talk-system-checks/blob/main/django-talk-system-checks.pdf"
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "Django meets Twilio task router"
+
+[talks.speaker]
+name = "Charalampos Papaloizu"
+
+[[talks]]
+title = "5 quick tips: Django + Docker"
+slides_url = "http://slides.com/jamespacileo/5-quick-tips-django-docker/fullscreen"
+
+[talks.speaker]
+name = "James Pacileo"

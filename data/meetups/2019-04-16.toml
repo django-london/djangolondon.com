@@ -1,0 +1,24 @@
+title = "April Django Meetup"
+date = 2019-04-16T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/259864033/"
+skills_matter_url = "https://skillsmatter.com/meetups/11866-london-django"
+
+[[talks]]
+title = "Decomposing a Django monolith: 2 different approaches"
+description = "We have all heard, or even lived, this story before -- we had a greenfield project with an exciting business opportunity, so we chose Django with all of its batteries included to move fast and go to market quickly. Fortunately, things went very well, the business was booming and the company growing. Unfortunately, so was the operational and developmental complexity of our Django project. It’s a good problem to have, but a problem nonetheless. In this talk, I will discuss two different approaches to decomposing a Django monolith into multiple services."
+
+[talks.speaker]
+name = "Lim Hoang"
+
+[[talks]]
+title = "Django and Web Security Headers"
+description = "Web browsers support several HTTP headers to opt in to extra security features. I’ll explain then and show you how to get an A+ rating for these with the free checker SecurityHeaders.com, using built-in features and a few third-party packages."
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "Lightning talk: Django Girls London"
+
+[talks.speaker]
+name = "Gintare Urbone and Jamica Ortiz"

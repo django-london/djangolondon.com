@@ -1,0 +1,21 @@
+title = "December Django Meetup"
+date = 2015-12-14T19:00:00+01:00
+meetup_url = "http://www.meetup.com/djangolondon/events/227021016/"
+skills_matter_url = "https://skillsmatter.com/meetups/7611-django-lodnon-december-meetup"
+
+[[talks]]
+title = "Django on AWS"
+description = "AWS is the biggest cloud provider out there, and thus many Django projects are deployed there. This will be a tour of the key services and features on AWS and how you can integrate them with your Django project."
+slides_url = "https://github.com/adamchainz/django-talk-aws"
+skills_matter_url = "https://skillsmatter.com/skillscasts/7340-django-on-aws"
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "Trialling Wagtail in the Agency Setting"
+description = "Wagtail is an app that can turn your Django site into a fully featured CMS. This talk will be an overview of positive outcomes of using Wagtail for a medium sized web publishing site build."
+skills_matter_url = "https://skillsmatter.com/skillscasts/7341-a-tour-of-wagtail"
+
+[talks.speaker]
+name = "Gary Stevens"

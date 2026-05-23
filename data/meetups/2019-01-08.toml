@@ -1,0 +1,18 @@
+title = "January Django Meetup"
+date = 2010-01-08T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/257808755/"
+skills_matter_url = "https://skillsmatter.com/meetups/11863-london-django"
+
+[[talks]]
+title = "Technologies that will be around in 21 years time"
+description = "The tech industry is normally focussed on the new. But what isn’t changing around us? What things are worth learning because they’re unlikely to disappear any time soon? It turns out SQL, Python, and Django are likely to survive thanks to a mathematical observation..."
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "Getting your feet wet with Kaggle"
+description = "A Kaggle crash course aimed at beginners. The goal is to get familiar with the tools and workflows data scientists use. We will walk through one Kaggle competition from start to finish and along the way learn about Jupyter notebooks, Pandas and scikit-learn, and concepts of classification, regression, validation sets and Machine learning algorithms."
+
+[talks.speaker]
+name = "Jelena Jovanovic"

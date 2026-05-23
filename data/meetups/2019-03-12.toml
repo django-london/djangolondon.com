@@ -1,0 +1,18 @@
+title = "March Django Meetup"
+date = 2019-03-12T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/259526083/"
+skills_matter_url = "https://skillsmatter.com/meetups/12195-london-django-meetup-march"
+
+[[talks]]
+title = "A Gentle Introduction to Experimentalism"
+description = "An overview of A/B testing and a Django module that may assist with this process."
+
+[talks.speaker]
+name = "Vaughan Allan"
+
+[[talks]]
+title = "Lightning talk: Dependency Health Checkup for your Django Apps"
+description = "A demo of Depcheck, an open-source tool to check the health of your Python dependencies."
+
+[talks.speaker]
+name = "Andy Jones"

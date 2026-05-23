@@ -1,0 +1,36 @@
+title = "while true: beer() and django()"
+date = 2014-08-12T19:00:00+01:00
+meetup_url = "http://www.meetup.com/djangolondon/events/196782422/"
+
+[[talks]]
+title = "Django at Scale"
+blogpost_url = "https://adamj.eu/tech/2014/08/14/django-at-scale/"
+slides_url = "https://github.com/adamchainz/django-talk-at-scale"
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "Generate an awesome base Django project, with Cookiecutters!"
+description = """
+<p>Here's a link to my cookiecutter project I was demoing with: <a href="https://github.com/wildfish/wildfish-django-starter"> https://github.com/wildfish/wildfish-django-starter </a>.</p>
+<p>This is a single CRUD app version: <a href="https://github.com/wildfish/cookiecutter-django-crud"> https://github.com/wildfish/cookiecutter-django-crud </a></p>
+<p>This is a big long list of loads of other people's projects: <a href="https://github.com/audreyr/cookiecutter#available-cookiecutters"> https://github.com/audreyr/cookiecutter#available-cookiecutters </a> </p>
+"""
+
+[talks.speaker]
+name = "Rolo Mawlabaux"
+
+[[talks]]
+title = "Django + neo4j (the leading graph database)"
+slides_url = "https://github.com/djangolondon/djangolondon.github.io/blob/main/_meetups/Slides/2014-08-12/neo4j.md"
+
+[talks.speaker]
+name = "Charalampos"
+
+[[talks]]
+title = "Dockerize that Django app!"
+slides_url = "https://jamespacileo.github.io/Slides-Dockerize-That-Django-App/"
+
+[talks.speaker]
+name = "James Pacileo"

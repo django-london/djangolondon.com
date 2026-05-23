@@ -1,0 +1,28 @@
+title = "Django June Meetup"
+date = 2016-06-14T19:00:00+01:00
+meetup_url = "http://www.meetup.com/djangolondon/events/231335519/"
+skills_matter_url = "https://skillsmatter.com/meetups/8044-london-django-june-meetup"
+
+[[talks]]
+title = "How Django knows who you are"
+description = "A gentle introduction to different ways that can be used to authenticate a user in Django"
+skills_matter_url = "https://skillsmatter.com/skillscasts/8009-london-django-june-meetup"
+
+[talks.speaker]
+name = "Stephanos Papanikolopoulos"
+
+[[talks]]
+title = "The ORM: Don't ask the DB"
+description = "Dive in to common issues people face when their database cause application slow downs. Be aware of what you do, and how your tools actually work."
+skills_matter_url = "https://skillsmatter.com/skillscasts/8394-the-orm-don-t-ask-the-db"
+
+[talks.speaker]
+name = "Anthony 'cybo' King"
+
+[[talks]]
+title = "How (and how not) to scale with Django"
+description = "In this talk Malcolm will share Tips and tricks for scaling Django - and what to avoid - based on Malcolm's experience building the systems used for the biggest TV shows on TV."
+skills_matter_url = "https://skillsmatter.com/skillscasts/8383-how-and-how-not-to-scale-with-django"
+
+[talks.speaker]
+name = "Malcolm Box"

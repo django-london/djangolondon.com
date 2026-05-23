@@ -1,0 +1,30 @@
+title = "April Django Meetup"
+date = 2016-04-12T19:00:00+01:00
+meetup_url = "http://www.meetup.com/djangolondon/events/230094002/"
+skills_matter_url = "https://skillsmatter.com/meetups/8038-london-django-april-meetup"
+
+[[talks]]
+title = "Introduction and Djangocon EU Summary"
+description = "Your host for the evening, Adam will cover the introductions and then give a summary of what happened at Djangocon EU at the start of the month, with references to some of the more interesting talks there."
+slides_url = "http://www.djangolondon.com/organizers/2016-04-12.html"
+skills_matter_url = "https://skillsmatter.com/skillscasts/8033-introduction-and-djangocon-eu-summary"
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "It's About Time: Getting to Grips with Timezones in Django"
+description = "Timezones can be confusing and annoying if you need to support them in a project. David will run us through the tools Django provides for working with them."
+slides_url = "http://slides.com/davidseddon/about-time"
+skills_matter_url = "https://skillsmatter.com/skillscasts/8005-london-django-april-meetup"
+
+[talks.speaker]
+name = "David Seddon"
+
+[[talks]]
+title = "Django Desktop Applications"
+description = "It's not a normal use case, but Django applications can be deployed on the desktop! Alex will cover a project he worked on that did this."
+skills_matter_url = "https://skillsmatter.com/skillscasts/8034-django-desktop-applications"
+
+[talks.speaker]
+name = "Alex Damian"
