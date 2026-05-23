@@ -10,6 +10,7 @@ console_command = '/code/manage.py shell'
 [build]
 
 [env]
+  DATABASE_PATH = '/mnt/djangolondon/djangolondon.sqlite3'
   PORT = '8000'
 
 [[mounts]]
