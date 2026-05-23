@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+  <meta charset=UTF-8>
+
+  <title>Django London</title>
+
+  <meta name=viewport content="width=device-width, initial-scale=1">
+
+  <link rel=stylesheet href="{% static 'style.css' %}">
+</head>
+
+<body hx-ext=morph>
+
+{% block body %}{% endblock %}
+
+</body>
+</html>

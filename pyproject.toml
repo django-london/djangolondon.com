@@ -1,0 +1,10 @@
+[project]
+name = "djangolondon.com"
+version = "0"
+requires-python = ">=3.14,<3.15"
+description = "The website for Django London, the Django meetup in London, UK."
+dependencies = [
+    "django",
+    "django-browser-reload",
+    "gunicorn",
+]
