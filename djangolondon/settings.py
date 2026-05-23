@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+from django.utils.csp import CSP
+
 # Hide development server warning
 # https://docs.djangoproject.com/en/stable/ref/django-admin/#envvar-DJANGO_RUNSERVER_HIDE_WARNING
 os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "django.middleware.csp.ContentSecurityPolicyMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
 ]
@@ -55,6 +58,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = "djangolondon.urls"
 
 SECRET_KEY = "django-insecure-e9nx_t_p4i+ztp)56!c_mor^jhp5b)0v19=gahgy%=v9waboo%"
+
+SECURE_CSP = {
+    "script-src": [CSP.NONCE, CSP.STRICT_DYNAMIC],
+    "object-src": [CSP.NONE],
+    "base-uri": [CSP.NONE],
+}
 
 STORAGES = {
     "staticfiles": {
@@ -70,6 +79,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
+                "django.template.context_processors.csp",
             ]
         },
     },
