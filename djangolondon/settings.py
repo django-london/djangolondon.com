@@ -79,4 +79,4 @@ USE_TZ = True
 
 # django.contrib.staticfiles
 STATIC_ROOT = BASE_DIR / "static_root"
-STATIC_URL = "s/"
+STATIC_URL = "static/"
