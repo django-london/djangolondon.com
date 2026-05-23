@@ -8,3 +8,12 @@ dependencies = [
     "django-browser-reload",
     "gunicorn",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-django>=4.12.0",
+]
+
+[tool.pytest]
+ini_options.DJANGO_SETTINGS_MODULE = "djangolondon.settings"
