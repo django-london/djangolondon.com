@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class=inner>
+  <h2>{{ meetup.title }}</h2>
+  <p>{{ meetup.date|date:"j F Y" }}</p>
+  {% if meetup.meetup_url %}<p><a href={{ meetup.meetup_url }}>Meetup.com event</a></p>{% endif %}
+  {% for talk in meetup.talk_set.all %}
+  <section>
+    <h3>{{ talk.title }}</h3>
+    <h4>{{ talk.speaker }}</h4>
+    {% if talk.description %}<p>{{ talk.description|linebreaksbr }}</p>{% endif %}
+    {% if talk.blogpost_url %}<p><a href={{ talk.blogpost_url }}>Blog post</a></p>{% endif %}
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}
