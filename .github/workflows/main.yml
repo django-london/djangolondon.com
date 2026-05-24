@@ -3,7 +3,8 @@ name: CI
 on:
   push:
     branches:
-      - main
+    - main
+  pull_request:
 
 jobs:
   test:
@@ -24,6 +25,7 @@ jobs:
   deploy:
     name: Deploy app
     needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
