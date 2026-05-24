@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from dj_lite import sqlite_config
 from django.utils.csp import CSP
 
 # Hide development server warning
@@ -28,12 +29,9 @@ CSRF_TRUSTED_ORIGINS = [
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
+        **sqlite_config(BASE_DIR),
         "NAME": os.environ.get("DATABASE_PATH", BASE_DIR / "local.sqlite3"),
         "ATOMIC_REQUESTS": True,
-        "OPTIONS": {
-            "transaction_mode": "IMMEDIATE",
-        },
     },
 }
 
