@@ -16,6 +16,7 @@ console_command = '/code/manage.py shell'
 [[mounts]]
   source = 'djangolondon'
   destination = '/mnt/djangolondon'
+  snapshot_retention = 14
 
 [http_service]
   internal_port = 8000
