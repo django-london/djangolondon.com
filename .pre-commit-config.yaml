@@ -32,12 +32,6 @@ repos:
   rev: 4864562a5d05a7ff3bce99bc31f892eeb396fc00  # frozen: 1.30.0
   hooks:
   - id: django-upgrade
-- repo: https://github.com/adamchainz/blacken-docs
-  rev: dda8db18cfc68df532abf33b185ecd12d5b7b326  # frozen: 1.20.0
-  hooks:
-  - id: blacken-docs
-    additional_dependencies:
-    - black==25.1.0
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: 0c7b6c989466a93942def1f84baf36ddfcd60c83  # frozen: v0.15.14
   hooks:
