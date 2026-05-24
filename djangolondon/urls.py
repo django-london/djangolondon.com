@@ -20,7 +20,9 @@ register_converter(ISODateConverter, "isodate")
 urlpatterns = [
     path("", views.index),
     path("code-of-conduct/", views.code_of_conduct),
-    path("meetups/<isodate:date>/", views.meetup),
+    path("meetups/", views.meetup_list),
+    path("meetups/<isodate:date>/", views.meetup_detail),
+    path("meetup/<isodate:date>/", views.meetup_redirect),
     path("favicon.ico", views.favicon),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
