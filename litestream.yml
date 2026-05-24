@@ -1,0 +1,4 @@
+dbs:
+  - path: ${DATABASE_PATH}
+    replica:
+      url: s3://${BUCKET_NAME}?endpoint=fly.storage.tigris.dev&region=auto

@@ -1,6 +1,7 @@
 FROM python:3.14-slim
 
 COPY --from=ghcr.io/astral-sh/uv:0.11.16 /uv /uvx /bin/
+COPY --from=litestream/litestream:latest /usr/local/bin/litestream /usr/local/bin/litestream
 
 WORKDIR /app
 
@@ -24,5 +25,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 RUN uv run manage.py collectstatic --noinput
 
 EXPOSE 8000
+
+COPY litestream.yml /etc/litestream.yml
 
 CMD ["./run.sh"]
