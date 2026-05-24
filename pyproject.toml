@@ -1,22 +1,65 @@
 [project]
-name = "djangolondon.com"
+name = "djangolondon-com"
 version = "0"
-requires-python = ">=3.14,<3.15"
 description = "The website for Django London, the Django meetup in London, UK."
+requires-python = ">=3.14,<3.15"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.14",
+]
 dependencies = [
-    "dj-lite>=1.3.0",
-    "django",
-    "django-browser-reload",
-    "gunicorn",
-    "markdown-it-py>=4.2.0",
+  "dj-lite>=1.3",
+  "django",
+  "django-browser-reload",
+  "gunicorn",
+  "markdown-it-py>=4.2",
 ]
 
 [dependency-groups]
 dev = [
-    "coverage>=7.14.0",
-    "pytest>=9.0.3",
-    "pytest-django>=4.12.0",
+  "coverage>=7.14",
+  "pytest>=9.0.3",
+  "pytest-django>=4.12",
 ]
+
+[tool.ruff]
+lint.select = [
+  # flake8-bugbear
+  "B",
+  # flake8-comprehensions
+  "C4",
+  # pycodestyle
+  "E",
+  # Pyflakes errors
+  "F",
+  # isort
+  "I",
+  # flake8-simplify
+  "SIM",
+  # flake8-tidy-imports
+  "TID",
+  # pyupgrade
+  "UP",
+  # Pyflakes warnings
+  "W",
+]
+lint.ignore = [
+  # flake8-bugbear opinionated rules
+  "B9",
+  # line-too-long
+  "E501",
+  # suppressible-exception
+  "SIM105",
+  # if-else-block-instead-of-if-exp
+  "SIM108",
+]
+lint.extend-safe-fixes = [
+  # non-pep585-annotation
+  "UP006",
+]
+
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
 
 [tool.pytest]
 ini_options.DJANGO_SETTINGS_MODULE = "djangolondon.settings"

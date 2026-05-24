@@ -11,7 +11,7 @@ In this talk, Ibukun Oluwayomi will attempt to answer the following questions:
  * What really is concurrency?
  * Is concurrency the same thing as parallelism?
  * What concurrent problems are and why approaching them concurrently is the best approach.
- * What tools for concurrency and parralellism are available in the python standard library and the limitations they have.
+ * What tools for concurrency and parallelism are available in the python standard library and the limitations they have.
  * What the Global interpreter lock (GIL) is and why the Python Multithreading module is not what you might expect.
 
 This talk will barely scratch the surface of concurrency as it is quite a complicated topic in software development. Ibukun's goal is to show that you do not have to understand all of those complexities to take advantage of its benefits as a Python developer.

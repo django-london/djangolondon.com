@@ -19,7 +19,7 @@ name = "Harry Papaloizou"
 title = "Denormalization (or, How I Learned to Stop Worrying and Love Data Redundancy)"
 description = """
 A practical guide on when to denormalize a database, and the golden rules to do it right.
-Marco is a web guy that values process over technology and user experience over everything. He has made e-commerce websites, marketing tools and financial tools. 
+Marco is a web guy that values process over technology and user experience over everything. He has made e-commerce websites, marketing tools and financial tools.
 Currently he's helping Festicket create hassle-free festival packages.
 """
 slides_url = "http://slides.com/marcoala/denormalization/"
@@ -31,7 +31,7 @@ name = "Marco Alabruzzo"
 [[talks]]
 title = "DRY Your Serializers"
 description = """
-Ian will be talking about his package django-rest-framework-serializer-extensions - a collection of useful tools to DRY up your Django Rest Framework serializers. 
+Ian will be talking about his package django-rest-framework-serializer-extensions - a collection of useful tools to DRY up your Django Rest Framework serializers.
 Ian is lead software engineer at Housekeep, a home cleaning startup.
 """
 slides_url = "https://github.com/djangolondon/djangolondon.github.io/blob/main/_meetups/Slides/2017-04-11/dry-serializers.pdf"

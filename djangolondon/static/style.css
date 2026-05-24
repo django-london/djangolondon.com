@@ -149,7 +149,7 @@ blockquote {
           margin-block-start: var(--flow-space, 1em);
 }
 
-/* Flow and rythm */
+/* Flow and rhythm */
 :is(h1, h2, h3, blockquote) {
   --flow-space: 1.5em;
 }
