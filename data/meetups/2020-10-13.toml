@@ -13,6 +13,7 @@ name = "Paolo Melchiorre"
 [[talks]]
 title = "Async python is not faster"
 description = "Benchmarks and explanation for why async Python web frameworks aren't faster than sync ones - and why they go a bit wobbly under load.<br>About Cal: I'm a contract Python developer mostly interested in databases and messaging code."
+blogpost_url = "https://calpaterson.com/async-python-is-not-faster.html"
 
 [talks.speaker]
 name = "Cal Paterson"
