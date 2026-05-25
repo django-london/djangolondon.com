@@ -2,6 +2,8 @@ from http import HTTPStatus
 
 from django.test import TestCase
 
+from djangolondon.models import Speaker
+
 
 class IndexTests(TestCase):
     def test_success(self):
@@ -31,11 +33,16 @@ class MeetupListTests(TestCase):
 
 
 class MeetupDetailTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.speaker = Speaker.objects.get(name="Paolo Melchiorre")
+
     def test_success(self):
         response = self.client.get("/meetups/2021-05-18/")
         assert response.status_code == HTTPStatus.OK
         assert "May Django Meetup" in response.text
         assert "Maps with Django" in response.text
+        assert f"/speakers/{self.speaker.pk}/" in response.text
         assert "Paolo Melchiorre" in response.text
 
     def test_not_found(self):
@@ -48,6 +55,23 @@ class MeetupRedirectTests(TestCase):
         response = self.client.get("/meetup/2021-05-18/")
         assert response.status_code == HTTPStatus.MOVED_PERMANENTLY
         assert response["Location"] == "/meetups/2021-05-18/"
+
+
+class SpeakerDetailTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.speaker = Speaker.objects.get(name="Paolo Melchiorre")
+
+    def test_success(self):
+        response = self.client.get(f"/speakers/{self.speaker.pk}/")
+        assert response.status_code == HTTPStatus.OK
+        assert "<title>Paolo Melchiorre | Django London</title>" in response.text
+        assert "Maps with Django" in response.text
+        assert "/meetups/2021-05-18/" in response.text
+
+    def test_not_found(self):
+        response = self.client.get("/speakers/999999/")
+        assert response.status_code == HTTPStatus.NOT_FOUND
 
 
 class FaviconTests(TestCase):

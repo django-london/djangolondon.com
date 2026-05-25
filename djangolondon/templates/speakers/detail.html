@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>{{ speaker.name }}</h2>
+<ul>
+  {% for talk in speaker.talk_set.all %}
+  <li><a href=/meetups/{{ talk.meetup.date|date:"Y-m-d" }}/>{{ talk.title }}</a> &mdash; {{ talk.meetup.title }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

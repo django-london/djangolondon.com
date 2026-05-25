@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
 
-from djangolondon.models import Meetup
+from djangolondon.models import Meetup, Speaker
 
 
 def index(request):
@@ -55,6 +55,21 @@ def meetup_detail(request, date: dt.date):
 
 def meetup_redirect(request, date: dt.date):
     return redirect(f"/meetups/{date.isoformat()}/", permanent=True)
+
+
+def speaker_detail(request, pk: int):
+    speaker = get_object_or_404(
+        Speaker.objects.prefetch_related("talk_set__meetup"),
+        pk=pk,
+    )
+    return render(
+        request,
+        "speakers/detail.html",
+        {
+            "title": speaker.name,
+            "speaker": speaker,
+        },
+    )
 
 
 @require_GET

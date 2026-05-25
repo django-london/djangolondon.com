@@ -24,6 +24,7 @@ urlpatterns = [
     path("meetups/", views.meetup_list),
     path("meetups/<isodate:date>/", views.meetup_detail),
     path("meetup/<isodate:date>/", views.meetup_redirect),
+    path("speakers/<int:pk>/", views.speaker_detail),
     path("favicon.ico", views.favicon),
     path("organizers/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
