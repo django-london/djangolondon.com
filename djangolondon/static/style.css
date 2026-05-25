@@ -91,6 +91,7 @@ textarea:not([rows]) {
 }
 
 body {
+  margin: 0;
   background: var(--color-light);
   color: var(--color-dark);
   font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
@@ -198,8 +199,7 @@ button {
 header {
   background: var(--color-django-green);
   color: var(--color-light);
-  padding: 2em;
-  margin: -2em -2em 0;
+  padding: 1.5em 2em;
 
   & .inner {
     max-width: 65ch;
