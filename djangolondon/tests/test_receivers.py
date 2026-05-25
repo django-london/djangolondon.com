@@ -1,8 +1,12 @@
+import tempfile
+from pathlib import Path
+from unittest import mock
+
 from django.apps import apps
 from django.contrib.auth.models import User
 from django.test import TestCase, override_settings
 
-from djangolondon.models import Meetup
+from djangolondon.models import Meetup, Speaker, Talk
 from djangolondon.receivers import (
     _dev_credentials,
     create_dev_superuser,
@@ -53,6 +57,12 @@ class LoadStaticDataTests(TestCase):
     def _call(self, app_name="djangolondon"):
         load_static_data(sender=apps.get_app_config(app_name))
 
+    def _call_with_toml(self, tmp_path, toml_content):
+        toml_file = Path(tmp_path) / "2024-01-01.toml"
+        toml_file.write_text(toml_content)
+        with mock.patch("djangolondon.receivers.DATA_DIR", Path(tmp_path)):
+            load_static_data(sender=apps.get_app_config("djangolondon"))
+
     def test_loads_meetups(self):
         self._call()
         assert Meetup.objects.exists()
@@ -66,3 +76,55 @@ class LoadStaticDataTests(TestCase):
     def test_skipped_for_other_apps(self):
         self._call(app_name="auth")
         assert not Meetup.objects.exists()
+
+    def test_syncs_updated_toml_fields(self):
+        with tempfile.TemporaryDirectory() as tmp_path:
+            self._call_with_toml(
+                tmp_path,
+                """
+                date = 2024-01-01T18:00:00+00:00
+                title = "January Meetup"
+
+                [[talks]]
+                title = "Original Title"
+                description = "Original description"
+                blogpost_url = "https://example.com/post1"
+                slides_url = "https://example.com/slides1"
+                skills_matter_url = ""
+
+                [talks.speaker]
+                name = "Jane Doe"
+            """,
+            )
+            self._call_with_toml(
+                tmp_path,
+                """
+                date = 2024-01-01T18:00:00+00:00
+                title = "January Meetup Updated"
+                meetup_url = "https://meetup.com/event"
+
+                [[talks]]
+                title = "Updated Title"
+                description = "Updated description"
+                blogpost_url = "https://example.com/post2"
+                slides_url = "https://example.com/slides2"
+                skills_matter_url = ""
+
+                [talks.speaker]
+                name = "Jane Doe"
+            """,
+            )
+
+        meetup = Meetup.objects.get(date="2024-01-01T18:00:00+00:00")
+        assert meetup.title == "January Meetup Updated"
+        assert meetup.meetup_url == "https://meetup.com/event"
+
+        talks = Talk.objects.filter(meetup=meetup)
+        assert talks.count() == 1
+        talk = talks.get()
+        assert talk.title == "Updated Title"
+        assert talk.description == "Updated description"
+        assert talk.blogpost_url == "https://example.com/post2"
+        assert talk.slides_url == "https://example.com/slides2"
+
+        assert Speaker.objects.filter(name="Jane Doe").count() == 1
