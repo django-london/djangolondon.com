@@ -2,17 +2,15 @@
 {% load markdown %}
 
 {% block main %}
-<div class=inner>
-  <h2>{{ meetup.title }}</h2>
-  <p>{{ meetup.date|date:"j F Y" }}</p>
-  {% if meetup.meetup_url %}<p><a href={{ meetup.meetup_url }}>Meetup.com event</a></p>{% endif %}
-  {% for talk in meetup.talk_set.all %}
-  <section>
-    <h3>{{ talk.title }}</h3>
-    <h4>{{ talk.speaker }}</h4>
-    {% if talk.description %}{{ talk.description|markdown }}{% endif %}
-    {% if talk.blogpost_url %}<p><a href={{ talk.blogpost_url }}>Blog post</a></p>{% endif %}
-  </section>
-  {% endfor %}
-</div>
+<h2>{{ meetup.title }}</h2>
+<p>{{ meetup.date|date:"j F Y" }}</p>
+{% if meetup.meetup_url %}<p><a href={{ meetup.meetup_url }}>Meetup.com event</a></p>{% endif %}
+{% for talk in meetup.talk_set.all %}
+<section>
+  <h3>{{ talk.title }}</h3>
+  <h4><a href=/speakers/{{ talk.speaker.pk }}/>{{ talk.speaker }}</a></h4>
+  {% if talk.description %}{{ talk.description|markdown }}{% endif %}
+  {% if talk.blogpost_url %}<p><a href={{ talk.blogpost_url }}>Blog post</a></p>{% endif %}
+</section>
+{% endfor %}
 {% endblock %}
