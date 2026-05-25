@@ -86,7 +86,7 @@ class LoadStaticDataTests(TestCase):
                 title = "January Meetup"
 
                 [[talks]]
-                title = "Original Title"
+                title = "My Talk"
                 description = "Original description"
                 blogpost_url = "https://example.com/post1"
                 slides_url = "https://example.com/slides1"
@@ -104,7 +104,7 @@ class LoadStaticDataTests(TestCase):
                 meetup_url = "https://meetup.com/event"
 
                 [[talks]]
-                title = "Updated Title"
+                title = "My Talk"
                 description = "Updated description"
                 blogpost_url = "https://example.com/post2"
                 slides_url = "https://example.com/slides2"
@@ -122,9 +122,54 @@ class LoadStaticDataTests(TestCase):
         talks = Talk.objects.filter(meetup=meetup)
         assert talks.count() == 1
         talk = talks.get()
-        assert talk.title == "Updated Title"
+        assert talk.title == "My Talk"
         assert talk.description == "Updated description"
         assert talk.blogpost_url == "https://example.com/post2"
         assert talk.slides_url == "https://example.com/slides2"
 
+        assert Speaker.objects.filter(name="Jane Doe").count() == 1
+
+    def test_speaker_with_two_talks(self):
+        with tempfile.TemporaryDirectory() as tmp_path:
+            self._call_with_toml(
+                tmp_path,
+                """
+                date = 2024-01-01T18:00:00+00:00
+                title = "January Meetup"
+
+                [[talks]]
+                title = "First Talk"
+
+                [talks.speaker]
+                name = "Jane Doe"
+
+                [[talks]]
+                title = "Second Talk"
+
+                [talks.speaker]
+                name = "Jane Doe"
+            """,
+            )
+            self._call_with_toml(
+                tmp_path,
+                """
+                date = 2024-01-01T18:00:00+00:00
+                title = "January Meetup"
+
+                [[talks]]
+                title = "First Talk"
+
+                [talks.speaker]
+                name = "Jane Doe"
+
+                [[talks]]
+                title = "Second Talk"
+
+                [talks.speaker]
+                name = "Jane Doe"
+            """,
+            )
+
+        meetup = Meetup.objects.get(date="2024-01-01T18:00:00+00:00")
+        assert Talk.objects.filter(meetup=meetup).count() == 2
         assert Speaker.objects.filter(name="Jane Doe").count() == 1

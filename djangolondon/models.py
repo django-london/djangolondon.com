@@ -30,5 +30,13 @@ class Talk(models.Model):
     slides_url = models.URLField(blank=True)
     skills_matter_url = models.URLField(blank=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["meetup", "speaker", "title"],
+                name="%(app_label)s_%(class)s_unique_talk",
+            ),
+        ]
+
     def __str__(self):
         return self.title

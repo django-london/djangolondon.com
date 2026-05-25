@@ -60,8 +60,8 @@ def load_static_data(sender, **kwargs):
             Talk.objects.update_or_create(
                 meetup=meetup,
                 speaker=speaker,
+                title=talk_data["title"],
                 defaults={
-                    "title": talk_data["title"],
                     "description": talk_data.get("description", "").strip(),
                     "blogpost_url": talk_data.get("blogpost_url", ""),
                     "slides_url": talk_data.get("slides_url", ""),
