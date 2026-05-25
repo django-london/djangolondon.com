@@ -13,18 +13,16 @@ os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "beta.djangolondon.com",
     "djangolondon.com",
-    "djangolondon.fly.dev",
+    "djangolondon-com.fly.dev",
 ]
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
-    "https://beta.djangolondon.com",
     "https://djangolondon.com",
-    "https://djangolondon.fly.dev",
+    "https://djangolondon-com.fly.dev/",
 ]
 
 DATABASES = {
