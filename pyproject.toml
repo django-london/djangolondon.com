@@ -70,6 +70,7 @@ run.data_file = ".coverage/cov"
 run.source = [
   "djangolondon",
 ]
+report.fail_under = 100
 report.show_missing = true
 report.skip_covered = true
 report.skip_empty = true
