@@ -7,11 +7,19 @@ Setup:
 **(2)** Run migrations:
 
 ```bash
-uv run manage.py migrate
+DEBUG=1 uv run manage.py migrate
 ```
 
 **(3)** Start the server:
 
 ```bash
 DEBUG=1 uv run manage.py runserver
+```
+
+Visit `/organizers/` to log in.
+In debug mode, the migration process automatically creates a superuser with these credentials:
+
+```
+username: admin
+password: thames
 ```

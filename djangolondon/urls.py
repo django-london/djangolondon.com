@@ -1,5 +1,6 @@
 import datetime as dt
 
+from django.contrib import admin
 from django.urls import include, path, register_converter
 
 from djangolondon import views
@@ -24,5 +25,6 @@ urlpatterns = [
     path("meetups/<isodate:date>/", views.meetup_detail),
     path("meetup/<isodate:date>/", views.meetup_redirect),
     path("favicon.ico", views.favicon),
+    path("organizers/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
