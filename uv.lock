@@ -115,22 +115,24 @@ dev = [
     { name = "coverage" },
     { name = "pytest" },
     { name = "pytest-django" },
+    { name = "pytest-randomly" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "dj-lite", specifier = ">=1.3.0" },
+    { name = "dj-lite", specifier = ">=1.3" },
     { name = "django" },
     { name = "django-browser-reload" },
     { name = "gunicorn" },
-    { name = "markdown-it-py", specifier = ">=4.2.0" },
+    { name = "markdown-it-py", specifier = ">=4.2" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "coverage", specifier = ">=7.14.0" },
+    { name = "coverage", specifier = ">=7.14" },
     { name = "pytest", specifier = ">=9.0.3" },
-    { name = "pytest-django", specifier = ">=4.12.0" },
+    { name = "pytest-django", specifier = ">=4.12" },
+    { name = "pytest-randomly", specifier = ">=4.1.0" },
 ]
 
 [[package]]
@@ -228,6 +230,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/13/2b/db9a193df89e5660137f5428063bcc2ced7ad790003b26974adf5c5ceb3b/pytest_django-4.12.0.tar.gz", hash = "sha256:df94ec819a83c8979c8f6de13d9cdfbe76e8c21d39473cfe2b40c9fc9be3c758", size = 91156, upload-time = "2026-02-14T18:40:49.235Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/83/a5/41d091f697c09609e7ef1d5d61925494e0454ebf51de7de05f0f0a728f1d/pytest_django-4.12.0-py3-none-any.whl", hash = "sha256:3ff300c49f8350ba2953b90297d23bf5f589db69545f56f1ec5f8cff5da83e85", size = 26123, upload-time = "2026-02-14T18:40:47.381Z" },
+]
+
+[[package]]
+name = "pytest-randomly"
+version = "4.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/27/b3/36192dacc0f470ac2cc516f73e01739c9a48a8224f76beada4f85e1c8a89/pytest_randomly-4.1.0.tar.gz", hash = "sha256:47f1d9746c3bc3efabd53ae1ebfb8bb385cf3d4df4b505b6d58d9c97a3dfe70f", size = 14302, upload-time = "2026-04-20T13:01:51.831Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9a/db/2df9a1fca597a273f957a559c20c2d95d629928384507b2afa43ba6909d1/pytest_randomly-4.1.0-py3-none-any.whl", hash = "sha256:f55e89e53367b090c0c053697d7f9d77595543d0e0516c93978b50c0f6b252f9", size = 8353, upload-time = "2026-04-20T13:01:50.382Z" },
 ]
 
 [[package]]
