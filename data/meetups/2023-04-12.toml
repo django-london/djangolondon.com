@@ -1,0 +1,22 @@
+title = "Django London Meetup April"
+date = 2023-04-12T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/292251580/"
+
+[[talks]]
+title = "Evaluating the carbon footprint of Django and Wagtail sites"
+description = """
+There is good research about the general climate impact of the digital economy. Great tools to evaluate individual websites too. Between the big picture and individual projects, we can then look at how the frameworks sites are built with affect the carbon footprint – and what changes at the level of frameworks could move the needle. You will learn: Basics of how we evaluate emissions for websites, including relevant tools. How this compares with general performance auditing. Evaluating emissions at scale: how we can do this for thousands of projects. Specific areas of Django and Wagtail which could use improvements.
+
+Thibaud works at Torchbox as a developer, core contributor to the Wagtail CMS built on Django, and contributes to Django.
+"""
+
+[talks.speaker]
+name = "Thibaud Colas"
+
+[[talks]]
+title = "How to profile and improve startup time by Adam Johnson"
+blogpost_url = "https://adamj.eu/tech/2023/03/02/django-profile-and-improve-import-time/"
+description = "A walkthrough of key techniques to profile the time it takes to start up your Django project, and ways to improve that."
+
+[talks.speaker]
+name = "Adam Johnson"

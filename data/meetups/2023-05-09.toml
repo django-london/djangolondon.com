@@ -1,0 +1,10 @@
+title = "Django London Meetup May"
+date = 2023-05-09T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/293104731/"
+
+[[talks]]
+title = "Using the Django JSONField for various calculations"
+description = "In this talk, Vlad Podgurschi will cover the effective use of Django's JSONField for various calculations. Attendees will learn how to utilize KeyTextTransforms and the upcoming KT expression, as well as how to annotate and aggregate on JSONField paths. Through the lens of a real-world example, Vlad will demonstrate how Django's JSONField was leveraged to achieve a particular goal. Those with experience in querysets will be able to easily follow along."
+
+[talks.speaker]
+name = "Vlad Podgurschi"
