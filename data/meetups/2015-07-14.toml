@@ -5,7 +5,7 @@ meetup_url = "https://www.meetup.com/djangolondon/events/223297765/"
 [[talks]]
 title = "Things I wish I'd known about Django"
 description = "All that stuff I'd wish I'd known when I started."
-skills_matter_url = "https://speakerdeck.com/jamescooke/things-i-wish-id-known-about-django"
+slides_url = "https://speakerdeck.com/jamescooke/things-i-wish-id-known-about-django"
 
 [talks.speaker]
 name = "James Cooke"

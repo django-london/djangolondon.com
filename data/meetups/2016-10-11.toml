@@ -6,7 +6,7 @@ skills_matter_url = "https://skillsmatter.com/meetups/8505-django-meetup"
 [[talks]]
 title = "Full clean factories"
 description = """
-Strong tests are dependent on the code that manages their setup and create the  instances required for each test run. In this talk, James explore some different factories available for Django and how they interact with `save` and `full_clean`.
+Strong tests are dependent on the code that manages their setup and create the  instances required for each test run. In this talk, James explores some different factories available for Django and how they interact with `save` and `full_clean`.
 James is a server-side development contractor based in London. He works mainly with Linux, Python, vim, whiteboards and hopefully as many excellent people as possible.
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/9137-full-clean-factories"

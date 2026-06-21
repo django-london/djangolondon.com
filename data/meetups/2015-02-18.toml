@@ -19,7 +19,7 @@ name = "James Cooke"
 
 [[talks]]
 title = "Company ihateironing are using Django"
-description = "Matt will talk about how is company ihateironing are using Django."
+description = "Matt will talk about how his company ihateironing is using Django."
 
 [talks.speaker]
 name = "Matt Connelly"
