@@ -1,0 +1,17 @@
+title = "Django London Meetup June"
+date = 2026-06-09T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/314900840/"
+
+[[talks]]
+title = "AI Agents Need Memory Too: Building Systems That Remember What Matters"
+description = "AI agents are only as good as what they can remember, but deciding what to store, where to persist it, and how to retrieve it at the right moment is harder than it sounds. This talk walks through a practical framework for architecting memory systems for agentic applications, covering memory types, storage patterns, retrieval strategies using vector search, and managing the full memory lifecycle in production."
+
+[talks.speaker]
+name = "Abigail Afi Gbadago"
+
+[[talks]]
+title = "Replay Failed Python Runs: Reverse Debugging When Logs Aren’t Enough"
+description = "Reproducing Python failures from a traceback alone is often impossible once the request is gone or the environment has changed. This talk introduces Retrace, an open-source reverse debugger that lets you record, replay, and step backwards through a failing run, giving both developers and AI agents concrete evidence for debugging."
+
+[talks.speaker]
+name = "Nathan Matthews"

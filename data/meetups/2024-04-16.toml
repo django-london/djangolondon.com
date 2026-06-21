@@ -1,0 +1,10 @@
+title = "Django London Meetup April"
+date = 2024-04-16T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/299793290/"
+
+[[talks]]
+title = "Data-Oriented Django Deux"
+description = "Data-Oriented Design gives us principles for making fast, hardware-friendly software. This talk covers applications of those principles in Django projects, packages, and even Django itself. Adam is a co-organizer of the meetup, a Django contributor, and author on Django and Git."
+
+[talks.speaker]
+name = "Adam Johnson"

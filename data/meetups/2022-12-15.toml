@@ -1,0 +1,10 @@
+title = "Django London Meetup December"
+date = 2022-12-15T18:15:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/290239349/"
+
+[[talks]]
+title = "Grasping the Nettle"
+description = "How and why to use Python Generics. Generics allow us to make use of certain Python features that would otherwise result in code that is not type safe. But they can be difficult to wrap our heads around. In this talk we’ll look in depth at the conceptual fundamentals of Generics and build the foundations in order to use them with confidence."
+
+[talks.speaker]
+name = "David Seddon"

@@ -1,0 +1,24 @@
+title = "November Django Meetup *back from DUTH!"
+date = 2015-11-16T19:00:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/226492998/"
+
+[[talks]]
+title = "Encapsulated Django: Keeping your apps small, focused and free of circular dependencies"
+description = "Keeping your apps small, focused and free of circular dependencies"
+
+[talks.speaker]
+name = "David Seddon"
+
+[[talks]]
+title = "Django Under The Hood: The Summary"
+description = "A summary of the concepts covered in Django Under The Hood."
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "Grepping Django models: showcasing django-grep-db"
+description = "Showcasing the use of django-grep-db for grepping Django models."
+
+[talks.speaker]
+name = "Michael Blatherwick"

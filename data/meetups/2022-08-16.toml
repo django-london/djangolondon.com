@@ -1,0 +1,10 @@
+title = "August Django London Meetup"
+date = 2022-08-16T18:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/286916493/"
+
+[[talks]]
+title = "Automate cleaning code in few easy steps!"
+description = "Have you ever been in a situation where you check your pipelines to see if he’s finished running the tests and you find that he hasn’t even started because you forgot to run the linters locally? In this talk she would like to share with you her findings, think about the pros and cons and understand a little bit better why you should start using them."
+
+[talks.speaker]
+name = "Ester Beltrami"

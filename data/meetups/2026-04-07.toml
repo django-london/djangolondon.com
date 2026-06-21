@@ -1,0 +1,17 @@
+title = "Django London Meetup April"
+date = 2026-04-07T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/313777736/"
+
+[[talks]]
+title = "Digitising Historical Caving Data with Django"
+description = "Building an automated pipeline with Django which can extract, structure and publish 2,700+ historical printed reports from scanned PDF copies. Andrew Northall is a Python & Django specialist who maintains several open source Django projects/services for the caving and amateur radio communities."
+
+[talks.speaker]
+name = "Andrew Northall"
+
+[[talks]]
+title = "llms.txt for Django: what works"
+description = "The llms.txt format is an emerging standard to structure information for Large Language Models. It’s a desirable addition to the docs of Python packages. Let’s review how to adopt it! We’ll discuss the fundamentals of the format and its benefits as a user of the docs, and as a maintainer. How to produce and consume those files across different tools (Sphinx, mkdocs, Django). How to optimize them for different LLMs with an eval suite. Tools and techniques you should be able to reuse through other engineering tasks with LLMs. Thibaud Colas works at Torchbox as developer, core contributor to the Wagtail CMS build on Django."
+
+[talks.speaker]
+name = "Thibaud Colas"

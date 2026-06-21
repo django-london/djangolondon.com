@@ -1,0 +1,22 @@
+title = "February Django Meetup"
+date = 2017-02-07T19:00:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/237000068/"
+
+[[talks]]
+title = "Testing in Django"
+description = "In and out on Django testing framework internals, its evolution and some best practices."
+
+[talks.speaker]
+name = "Ana Balica"
+
+[[talks]]
+title = "7Bridges and Django"
+
+[talks.speaker]
+name = "Matei Beremski"
+
+[[talks]]
+title = "Business Process Modelling in Django Viewflow"
+
+[talks.speaker]
+name = "Sam Ghosh"

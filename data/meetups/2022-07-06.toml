@@ -1,0 +1,17 @@
+title = "July Django London Meetup"
+date = 2022-07-06T18:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/286709204/"
+
+[[talks]]
+title = "Setting up an internship programme from scratch"
+description = "To give exposure and experience to an underrepresented group of the workforce, and show off the incredible careers in the future of energy and tech, Octopus Energy created an internship with roles open to candidates who identify with any Black, African or Caribbean background. Maya and a few other talented members of the tech team set up and ran the tech arm of the programme. In this talk, she will share what work was involved in this process."
+
+[talks.speaker]
+name = "Maya Shah"
+
+[[talks]]
+title = "Must-have tools for running a production ready GraphQL API"
+description = "GraphQL is a powerful tool. With great power comes great responsibility (quoting Spiderman movie 😄 ) and that’s why we need other tools that help us secure our GraphQL APIs and help us scale it up. In this talk, Ahter will be explaining few of those must-have tools to run a production ready GraphQL API (using Django)."
+
+[talks.speaker]
+name = "Ahter Sonmez"

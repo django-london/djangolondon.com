@@ -13,7 +13,7 @@ name = "Rob Kirberich"
 
 [[talks]]
 title = "Craig Goes to Scotland to Learn About Python"
-description = "Craig shares gives his personal experiences and highlights from his time at EuroPython 2018 in Edinburgh."
+description = "Craig shares his personal experiences and highlights from his time at EuroPython 2018 in Edinburgh."
 slides_url = "https://www.craiga.id.au/talks/europython2018/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12646-craig-goes-to-scotland-to-learn-about-python"
 

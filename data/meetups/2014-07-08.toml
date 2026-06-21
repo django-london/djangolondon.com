@@ -1,0 +1,24 @@
+title = "while beer(): show() and tell()"
+date = 2014-07-08T18:45:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/189071492/"
+
+[[talks]]
+title = "Geo Django"
+description = "Following on from the success of June's meetup, this month we will have more short informal talks and regular breaks for beers and conversation."
+
+[talks.speaker]
+name = "James Pacileo"
+
+[[talks]]
+title = "Business Logic and Django ORM isolation"
+description = "Following on from the success of June's meetup, this month we will have more short informal talks and regular breaks for beers and conversation."
+
+[talks.speaker]
+name = "Hansel Dunlop"
+
+[[talks]]
+title = "Testing file uploads"
+description = "Following on from the success of June's meetup, this month we will have more short informal talks and regular breaks for beers and conversation."
+
+[talks.speaker]
+name = "Mark Litwintschik"

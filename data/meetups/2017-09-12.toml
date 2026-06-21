@@ -1,0 +1,10 @@
+title = "September Django Meetup"
+date = 2017-09-12T18:30:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/242405590/"
+
+[[talks]]
+title = "Django & Mr Piper the dependency manager"
+description = "Piper is a small user-friendly tool for managing project dependencies. This is a talk on what Piper is and how it can help the Django developer's workflow."
+
+[talks.speaker]
+name = "James Pacileo"

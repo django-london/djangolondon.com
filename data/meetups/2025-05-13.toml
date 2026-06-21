@@ -1,0 +1,14 @@
+title = "Django London Meetup May"
+date = 2025-05-13T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/307281281/"
+
+[[talks]]
+title = "How to enable new linting rules"
+description = """
+An approach to subjecting new code to stricter standards than existing code.
+
+(Bio: Sam is a software engineer at Kraken Tech, working on their financial systems (billing, payments, debt) and codebase health.)
+"""
+
+[talks.speaker]
+name = "Sam Searles-Bryant"

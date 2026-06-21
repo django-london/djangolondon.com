@@ -22,7 +22,7 @@ name = "Adam Johnson"
 title = "Django meets Twilio task router"
 
 [talks.speaker]
-name = "Charalampos Papaloizu"
+name = "Charalampos Papaloizou"
 
 [[talks]]
 title = "5 quick tips: Django + Docker"

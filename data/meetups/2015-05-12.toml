@@ -1,0 +1,24 @@
+title = "Django Pub App"
+date = 2015-05-12T18:45:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/222140648/"
+
+[[talks]]
+title = "Django + Mysql (and YPlan)"
+description = "A presentation on Django and MySQL, including YPlan."
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "OriginMarkets (the why of Django)"
+description = "A presentation on the origins and purpose of Django."
+
+[talks.speaker]
+name = "Robert Taylor"
+
+[[talks]]
+title = "Bench marking Django"
+description = "A presentation on benchmarking practices within Django."
+
+[talks.speaker]
+name = "Patrick Fitzgerald"

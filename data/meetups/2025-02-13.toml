@@ -1,0 +1,25 @@
+title = "Django London Meetup February"
+date = 2025-02-13T18:15:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/305991220/"
+
+[[talks]]
+title = "Run your tests against Django's main!"
+description = """
+Django is known to be very stable. How did it get its reputation? With lots of features and settings, Django has over 17k tests – but that's not always enough to catch bugs. The best time to catch bugs is before they made it into the final release. So, here's a simple way to start contributing to Django: run your tests against Django's main branch! In this talk, we'll explore how you can easily add it to your CI matrix, and how it benefits both Django and your project.
+
+Sage is a Wagtail CMS developer at Torchbox, GSoC contributor and mentor for Wagtail and Django
+"""
+
+[talks.speaker]
+name = "Sage Abdullah"
+
+[[talks]]
+title = "Keeping Django relevant for the next 20 years"
+description = """
+Django is a big, slow-moving object. Lots of people worry about how much traction the framework still has, and its long-term outlook. Today, together, we get to review its existential threats – and opportunities ! We’ll start with a data-driven review of emerging trends in the web development ecosystem, with a particular focus on Python. We’ll look at specific Python considerations (types, tooling, package discovery) that are relevant for all projects, and specific indicators of the project health for contributors, and underlying usage trends.
+
+Thibaud works at Torchbox as developer, core contributor to the Wagtail CMS build on Django, and President of the Django Software Foundation.
+"""
+
+[talks.speaker]
+name = "Thibaud Colas"

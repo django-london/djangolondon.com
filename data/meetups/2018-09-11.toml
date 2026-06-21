@@ -1,0 +1,10 @@
+title = "London Django Meetup"
+date = 2018-09-11T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/253642800/"
+
+[[talks]]
+title = "Liberating Structures"
+description = "Rather than a talk, we will learn about and participate in Liberating Structures, which are a set of facilitation tools for understanding how to work better. We'll be applying these tools to working as Django developers. This will be an interactive session."
+
+[talks.speaker]
+name = "David Heath"

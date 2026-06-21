@@ -1,0 +1,25 @@
+title = "Django London Meetup May"
+date = 2026-05-07T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/314361297/"
+
+[[talks]]
+title = "Django's GeneratedField by example"
+description = """
+Learn how to use Django 5.0's GeneratedField through practical examples. This field lets the database compute values automatically based on other fields in your model — a powerful feature that's easy to underuse. Paolo will walk through real-world use cases to show where it fits and how to make the most of it.
+
+Paolo Melchiorre is a Python backend developer, Django contributor, and Python Software Foundation Fellow. He serves on the Django Software Foundation board, co-organises PyCon Italia, and is a coach for Django Girls and a navigator for the Djangonaut Space mentorship programme.
+"""
+
+[talks.speaker]
+name = "Paolo Melchiorre"
+
+[[talks]]
+title = "Django in the Lab: how web development is reshaping behavioural research"
+description = """
+Off-the-shelf platforms can't always keep up with the complexity of academic research. Andy has been using Django since version 1.11 to build tools that can — from coordinating live location-based VR studies to running inclusive diary studies via WhatsApp and auditing immersive experiences for accessibility. He'll share where Django works especially well in academic settings, what surprised him along the way, and why this moment feels like a real opportunity for the Django community.
+
+Andy Woods is a Senior Research Engineer-Psychologist at CoSTAR & StoryFutures, Royal Holloway, University of London, and a Django Software Foundation Individual Member.
+"""
+
+[talks.speaker]
+name = "Andy Woods"

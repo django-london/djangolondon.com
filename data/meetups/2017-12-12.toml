@@ -1,0 +1,22 @@
+title = "December Django Meetup"
+date = 2017-12-12T18:30:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/244962572/"
+
+[[talks]]
+title = "Django Quiz"
+description = "The return of the quiz from last December, with more prizes to be won!"
+
+[talks.speaker]
+name = "Adam Johnson"
+
+[[talks]]
+title = "The Rocky River"
+
+[talks.speaker]
+name = "David Seddon"
+
+[[talks]]
+title = "Scaling Django with Kubernetes"
+
+[talks.speaker]
+name = "Joseph Borg"

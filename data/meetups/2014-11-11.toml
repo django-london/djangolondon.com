@@ -1,0 +1,10 @@
+title = "def meetup(): yield meet(), chat() and talk()"
+date = 2014-11-11T19:00:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/215672122/"
+
+[[talks]]
+title = "The Other True Way': A case for Class Based Settings"
+description = "Short talks: David Seddon: The Other True Way': A case for Class Based Settings"
+
+[talks.speaker]
+name = "David Seddon"

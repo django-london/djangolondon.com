@@ -1,0 +1,10 @@
+title = "June Django London Meetup"
+date = 2022-06-20T18:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/286565592/"
+
+[[talks]]
+title = "Patterns of flakey Python tests"
+description = "Flakey tests are those that fail intermittently - they are annoying and affect all large test suites. This talk will describe some common causes of flakiness in Python tests, and include advice on fixing and preventing flakey tests."
+
+[talks.speaker]
+name = "David Winterbottom"

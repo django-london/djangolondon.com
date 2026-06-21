@@ -1,0 +1,17 @@
+title = "Django London Meetup May"
+date = 2024-05-15T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/300467704/"
+
+[[talks]]
+title = "Layered Django project structure for large-scale collaboration"
+description = "How can hundreds of engineers collaborate on the same codebase without chaos and build a successful business? This talk will explore the challenges encountered by a large team of engineers working on a complex codebase, and how to effectively manage the process of building a successful tech business. The key to success lies in organising the codebase in a clear and concise manner, enabling easy comprehension and modification by team members. Failure to do so can lead to confusion and hinder progress, potentially resulting in an unsuccessful project. This talk will specifically focus on organising a Django project using a layered architecture. This involves structuring the codebase into distinct layers, each with a unique purpose, to facilitate separation of concerns. In an MVC framework, this typically involves separating the data, domain, application, and interface layers. By understanding the fundamentals of layered architecture and applying these principles to future projects, attendees will learn how to effectively manage complex codebases and successfully build thriving businesses with technology."
+
+[talks.speaker]
+name = "Çağıl Uluşahin Sönmez"
+
+[[talks]]
+title = "Crabs in Snakes!"
+description = "Python is great for productivity and readability. Rust is great if you want things to run really fast. Isn’t it a shame we can’t use both in the same program? It turns out we can! Learn how, with the help of some clever libraries, we can write compiled Python modules in Rust. We’ll start by introducing Rust itself. It’s a very different language to Python with a whole new way of thinking. Along the way, we’ll meet Cargo, Rust’s excellent package manager. Then we’ll see how we can plumb Rust code into Python as a native extension module"
+
+[talks.speaker]
+name = "David Seddon"

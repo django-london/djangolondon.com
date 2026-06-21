@@ -14,7 +14,7 @@ Thibaud works at Torchbox as a developer, core contributor to the Wagtail CMS bu
 name = "Thibaud Colas"
 
 [[talks]]
-title = "How to profile and improve startup time by Adam Johnson"
+title = "How to profile and improve startup time"
 blogpost_url = "https://adamj.eu/tech/2023/03/02/django-profile-and-improve-import-time/"
 description = "A walkthrough of key techniques to profile the time it takes to start up your Django project, and ways to improve that."
 

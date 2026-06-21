@@ -1,0 +1,17 @@
+title = "Django London Meetup December"
+date = 2023-12-11T18:15:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/297502880/"
+
+[[talks]]
+title = "Supporting Junior Developers: Insights from My Journey"
+description = "Anna aims to share valuable insights from her own personal journey as a junior developer. The primary goal is to provide practical and beneficial information for junior developers, as well as their mentors and line managers. While the focus is on supporting junior developers, the talk suggests that anyone attending could find ideas for their professional growth. Overall, the talk will offer actionable advice and perspectives based on the speaker’s own experiences, making it relevant for a broader audience interested in professional development."
+
+[talks.speaker]
+name = "Anna Zhydko"
+
+[[talks]]
+title = "Tests that write your docs. Tests that rewrite themselves."
+description = "This talk will cover the Hitchstory tool, which can test your Django apps and generate documentation at the same time. On the way, it will cover some YAML surprises, or “WATs” in the vein of the Gary Bernhardt’s infamous WAT talk."
+
+[talks.speaker]
+name = "Colm O’Connor"

@@ -1,0 +1,10 @@
+title = "Django London Meetup June"
+date = 2023-06-14T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/293442804/"
+
+[[talks]]
+title = "Workplace culture is not just a fashion trend!"
+description = "What is workplace culture? What does it look like? Why is it important to have a positive one? Have you ever thought about why employees are leaving their workplaces? In this talk, we'll dive into workplace culture and explore how to create an environment that attracts and retains top talent. Drawing from personal experiences at a company with an amazing friendly workplace culture, we'll discuss the key characteristics that define a rockstar workplace. From open communication and empowering leadership to inclusivity and work-life balance, we'll shed light on the importance of these factors in fostering employee satisfaction, engagement, and performance. Join us as we delve into the benefits of a positive workplace culture, including better employee health, reduced turnover, increased loyalty, and improved job performance. You'll leave with valuable insights and practical strategies to create a harmonious work environment where everyone can thrive. So, step into the Culture Club and discover how to build a workplace that rocks!"
+
+[talks.speaker]
+name = "Ester Beltrami"

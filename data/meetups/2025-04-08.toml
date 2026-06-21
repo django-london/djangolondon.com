@@ -1,0 +1,17 @@
+title = "Django London Meetup April"
+date = 2025-04-08T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/306661103/"
+
+[[talks]]
+title = "How to use Cursor as a professional"
+description = "A different approach to AI-assisted development. Many engineers are misusing Cursor AI, treating it as just a search engine or IDE, but there's a better way. I'll show you how to harness Cursor’s full power by building an autonomous standard library of rules, fine-tuning outcomes, and exponentially accelerating development workflows. Expect real-world examples, and insights that will transform how you think about AI-driven software development."
+
+[talks.speaker]
+name = "David Zorto"
+
+[[talks]]
+title = "Data-Oriented Django Drei"
+description = "Data-Oriented Design encourages us to focus on the data transformations occurring in our code, so we can write code that maps them onto hardware efficiently. Building on my previous two talks at DjangoCons Europe 2022 and 2024, this “third part” will reintroduce Data-Oriented Design and then focus on database indexes. We’ll see how they work, what options you have, and how to select the right ones to build for your application. The aim is to empower you to write indexes that make your queries zoom, using the tools Django provides."
+
+[talks.speaker]
+name = "Adam Johnson"

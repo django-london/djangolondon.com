@@ -1,0 +1,10 @@
+title = "July Django Meetup"
+date = 2021-07-13T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/278951881/"
+
+[[talks]]
+title = "A 3 yr Django Dev and his journey to get a side-project going"
+description = "I talk about what I tried to get a django based side project up. What worked. What didn't work. Not all code related. Some are psychological tactics to get over akrasia. This talk is beginner friendly and would aim to interest any level of developers."
+
+[talks.speaker]
+name = "KimSia Sim"

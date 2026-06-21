@@ -1,0 +1,31 @@
+title = "for hour in meetup: beer() and django()"
+date = 2014-09-09T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/202037892/"
+
+[[talks]]
+title = "Quick live demonstration of Django + Docker"
+description = "Quick live demonstration of Django + Docker"
+
+[talks.speaker]
+name = "James Pacileo"
+
+[[talks]]
+title = "First steps with Django CMS"
+description = "First steps with Django CMS"
+
+[talks.speaker]
+name = "Iacopo Spalletti"
+
+[[talks]]
+title = "Django 1.7 officially released!"
+description = "Django 1.7 officially released!"
+
+[talks.speaker]
+name = "Anand Kumria"
+
+[[talks]]
+title = "Amazing tests with FactoryBoy!"
+description = "Amazing tests with FactoryBoy!"
+
+[talks.speaker]
+name = "Adam Johnson"

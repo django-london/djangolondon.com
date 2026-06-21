@@ -1,0 +1,10 @@
+title = "November Django Meetup"
+date = 2017-11-07T18:30:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/244261754/"
+
+[[talks]]
+title = "Making Enterprise fun with Django"
+description = "Django is not only for new web apps, but also for integrating into existing systems as well. We will go over how to setup a project that integrates with common enterprise components such as Oracle and LDAP, and speed up development iterations with Docker."
+
+[talks.speaker]
+name = "Charlie Smith"

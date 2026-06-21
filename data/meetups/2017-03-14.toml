@@ -1,0 +1,17 @@
+title = "March Django Meetup"
+date = 2017-03-14T19:00:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/237672538/"
+
+[[talks]]
+title = "Docker in Production - Are we there yet?"
+description = "A look at running docker in production in 2017. Is it a good idea? Including an overview of Amazon ECS and Google Container Engine."
+
+[talks.speaker]
+name = "Rolo Mawlabaux"
+
+[[talks]]
+title = "Scaling large Django codebases"
+description = "We manage over 300 apps, and we will take a look at some of the tools and techniques that we use to do this."
+
+[talks.speaker]
+name = "Dan Palmer"

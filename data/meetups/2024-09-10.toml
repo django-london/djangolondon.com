@@ -1,0 +1,17 @@
+title = "Django London Meetup September"
+date = 2024-09-10T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/302810842/"
+
+[[talks]]
+title = "Empowering Django with Background Workers"
+description = "There's a lot more to a web application than just the request/response cycle. Running tasks in the background, whether on a trigger or schedule unlocks a lot of extra functionality, performance and reliability. Whilst Django is a web framework, it doesn't have a good first-party story for background workers right now. When most people think of background workers, they lean immediately to Celery, but other tools are out there which might be better and easier to work with. The lack of first-party support results in diverging implementations, added complexity for developers, and a learning cliff for new developers. If Django had a first-party solution, it could help unify these implementations, and make Django more \"batteries included\". The lack of first-party support is also a challenge to Wagtail, where many potentially intensive tasks have to be run in the request/response cycle, slowing down user actions."
+
+[talks.speaker]
+name = "Jake Howard"
+
+[[talks]]
+title = "Pydantic Logfire — Uncomplicated Observability"
+description = "From the team behind Pydantic, Logfire is a new type of observability platform built on the same belief as our open-source library — that the most powerful tools can be easy to use. In this talk we'll introduce Logfire, then demonstrate how it can make understanding and fixing your app faster and more enjoyable with a live demo. We'll touch on some of the most useful integrations including: Django, Postgres and OpenAI. I'm also happy to take any questions on Pydantic the library, or the experience of starting a company around open source."
+
+[talks.speaker]
+name = "Samuel Colvin"

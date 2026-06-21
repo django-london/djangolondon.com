@@ -1,0 +1,17 @@
+title = "Django London Meetup November"
+date = 2025-11-11T18:15:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/311568587/"
+
+[[talks]]
+title = "Building an AI Powered Search Engine with Django and LangChain"
+description = "Many websites have a way to search through listings. However the UI often includes many filters, check boxes, dropdowns and other UX nightmares. What if the user could just write in plain English what they wanted to find and get suitable results? We explore it as we build a version of linkedin's AI job search in Django using LangChain! Erry Kostala is a Senior Software engineer of 9+ years. Self motivated. Hobbies include learning Japanese and improv comedy!"
+
+[talks.speaker]
+name = "Erry Kostala"
+
+[[talks]]
+title = "Postgres Migrations: The Good, The Bad, and The Locked"
+description = "This talk is all about the surprising complexity of Postgres database migrations. It covers what factors makes a migration safe or unsafe, common pitfalls and introduces a tool to help mitigate them."
+
+[talks.speaker]
+name = "Tom Forbes"

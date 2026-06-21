@@ -1,0 +1,10 @@
+title = "Django London Meetup December, talk & quiz edition!"
+date = 2025-12-09T18:15:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/311957141/"
+
+[[talks]]
+title = "MongoDB Overview"
+description = "This 25-minute session covers: Learning basics about MongoDB architecture 10-question skill check to validate learning And then as tradition Django Quiz!"
+
+[talks.speaker]
+name = "Abigail Afi Gbadago"

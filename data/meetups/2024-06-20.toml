@@ -1,0 +1,10 @@
+title = "Django London Meetup June"
+date = 2024-06-20T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/301642422/"
+
+[[talks]]
+title = "Supercharge Django with Mau Markup"
+description = "This talk introduces the audience to the Mau markup language and shows how it can be easily used in a Django website to greatly improve the rendering of text fields. The talks doesn't requires specific knowledge of Django or of markup languages in general, even though a familiarity with Markdown might be beneficial."
+
+[talks.speaker]
+name = "Leonardo Giordani"

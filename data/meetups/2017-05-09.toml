@@ -1,0 +1,17 @@
+title = "May Django Meetup"
+date = 2017-05-09T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/239180132/"
+
+[[talks]]
+title = "Connecting Django to The Internet of Things"
+description = "Ever wondered what an embedded computer is and what ways I can or should connect it to my Django project? This 20 minute presentation is all about tiny embedded systems and how to do that. It starts off with an quick demo of a home made 'thing' which will interact with the audience. The remaining time will be a choice between overview of the subject matter or a deep dive into one the components depending on what our audience vote on. A variety of embedded systems will be brought along to the event for discussion points afterwards, some C++ driven, some Python driven and some with a full Linux OS. I shall be available after the event for further discussion."
+
+[talks.speaker]
+name = "Nicholas Herriot"
+
+[[talks]]
+title = "Databases, Django, Stability and Performance"
+description = "In this talk I'll touch on a couple of key points and technologies - mainly what databases to use and the circumstances to use them."
+
+[talks.speaker]
+name = "Patrick Fitzgerald"

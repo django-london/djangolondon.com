@@ -1,0 +1,10 @@
+title = "August Django Meetup"
+date = 2021-08-17T19:30:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/280059387/"
+
+[[talks]]
+title = "How do you actually get started with testing in django?"
+description = "You have built a django website and your site is a massive success, you know you should have tests and a high percentage of test coverage and you dont. The guilt and shame gnaws at you at night. You have googled \"How to test django\",\"Using pytest with Django\",\"testing views in Django\",\"testing models in Django\" or various derivatives but just give up. You find a couple of blogs that get you started and demonstrate how to do a test that adds two numbers then .... nothing more! aaaaaarrrgghh help me internet!!! If that sounds familiar then this talk is for you! My aim is to demystify testing in Django for the complete beginner."
+
+[talks.speaker]
+name = "Chris Wedgwood"

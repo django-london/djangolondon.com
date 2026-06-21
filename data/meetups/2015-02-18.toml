@@ -1,0 +1,25 @@
+title = "New Year, New Django"
+date = 2015-02-18T19:00:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/220297780/"
+
+[[talks]]
+title = "Django sieve"
+description = "Django sieve"
+slides_url = "https://github.com/alixedi/django_sieve"
+
+[talks.speaker]
+name = "Ali Zaidi"
+
+[[talks]]
+title = "My favourite bits of Django Rest Framework"
+description = "My favourite bits of Django Rest Framework."
+
+[talks.speaker]
+name = "James Cooke"
+
+[[talks]]
+title = "Company ihateironing are using Django"
+description = "Matt will talk about how is company ihateironing are using Django."
+
+[talks.speaker]
+name = "Matt Connelly"

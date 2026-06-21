@@ -1,0 +1,17 @@
+title = "django.__version__ = \"1.9.0\"; import whats_new"
+date = 2015-10-20T18:30:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/224716213/"
+
+[[talks]]
+title = "What's new with Django 1.9"
+description = "Marc Tamlyn will chat to us about what's new with Django 1.9."
+
+[talks.speaker]
+name = "Marc Tamlyn"
+
+[[talks]]
+title = "Gaming on Django!"
+description = "A talk on gaming using the Django framework."
+
+[talks.speaker]
+name = "James Pacileo"

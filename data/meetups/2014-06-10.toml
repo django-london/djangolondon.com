@@ -1,0 +1,10 @@
+title = "Initialise a Beer Generator and call next() as many times as required"
+date = 2014-06-10T19:00:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/184757432/"
+
+[[talks]]
+title = "GeoDjango brief overview"
+description = "James will give a brief overview of GeoDjango. Attendees are also welcome to give a quick ~5min talk on something in the Python / Django world."
+
+[talks.speaker]
+name = "James P."

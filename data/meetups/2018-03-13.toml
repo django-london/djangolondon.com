@@ -1,0 +1,17 @@
+title = "March Django Meetup"
+date = 2018-03-13T19:00:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/247803878/"
+
+[[talks]]
+title = "Dockerizing your Django Apps"
+description = "A brief intro to docker and docker compose. The benefits of using docker and the purpose of docker compose, and how to integrate them with your Django projects."
+
+[talks.speaker]
+name = "Silvian Dragan"
+
+[[talks]]
+title = "Business Desktop Transformation with Django"
+description = "As IT budgets come under increasing pressure, the requirement is always to do more with less. See how the combination of Django and Linux provides the required magic to enable this at the desktop level at massive scale."
+
+[talks.speaker]
+name = "Patrick Fitzgerald"

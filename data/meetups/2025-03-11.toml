@@ -1,0 +1,16 @@
+title = "Django London Meetup March"
+date = 2025-03-11T18:15:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/306321928/"
+
+[[talks]]
+title = "Cursor IDE to build a comedy booking app in django htmx"
+
+[talks.speaker]
+name = "Samuel Joseph"
+
+[[talks]]
+title = "Building GraphQL APIs with Django"
+description = "An introduction to GraphQL and an example API built with Django."
+
+[talks.speaker]
+name = "Yosuf Ali"

@@ -1,0 +1,17 @@
+title = "Django London Meetup June"
+date = 2025-06-12T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/307999179/"
+
+[[talks]]
+title = "Mind Over Code: Navigating Bias in Software Engineering"
+description = "Do you consciously take part in every decision you make? This short talk introduces just a few of the ways in which our brains make quick but imperfect judgements in all aspects of our day-to-day careers, and what you can do to keep yourself objective."
+
+[talks.speaker]
+name = "Simon Tunmore"
+
+[[talks]]
+title = "Squeezing more out of what you have"
+description = "A tool that improved observability of the api started to affect the very thing it was observing, leading to slower api requests in Kraken. This talk is a discussion on peeling away unnecessary components in a system and doing more with what's left."
+
+[talks.speaker]
+name = "David Uzumaki"
