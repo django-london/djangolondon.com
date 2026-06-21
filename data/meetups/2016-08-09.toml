@@ -1,6 +1,6 @@
 title = "Django August Meetup"
 date = 2016-08-09T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/232623366/"
+meetup_url = "https://www.meetup.com/djangolondon/events/232623366/"
 skills_matter_url = "https://skillsmatter.com/meetups/8046-london-django-august-meetup"
 
 [[talks]]
@@ -25,7 +25,7 @@ name = "Antonio Martin"
 [[talks]]
 title = "A quick introduction to unit testing Django projects with tox"
 description = "How and why you should use tox instead of manage.py to run Django unit tests like all the cool kids."
-slides_url = "http://slides.com/jerrytaylor/a-quick-introduction-to-unit-testing-django-projects-with-tox#/"
+slides_url = "https://slides.com/jerrytaylor/a-quick-introduction-to-unit-testing-django-projects-with-tox#/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/8732-a-quick-introduction-to-unit-testing-django-projects-with-tox"
 
 [talks.speaker]

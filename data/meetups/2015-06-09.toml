@@ -1,12 +1,12 @@
 title = "Things I wish I'd known about Django"
 date = 2015-06-09T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/222413498/"
+meetup_url = "https://www.meetup.com/djangolondon/events/222413498/"
 skills_matter_url = "https://skillsmatter.com/meetups/7180-things-i-wish-i-d-known-about-django"
 
 [[talks]]
 title = "Django CMS best practices"
 description = "A talk with guidelines for intermediate level django CMS users."
-slides_url = "http://nephila.it/talk/bestpractices-london.html"
+slides_url = "https://nephila.it/talk/bestpractices-london.html"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6474-django-cms-best-practices"
 
 [talks.speaker]
@@ -15,7 +15,7 @@ name = "Iacopo Spalletti"
 [[talks]]
 title = "Testing Django applications using Hypothesis"
 description = "Hypothesis is a new testing library for writing better tests with less work. I will show you how to use it to improve your existing Django test suites."
-slides_url = "http://drmaciver.github.io/hypothesis-talks/hypothesis-for-django.html"
+slides_url = "https://drmaciver.github.io/hypothesis-talks/hypothesis-for-django.html"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6475-testing-django-applications-using-hypothesis"
 
 [talks.speaker]
@@ -23,7 +23,7 @@ name = "David MacIver"
 
 [[talks]]
 title = "DjangoCon Lightning Recap"
-slides_url = "http://romgar.github.io/presentations/djangocon_2015/"
+slides_url = "https://romgar.github.io/presentations/djangocon_2015/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6395-djangocon-lightning-recap"
 
 [talks.speaker]

@@ -6,7 +6,7 @@ skills_matter_url = "https://skillsmatter.com/meetups/11289-london-django-meetup
 [[talks]]
 title = "Lint Your Architecture"
 description = "Code bases have a nasty habit of becoming a complicated web of circular dependencies. To stop this happening, you need constraints on your project's structure. Meet Layer Linter, a tool to control the dependencies between modules in your Python project. https://layer-linter.readthedocs.io/en/latest/readme.html"
-slides_url = "http://slides.com/davidseddon/lint-your-architecture#/"
+slides_url = "https://slides.com/davidseddon/lint-your-architecture#/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12972-lint-your-architecture"
 
 [talks.speaker]

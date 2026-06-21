@@ -1,6 +1,6 @@
 title = "January Django Meetup"
 date = 2016-01-19T19:00:00+00:00
-meetup_url = "http://www.meetup.com/djangolondon/events/227547663/"
+meetup_url = "https://www.meetup.com/djangolondon/events/227547663/"
 skills_matter_url = "https://skillsmatter.com/meetups/7721-heroku-tour"
 
 [[talks]]
@@ -22,7 +22,7 @@ name = "Anand Kumria"
 [[talks]]
 title = "Heroku tour"
 description = "A brief introduction to Heroku: what it is, when it is convenient to use it, strengths and caveats, and how to build an application that can get the most from a cloud platform infrastructure."
-slides_url = "http://slides.com/marcoala/2016-heroku#/"
+slides_url = "https://slides.com/marcoala/2016-heroku#/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/7344-london-django-meetup"
 
 [talks.speaker]

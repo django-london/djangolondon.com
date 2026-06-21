@@ -1,6 +1,6 @@
 title = "while true: beer() and django()"
 date = 2014-08-12T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/196782422/"
+meetup_url = "https://www.meetup.com/djangolondon/events/196782422/"
 
 [[talks]]
 title = "Django at Scale"

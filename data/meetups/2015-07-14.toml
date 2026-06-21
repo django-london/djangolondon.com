@@ -1,6 +1,6 @@
 title = "The London Django pub meetup"
 date = 2015-07-14T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/223297765/"
+meetup_url = "https://www.meetup.com/djangolondon/events/223297765/"
 
 [[talks]]
 title = "Things I wish I'd known about Django"
@@ -26,7 +26,7 @@ name = "Charalampos Papaloizou"
 
 [[talks]]
 title = "5 quick tips: Django + Docker"
-slides_url = "http://slides.com/jamespacileo/5-quick-tips-django-docker/fullscreen"
+slides_url = "https://slides.com/jamespacileo/5-quick-tips-django-docker/fullscreen"
 
 [talks.speaker]
 name = "James Pacileo"

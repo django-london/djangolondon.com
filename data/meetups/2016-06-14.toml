@@ -1,6 +1,6 @@
 title = "Django June Meetup"
 date = 2016-06-14T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/231335519/"
+meetup_url = "https://www.meetup.com/djangolondon/events/231335519/"
 skills_matter_url = "https://skillsmatter.com/meetups/8044-london-django-june-meetup"
 
 [[talks]]

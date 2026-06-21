@@ -1,12 +1,12 @@
 title = "Django July Meetup - Coding Summer"
 date = 2016-07-12T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/232245183/"
+meetup_url = "https://www.meetup.com/djangolondon/events/232245183/"
 skills_matter_url = "https://skillsmatter.com/meetups/8045-london-django-july-meetup"
 
 [[talks]]
 title = "Untangling Django, Typescript and Angular 2"
 description = "Angular 2 is coming - what does that mean for Django projects?"
-slides_url = "http://slides.com/jamespacileo/5-quick-tips-django-docker-4#/"
+slides_url = "https://slides.com/jamespacileo/5-quick-tips-django-docker-4#/"
 
 [talks.speaker]
 name = "James Pacileo"
@@ -14,7 +14,7 @@ name = "James Pacileo"
 [[talks]]
 title = "Project django-minipub"
 description = "Introducing a small Django project and discussing how it lead me to the philosophy of small, focussed, recombinable apps."
-slides_url = "http://www.slideshare.net/RichardBarran/minipub-lightningenglish-64835946"
+slides_url = "https://www.slideshare.net/RichardBarran/minipub-lightningenglish-64835946"
 
 [talks.speaker]
 name = "Richard Barran"
@@ -22,7 +22,7 @@ name = "Richard Barran"
 [[talks]]
 title = "Django System Check Framework"
 description = "Even if you didn't realize it, you've used Django's System Check Framework. Here's a brief guide to how it works."
-slides_url = "http://slides.com/davidseddon/check-the-system"
+slides_url = "https://slides.com/davidseddon/check-the-system"
 
 [talks.speaker]
 name = "David Seddon"

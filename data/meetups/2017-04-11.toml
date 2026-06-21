@@ -22,7 +22,7 @@ A practical guide on when to denormalize a database, and the golden rules to do 
 Marco is a web guy that values process over technology and user experience over everything. He has made e-commerce websites, marketing tools and financial tools.
 Currently he's helping Festicket create hassle-free festival packages.
 """
-slides_url = "http://slides.com/marcoala/denormalization/"
+slides_url = "https://slides.com/marcoala/denormalization/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/10105-denormalization-or-how-i-learned-to-stop-worrying-and-love-data-redundancy"
 
 [talks.speaker]

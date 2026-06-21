@@ -1,12 +1,12 @@
 title = "September Django Rain"
 date = 2015-09-22T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/224716138/"
+meetup_url = "https://www.meetup.com/djangolondon/events/224716138/"
 skills_matter_url = "https://skillsmatter.com/meetups/7311-september-django-rain"
 
 [[talks]]
 title = "Django Performance Recipes"
 description = "I've written a lot of Django code in my career, some slow, and some fast; my aim is to share a few of the techniques you can use to go from 300ms response times to 30ms. We'll travel up and down the stack, looking to identify, monitor and solve performance issues, while dodging those which just aren't worth solving."
-slides_url = "http://www.slideshare.net/JonAtkinson1/django-performance-recipes"
+slides_url = "https://www.slideshare.net/JonAtkinson1/django-performance-recipes"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6628-django-performance-recipes"
 
 [talks.speaker]

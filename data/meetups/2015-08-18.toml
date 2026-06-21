@@ -1,6 +1,6 @@
 title = "Better Python, better Django"
 date = 2015-08-18T19:00:00+01:00
-meetup_url = "http://www.meetup.com/djangolondon/events/223938679/"
+meetup_url = "https://www.meetup.com/djangolondon/events/223938679/"
 skills_matter_url = "https://skillsmatter.com/meetups/7248-london-django-august-2015-meetup"
 
 [[talks]]
@@ -21,7 +21,7 @@ name = "Maciej Dziardziel"
 [[talks]]
 title = "How to easily deploy a django app on PyPI in 5 minutes"
 description = "Have you created a Django app and want people to install it easily with pip? Let's use GitHub and TravisCI to deploy your app on PyPI, so easily that you'll wonder why you weren't doing it this way already."
-slides_url = "http://romgar.github.io/presentations/pypi_deployment/"
+slides_url = "https://romgar.github.io/presentations/pypi_deployment/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6561-how-to-easily-deploy-a-django-app-on-pypi-in-5-minutes"
 
 [talks.speaker]
