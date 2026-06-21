@@ -4,13 +4,23 @@
 {% block main %}
 <h2>{{ meetup.title }}</h2>
 <p>{{ meetup.date|date:"j F Y" }}</p>
-{% if meetup.meetup_url %}<ul class=links-list><li><a href={{ meetup.meetup_url }}>Meetup.com event</a></li></ul>{% endif %}
+{% if meetup.meetup_url or meetup.skills_matter_url %}
+<ul class=links-list>
+  {% if meetup.meetup_url %}<li><a href={{ meetup.meetup_url }}>Meetup.com event</a></li>{% endif %}
+  {% if meetup.skills_matter_url %}<li><a href=https://web.archive.org/web/0/{{ meetup.skills_matter_url }}>Skills Matter</a></li>{% endif %}
+</ul>
+{% endif %}
 {% for talk in meetup.talk_set.all %}
 <section>
   <h3>{{ talk.title }}</h3>
   <h4>{% for speaker in talk.speakers.all %}<a href=/speakers/{{ speaker.slug }}/>{{ speaker }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</h4>
   {% if talk.description %}{{ talk.description|markdown }}{% endif %}
-  {% if talk.blogpost_url %}<ul class=links-list><li><a href={{ talk.blogpost_url }}>Blog post</a></li></ul>{% endif %}
+  {% if talk.blogpost_url or talk.skills_matter_url %}
+  <ul class=links-list>
+    {% if talk.blogpost_url %}<li><a href={{ talk.blogpost_url }}>Blog post</a></li>{% endif %}
+    {% if talk.skills_matter_url %}<li><a href=https://web.archive.org/web/0/{{ talk.skills_matter_url }}>Skills Matter</a></li>{% endif %}
+  </ul>
+  {% endif %}
 </section>
 {% endfor %}
 {% endblock %}
