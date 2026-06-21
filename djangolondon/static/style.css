@@ -224,6 +224,31 @@ main {
   padding-block: 2em;
 }
 
+nav {
+  background: var(--color-django-green-light);
+  color: #fff;
+  padding: 0.5em 2em;
+
+  & .inner {
+    max-width: 65ch;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+  }
+
+  & a {
+    text-decoration-line: none;
+    text-decoration-color: #fff;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+      text-decoration-line: underline;
+    }
+  }
+}
+
 .links-list {
   padding-inline-start: 0;
   display: flex;
