@@ -21,7 +21,7 @@ speakers = ["rolo-mawlabaux"]
 
 [[talks]]
 title = "Django + neo4j (the leading graph database)"
-slides_url = "https://github.com/djangolondon/djangolondon.github.io/blob/main/_meetups/Slides/2014-08-12/neo4j.md"
+slides_url = "/slides/2014-08-12/neo4j.md"
 
 speakers = ["charalampos"]
 

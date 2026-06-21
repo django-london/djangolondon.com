@@ -26,6 +26,7 @@ urlpatterns = [
     path("meetup/<isodate:date>/", views.meetup_redirect),
     path("speakers/", views.speaker_list),
     path("speakers/<slug:slug>/", views.speaker_detail),
+    path("slides/<str:date>/<str:filename>", views.meetup_slides),
     path("favicon.ico", views.favicon),
     path(".well-known/atproto-did", views.atproto_did),
     path("organizers/", admin.site.urls),

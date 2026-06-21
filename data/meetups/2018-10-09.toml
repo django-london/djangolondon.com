@@ -14,7 +14,7 @@ speakers = ["david-seddon"]
 [[talks]]
 title = "My Experience on Using Postgresql in Production for a Data Heavy Project"
 description = "This talk gives an insight on - optimising queries - understanding some postgresql internals - understanding postgresql locks - sharing experience on what can go wrong in production and how you can prevent it - some tips about postgresql from the experience i gained at my current company"
-slides_url = "/meetups/Slides/2018-10-09/django-sql.pdf"
+slides_url = "/slides/2018-10-09/django-sql.pdf"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12973-my-experience-on-using-postgresql-in-production-for-a-data-heavy-project"
 
 speakers = ["charalampos-papaloizou"]

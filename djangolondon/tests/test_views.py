@@ -84,6 +84,17 @@ class SpeakerDetailTests(TestCase):
         assert response.status_code == HTTPStatus.NOT_FOUND
 
 
+class MeetupSlidesTests(TestCase):
+    def test_success(self):
+        response = self.client.get("/slides/2018-10-09/django-sql.pdf")
+        assert response.status_code == HTTPStatus.OK
+        assert response["Content-Type"] == "application/pdf"
+
+    def test_not_found(self):
+        response = self.client.get("/slides/2018-10-09/does-not-exist.pdf")
+        assert response.status_code == HTTPStatus.NOT_FOUND
+
+
 class FaviconTests(TestCase):
     def test_success(self):
         response = self.client.get("/favicon.ico")
