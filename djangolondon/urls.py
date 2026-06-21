@@ -19,16 +19,35 @@ class ISODateConverter:
 register_converter(ISODateConverter, "isodate")
 
 urlpatterns = [
+    # Static pages
     path("", views.index),
     path("code-of-conduct/", views.code_of_conduct),
-    path("meetups/", views.meetup_list),
-    path("meetups/<isodate:date>/", views.meetup_detail),
+    # Meetups and related data
     path("meetup/<isodate:date>/", views.meetup_redirect),
-    path("speakers/", views.speaker_list),
-    path("speakers/<slug:slug>/", views.speaker_detail),
+    path(
+        "meetups/",
+        include(
+            [
+                path("", views.meetup_list),
+                path("<isodate:date>/", views.meetup_detail),
+            ]
+        ),
+    ),
+    path(
+        "speakers/",
+        include(
+            [
+                path("", views.speaker_list),
+                path("<slug:slug>/", views.speaker_detail),
+            ]
+        ),
+    ),
     path("slides/<str:date>/<str:filename>", views.meetup_slides),
+    # Public files and other special routes
     path("favicon.ico", views.favicon),
     path(".well-known/atproto-did", views.atproto_did),
+    # Admin
     path("organizers/", admin.site.urls),
+    # django-browser-reload (development only)
     path("__reload__/", include("django_browser_reload.urls")),
 ]
