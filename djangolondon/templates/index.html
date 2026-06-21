@@ -9,7 +9,7 @@
 <h2>Past Meetups</h2>
 <ul>
   {% for meetup in meetups %}
-  <li><a href=/meetups/{{ meetup.date|date:"Y-m-d" }}/>{{ meetup.title }}, {{ meetup.date|date:"j F Y" }}</a></li>
+  <li><a href=/meetups/{{ meetup.date|date:"Y-m-d" }}/>{{ meetup.date|date:"j F Y" }}</a></li>
   {% endfor %}
 </ul>
 <p><a href=/meetups/>All meetups &rarr;</a></p>

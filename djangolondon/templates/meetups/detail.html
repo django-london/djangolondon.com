@@ -2,8 +2,9 @@
 {% load markdown %}
 
 {% block main %}
-<h2>{{ meetup.title }}</h2>
+<h2>{{ meetup.date|date:"F Y" }}</h2>
 <p>{{ meetup.date|date:"j F Y" }}</p>
+<p><em>{{ meetup.title }}</em></p>
 {% if meetup.meetup_url or meetup.skills_matter_url %}
 <ul class=links-list>
   {% if meetup.meetup_url %}<li><a href={{ meetup.meetup_url }}>Meetup.com event</a></li>{% endif %}
