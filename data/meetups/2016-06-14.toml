@@ -8,21 +8,18 @@ title = "How Django knows who you are"
 description = "A gentle introduction to different ways that can be used to authenticate a user in Django"
 skills_matter_url = "https://skillsmatter.com/skillscasts/8009-london-django-june-meetup"
 
-[talks.speaker]
-name = "Stephanos Papanikolopoulos"
+speakers = ["stephanos-papanikolopoulos"]
 
 [[talks]]
 title = "The ORM: Don't ask the DB"
 description = "Dive in to common issues people face when their database cause application slow downs. Be aware of what you do, and how your tools actually work."
 skills_matter_url = "https://skillsmatter.com/skillscasts/8394-the-orm-don-t-ask-the-db"
 
-[talks.speaker]
-name = "Anthony 'cybo' King"
+speakers = ["anthony-cybo-king"]
 
 [[talks]]
 title = "How (and how not) to scale with Django"
 description = "In this talk Malcolm will share Tips and tricks for scaling Django - and what to avoid - based on Malcolm's experience building the systems used for the biggest TV shows on TV."
 skills_matter_url = "https://skillsmatter.com/skillscasts/8383-how-and-how-not-to-scale-with-django"
 
-[talks.speaker]
-name = "Malcolm Box"
+speakers = ["malcolm-box"]

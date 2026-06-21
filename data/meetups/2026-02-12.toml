@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/313008143/"
 title = "Constraints over Patterns"
 description = "We should think and talk about software engineering principles first as constraints on how we write code rather than patterns to be applied. Eden is a software engineer at Kraken in the developer foundations team. Before that, I was a research student in Linguistics."
 
-[talks.speaker]
-name = "Eden Watkins"
+speakers = ["eden-watkins"]
 
 [[talks]]
 title = "Intro to Load Level Measurement (LLM) with Locust"
 description = "An Intro to Load Testing with Locust and Python. Andy Idiaghe is a Senior Software Engineer at Kraken, Mario Kart enthusiast and overall tech generalist"
 
-[talks.speaker]
-name = "Andy Idiaghe"
+speakers = ["andy-idiaghe"]

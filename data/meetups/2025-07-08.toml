@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/308716571/"
 title = "Dark Data: The Untapped Resource That Could Transform Industries"
 description = "Discover the transformative potential of dark data: the vast amounts of collected but unused information. This presentation will explore real-world examples, technical challenges, and ethical considerations, equipping attendees with strategies to harness dark data for competitive advantage and responsible AI practices."
 
-[talks.speaker]
-name = "Rhea Mendonca"
+speakers = ["rhea-mendonca"]
 
 [[talks]]
 title = "The future of Python Notebooks"
 description = "This talk covers how Python notebooks are evolving from static documents to interactive, collaborative, and production-ready environments, using Marimo. We’ll examine emerging trends—such as AI-powered and reactive notebooks, notebook-as-app frameworks, and integration with modern workflows—equipping attendees with insights to leverage notebooks to reshape coding, teaching, and scientific publishing."
 
-[talks.speaker]
-name = "Rahul Ayyappan"
+speakers = ["rahul-ayyappan"]

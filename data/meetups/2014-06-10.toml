@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/184757432/"
 title = "GeoDjango brief overview"
 description = "James will give a brief overview of GeoDjango. Attendees are also welcome to give a quick ~5min talk on something in the Python / Django world."
 
-[talks.speaker]
-name = "James P."
+speakers = ["james-p"]

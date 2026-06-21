@@ -6,19 +6,16 @@ meetup_url = "https://www.meetup.com/djangolondon/events/189071492/"
 title = "Geo Django"
 description = "Following on from the success of June's meetup, this month we will have more short informal talks and regular breaks for beers and conversation."
 
-[talks.speaker]
-name = "James Pacileo"
+speakers = ["james-pacileo"]
 
 [[talks]]
 title = "Business Logic and Django ORM isolation"
 description = "Following on from the success of June's meetup, this month we will have more short informal talks and regular breaks for beers and conversation."
 
-[talks.speaker]
-name = "Hansel Dunlop"
+speakers = ["hansel-dunlop"]
 
 [[talks]]
 title = "Testing file uploads"
 description = "Following on from the success of June's meetup, this month we will have more short informal talks and regular breaks for beers and conversation."
 
-[talks.speaker]
-name = "Mark Litwintschik"
+speakers = ["mark-litwintschik"]

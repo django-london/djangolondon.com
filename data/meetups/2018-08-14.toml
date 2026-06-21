@@ -8,8 +8,7 @@ title = "What we Think of GraphQL, 88 Million Queries Later"
 description = "An exploration of GraphQL with Rob Kirberich."
 skills_matter_url = "https://skillsmatter.com/skillscasts/12644-what-we-think-of-graphql-88-million-queries-later"
 
-[talks.speaker]
-name = "Rob Kirberich"
+speakers = ["rob-kirberich"]
 
 [[talks]]
 title = "Craig Goes to Scotland to Learn About Python"
@@ -17,5 +16,4 @@ description = "Craig shares his personal experiences and highlights from his tim
 slides_url = "https://www.craiga.id.au/talks/europython2018/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12646-craig-goes-to-scotland-to-learn-about-python"
 
-[talks.speaker]
-name = "Craig Anderson"
+speakers = ["craig-anderson"]

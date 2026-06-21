@@ -6,19 +6,16 @@ meetup_url = "https://www.meetup.com/djangolondon/events/221701885/"
 title = "DjangoGirls and other topics"
 description = "DjangoGirls and other topics."
 
-[talks.speaker]
-name = "Ola Sendecka"
+speakers = ["ola-sendecka"]
 
 [[talks]]
 title = "Overcoming Legacy with Django"
 description = "A story on overcoming Legacy with Django."
 
-[talks.speaker]
-name = "Patrick Fitzgerald"
+speakers = ["patrick-fitzgerald"]
 
 [[talks]]
 title = "Transitioning to Django, my adventure!"
 description = "Transitioning to Django: my adventure!"
 
-[talks.speaker]
-name = "Neil Bachelor"
+speakers = ["neil-bachelor"]

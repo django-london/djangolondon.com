@@ -7,19 +7,16 @@ title = "Django sieve"
 description = "Django sieve"
 slides_url = "https://github.com/alixedi/django_sieve"
 
-[talks.speaker]
-name = "Ali Zaidi"
+speakers = ["ali-zaidi"]
 
 [[talks]]
 title = "My favourite bits of Django Rest Framework"
 description = "My favourite bits of Django Rest Framework."
 
-[talks.speaker]
-name = "James Cooke"
+speakers = ["james-cooke"]
 
 [[talks]]
 title = "Company ihateironing are using Django"
 description = "Matt will talk about how his company ihateironing is using Django."
 
-[talks.speaker]
-name = "Matt Connelly"
+speakers = ["matt-connelly"]

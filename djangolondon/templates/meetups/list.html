@@ -2,6 +2,7 @@
 
 {% block main %}
 <h2>All Meetups</h2>
+<p>Django London has held {{ meetup_count }} meetup{{ meetup_count|pluralize }} over the years.</p>
 {% for year, meetups in grouped_meetups %}
 <h3>{{ year }}</h3>
 <ul>

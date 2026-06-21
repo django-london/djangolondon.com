@@ -11,20 +11,17 @@ Earthmiles have been using Celery in their production environment for over a yea
 Viren Rajput is co-founder at Earthmiles. Have been developing with Python for 6 years. In his free time, he contributes to open source libraries in Python.
 """
 
-[talks.speaker]
-name = "Viren Rajput"
+speakers = ["viren-rajput"]
 
 [[talks]]
 title = "Using type checking in Django projects with mypy"
 description = "Python has always been one of the most dynamic languages, and that's the most important factor in making it as flexible and expressive as it is. However, some recent efforts being done to also bring the world of static typing into Python, initially as a 3rd party project called mypy, and currently with some support in the core language in the form of PEP-484. From some experiences with it, mypy improved Daniel's Python code, but its main blocker now is supporting the libraries and frameworks we all use. He is currently working on bringing support for Django to be able to have type annotations in web development projects. This talk will describe the status of this work, what could be improved, and how it can already make your web development better."
 slides_url = "https://github.com/machinalis/slides/tree/master/mypy-django"
 
-[talks.speaker]
-name = "Daniel Moisset"
+speakers = ["daniel-moisset"]
 
 [[talks]]
 title = "Scalable end to end testing using Selenium, a cheat sheet"
 description = "A cheat sheet of tips, tricks and limitations to functionally test Django applications with Selenium."
 
-[talks.speaker]
-name = "Prashant Tiwari"
+speakers = ["prashant-tiwari"]

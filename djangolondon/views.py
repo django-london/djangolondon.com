@@ -2,12 +2,13 @@ import datetime as dt
 from itertools import groupby
 
 from django.conf import settings
+from django.db.models import Prefetch
 from django.http import FileResponse, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
 
-from djangolondon.models import Meetup, Speaker
+from djangolondon.models import Meetup, Speaker, Talk
 
 
 def index(request):
@@ -28,11 +29,13 @@ def meetup_list(request):
     grouped = [
         (year, list(ms)) for year, ms in groupby(all_meetups, key=lambda m: m.date.year)
     ]
+    meetup_count = sum(len(ms) for _, ms in grouped)
     return render(
         request,
         "meetups/list.html",
         {
             "title": "Meetups",
+            "meetup_count": meetup_count,
             "grouped_meetups": grouped,
         },
     )
@@ -40,7 +43,7 @@ def meetup_list(request):
 
 def meetup_detail(request, date: dt.date):
     meetup = get_object_or_404(
-        Meetup.objects.prefetch_related("talk_set__speaker"),
+        Meetup.objects.prefetch_related("talk_set__speakers"),
         date__date=date,
     )
     return render(
@@ -57,10 +60,29 @@ def meetup_redirect(request, date: dt.date):
     return redirect(f"/meetups/{date.isoformat()}/", permanent=True)
 
 
-def speaker_detail(request, pk: int):
+def speaker_list(request):
+    speakers = Speaker.objects.order_by("name")
+    return render(
+        request,
+        "speakers/list.html",
+        {
+            "title": "Speakers",
+            "speakers": speakers,
+        },
+    )
+
+
+def speaker_detail(request, slug: str):
     speaker = get_object_or_404(
-        Speaker.objects.prefetch_related("talk_set__meetup"),
-        pk=pk,
+        Speaker.objects.prefetch_related(
+            Prefetch(
+                "talk_set",
+                queryset=Talk.objects.select_related("meetup").order_by(
+                    "-meetup__date"
+                ),
+            )
+        ),
+        slug=slug,
     )
     return render(
         request,

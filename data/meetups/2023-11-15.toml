@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/297254364/"
 title = "Django Migrations and Anytime Deploys"
 description = "The aim of this talk is to explains techniques that can be used to write data migrations in Django applications, ensuring the ability to deploy changes at any time."
 
-[talks.speaker]
-name = "Eshwari Chandrashekhar"
+speakers = ["eshwari-chandrashekhar"]
 
 [[talks]]
 title = "Google sheets and htmx"
 description = "A three-part talk: 1. How to add Google sheets as your Django database in 4 minutes Adding Google sheets to Django as a basic database is extremely fast to do (and free). This is great for building a quick product. You avoid the extra effort of setting up a full database, and get your idea out faster. 2. Add infinite scroll with Django and HTMX in 60 seconds 3. How to create a Django form (using HTMX) in 90 seconds"
 
-[talks.speaker]
-name = "Tom Dekan"
+speakers = ["tom-dekan"]

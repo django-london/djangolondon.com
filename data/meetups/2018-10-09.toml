@@ -9,8 +9,7 @@ description = "Code bases have a nasty habit of becoming a complicated web of ci
 slides_url = "https://slides.com/davidseddon/lint-your-architecture#/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12972-lint-your-architecture"
 
-[talks.speaker]
-name = "David Seddon"
+speakers = ["david-seddon"]
 
 [[talks]]
 title = "My Experience on Using Postgresql in Production for a Data Heavy Project"
@@ -18,5 +17,4 @@ description = "This talk gives an insight on - optimising queries - understandin
 slides_url = "/meetups/Slides/2018-10-09/django-sql.pdf"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12973-my-experience-on-using-postgresql-in-production-for-a-data-heavy-project"
 
-[talks.speaker]
-name = "Charalampos Papaloizou"
+speakers = ["charalampos-papaloizou"]

@@ -9,8 +9,7 @@ description = "A talk with guidelines for intermediate level django CMS users."
 slides_url = "https://nephila.it/talk/bestpractices-london.html"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6474-django-cms-best-practices"
 
-[talks.speaker]
-name = "Iacopo Spalletti"
+speakers = ["iacopo-spalletti"]
 
 [[talks]]
 title = "Testing Django applications using Hypothesis"
@@ -18,13 +17,11 @@ description = "Hypothesis is a new testing library for writing better tests with
 slides_url = "https://drmaciver.github.io/hypothesis-talks/hypothesis-for-django.html"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6475-testing-django-applications-using-hypothesis"
 
-[talks.speaker]
-name = "David MacIver"
+speakers = ["david-maciver"]
 
 [[talks]]
 title = "DjangoCon Lightning Recap"
 slides_url = "https://romgar.github.io/presentations/djangocon_2015/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6395-djangocon-lightning-recap"
 
-[talks.speaker]
-name = "Romain Garrigues"
+speakers = ["romain-garrigues"]

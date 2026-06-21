@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/282904758/"
 title = "Understanding everything your Django App is doing at runtime"
 description = "How long does it take to understand what your project, especially your dependencies, is actually doing? Wilhelm will talk about using various kinds of debuggers to trace out what your code is doing."
 
-[talks.speaker]
-name = "Wilhelm Klopp"
+speakers = ["wilhelm-klopp"]

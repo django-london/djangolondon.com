@@ -7,19 +7,16 @@ skills_matter_url = "https://skillsmatter.com/meetups/11864-london-django"
 title = "Build search into your Django app"
 description = "From ops to UX, a lot of useful problems in many fields of tech are search problems. This talk will introduce you to the 'why' behind search and provide a quick introduction to integrating Elasticsearch into a new Django application, focussing on easily building your app's first search features."
 
-[talks.speaker]
-name = "Emanuil Tolev"
+speakers = ["emanuil-tolev"]
 
 [[talks]]
 title = "Django: breaking the monolith!"
 description = "Bringing Django to the era of micro-services, with Django Rest Framework (DRF) and a front-end framework - using React as an example."
 
-[talks.speaker]
-name = "Raul Tavares"
+speakers = ["raul-tavares"]
 
 [[talks]]
 title = "Lightning talk: Impulse Demo"
 description = "A quick demo of Impulse, a command line tool for visualising the architecture of any python package. https://impulse-cli.readthedocs.io/"
 
-[talks.speaker]
-name = "David Seddon"
+speakers = ["david-seddon"]

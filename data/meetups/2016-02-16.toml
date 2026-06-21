@@ -16,21 +16,18 @@ Acceptance test driven development with cookiecutter-django and Hitch Test. Hitc
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/7612-how-to-communicate"
 
-[talks.speaker]
-name = "Colm O'Connor"
+speakers = ["colm-o-connor"]
 
 [[talks]]
 title = "PanelApp, an example of Django helping Genomics"
 description = "Once you have genomic data, how do you know what is a marker of a problem? How would your local GP or someone at a hospital? Access to expert knowledge and specialists is hard in any field but within the burgeoning field of genomics, even harder. Django is part of our approach to solving this problem."
 skills_matter_url = "https://skillsmatter.com/skillscasts/7611-panelapp-an-example-of-django-helping-genomics"
 
-[talks.speaker]
-name = "Antonio Rueda-Martin"
+speakers = ["antonio-rueda-martin"]
 
 [[talks]]
 title = "How to communicate"
 description = "What problems are we running into building Web APIs today? How can we best take advantage of Django's upcoming channels work to build realtime systems? What are Django's strengths in the changing API landscape, and how can it stay relevant?"
 skills_matter_url = "https://skillsmatter.com/skillscasts/7383-how-to-communicate"
 
-[talks.speaker]
-name = "Tom Christie"
+speakers = ["tom-christie"]

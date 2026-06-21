@@ -7,5 +7,4 @@ skills_matter_url = "https://skillsmatter.com/meetups/11864-london-django"
 title = "Container based Architecture for Django Applications"
 description = "Have you heard about Docker? Do you think it's too complicated? Are you intimidated by the whole concept of containerization? I answered yes to these questions less than a year ago. Now I cannot start a new project without docker. I have tamed the beast and I am now able to take advantage of all of its benefits. In this talk, I will explain what Docker containers are and outline their benefits. I will also present a simple architecture for developing Django applications. It will include, Django, Mysql, RabbitMQ, Memcache and Nginx all running in separate containers. I will show a demo of how such an application can be deployed to Heroku easily."
 
-[talks.speaker]
-name = "Ibukunoluwa Oluwayomi"
+speakers = ["ibukunoluwa-oluwayomi"]

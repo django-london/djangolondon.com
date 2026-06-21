@@ -10,5 +10,4 @@ An approach to subjecting new code to stricter standards than existing code.
 (Bio: Sam is a software engineer at Kraken Tech, working on their financial systems (billing, payments, debt) and codebase health.)
 """
 
-[talks.speaker]
-name = "Sam Searles-Bryant"
+speakers = ["sam-searles-bryant"]

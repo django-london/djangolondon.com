@@ -10,13 +10,11 @@ There is good research about the general climate impact of the digital economy. 
 Thibaud works at Torchbox as a developer, core contributor to the Wagtail CMS built on Django, and contributes to Django.
 """
 
-[talks.speaker]
-name = "Thibaud Colas"
+speakers = ["thibaud-colas"]
 
 [[talks]]
 title = "How to profile and improve startup time"
 blogpost_url = "https://adamj.eu/tech/2023/03/02/django-profile-and-improve-import-time/"
 description = "A walkthrough of key techniques to profile the time it takes to start up your Django project, and ways to improve that."
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]

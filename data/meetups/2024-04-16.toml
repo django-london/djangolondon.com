@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/299793290/"
 title = "Data-Oriented Django Deux"
 description = "Data-Oriented Design gives us principles for making fast, hardware-friendly software. This talk covers applications of those principles in Django projects, packages, and even Django itself. Adam is a co-organizer of the meetup, a Django contributor, and author on Django and Git."
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]

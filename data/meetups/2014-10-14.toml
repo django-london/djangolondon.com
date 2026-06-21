@@ -5,5 +5,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/209677832/"
 [[talks]]
 title = "Uploading with Django"
 
-[talks.speaker]
-name = "Jonatron"
+speakers = ["jonatron"]

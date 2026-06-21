@@ -21,8 +21,7 @@ Ibukun is a Software Development Engineer on the Server frameworks and Architect
 slides_url = "/meetups/slides/2018-07-16/concurrency-and-parallelism-in-python.pdf"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12348-concurrency-and-parallelism-in-python-not-as-complicated-as-you-think"
 
-[talks.speaker]
-name = "Ibukun Oluwayomi"
+speakers = ["ibukun-oluwayomi"]
 
 [[talks]]
 title = "GraphQL and Django"
@@ -30,5 +29,4 @@ description = "Mat Clayton, CTO and co-founder of Mixcloud (a Django powered web
 slides_url = "/meetups/slides/2018-07-16/graphql-and-django.pdf"
 skills_matter_url = "https://skillsmatter.com/skillscasts/12427-graphql-abd-django"
 
-[talks.speaker]
-name = "Mat Clayton"
+speakers = ["mat-clayton"]

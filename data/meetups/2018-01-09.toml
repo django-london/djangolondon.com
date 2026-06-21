@@ -5,6 +5,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/246047294/"
 [[talks]]
 title = "Work Life Panel Q&A"
 description = "A panel Q&A session with people from the Django/Python/web world, covering different roles from employee to contractor, developer to manager. Note: Talks are still being arranged; contact the organizers if you are interested in giving a talk."
-
-[talks.speaker]
-name = "Adam Malinowski, Dan Palmer, and Rolo Mawlabaux"
+speakers = ["adam-malinowski", "dan-palmer", "rolo-mawlabaux"]

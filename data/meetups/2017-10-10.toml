@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/243943983/"
 title = "How should companies hire new Django/Python developers?"
 description = "Talk regarding hiring practices for Django/Python developers."
 
-[talks.speaker]
-name = "Chris Wedgwood"
+speakers = ["chris-wedgwood"]
 
 [[talks]]
 title = "Learnings from a non-technical founder"
 description = "Talk sharing experiences from a non-technical founder's perspective."
 
-[talks.speaker]
-name = "Conrad Ford"
+speakers = ["conrad-ford"]

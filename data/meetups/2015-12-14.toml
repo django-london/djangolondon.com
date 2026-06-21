@@ -9,13 +9,11 @@ description = "AWS is the biggest cloud provider out there, and thus many Django
 slides_url = "https://github.com/adamchainz/django-talk-aws"
 skills_matter_url = "https://skillsmatter.com/skillscasts/7340-django-on-aws"
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]
 
 [[talks]]
 title = "Trialling Wagtail in the Agency Setting"
 description = "Wagtail is an app that can turn your Django site into a fully featured CMS. This talk will be an overview of positive outcomes of using Wagtail for a medium sized web publishing site build."
 skills_matter_url = "https://skillsmatter.com/skillscasts/7341-a-tour-of-wagtail"
 
-[talks.speaker]
-name = "Gary Stevens"
+speakers = ["gary-stevens"]

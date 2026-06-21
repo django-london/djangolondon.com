@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/298796486/"
 title = "Battle-Tested Tips for Maximizing Learning from Tech Incidents"
 description = "This talk offers battle-tested tips to maximize learning from tech incidents, with the goal of transforming individual learning into organizational knowledge. The focus is on avoiding repeated mistakes by exploring strategies to turn technical disruptions into valuable learning opportunities, providing insights for the entire team or organization."
 
-[talks.speaker]
-name = "Ahter Sonmez"
+speakers = ["ahter-sonmez"]

@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/248836912/"
 title = "Managing Special Cases with django-enumfield"
 description = "Struggling to model complex business logic with models? Writing lots of boilerplate to validate enumerations that you use in your model? Let’s refactor with Django EnumField to address common problems in Django development."
 
-[talks.speaker]
-name = "Dan Palmer"
+speakers = ["dan-palmer"]
 
 [[talks]]
 title = "Freelancing (and Contracting) for Developers"
 description = "An open and candid talk about being self employed as a software developer. This talk will cover both money and soft skills. How much should I charge? How do I get my first client? My second client? Do I need a contract? How do I dump I client? How do I raise my rates? I will be opening discussing my rates and experiences. For this reason the talk will be held under the Chatham House Rule and will not be recorded."
 
-[talks.speaker]
-name = "Adam Charnock"
+speakers = ["adam-charnock"]

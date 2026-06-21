@@ -57,10 +57,18 @@ class LoadStaticDataTests(TestCase):
     def _call(self, app_name="djangolondon"):
         load_static_data(sender=apps.get_app_config(app_name))
 
-    def _call_with_toml(self, tmp_path, toml_content):
-        toml_file = Path(tmp_path) / "2024-01-01.toml"
-        toml_file.write_text(toml_content)
-        with mock.patch("djangolondon.receivers.DATA_DIR", Path(tmp_path)):
+    def _call_with_dirs(self, tmp_path, speakers_toml, meetup_toml):
+        speakers_dir = Path(tmp_path) / "speakers"
+        speakers_dir.mkdir(exist_ok=True)
+        for slug, content in speakers_toml.items():
+            (speakers_dir / f"{slug}.toml").write_text(content)
+        meetups_dir = Path(tmp_path) / "meetups"
+        meetups_dir.mkdir(exist_ok=True)
+        (meetups_dir / "2024-01-01.toml").write_text(meetup_toml)
+        with (
+            mock.patch("djangolondon.receivers.SPEAKERS_DIR", speakers_dir),
+            mock.patch("djangolondon.receivers.DATA_DIR", meetups_dir),
+        ):
             load_static_data(sender=apps.get_app_config("djangolondon"))
 
     def test_loads_meetups(self):
@@ -79,8 +87,10 @@ class LoadStaticDataTests(TestCase):
 
     def test_syncs_updated_toml_fields(self):
         with tempfile.TemporaryDirectory() as tmp_path:
-            self._call_with_toml(
+            speakers = {"jane-doe": 'name = "Jane Doe"\n'}
+            self._call_with_dirs(
                 tmp_path,
+                speakers,
                 """
                 date = 2024-01-01T18:00:00+00:00
                 title = "January Meetup"
@@ -91,13 +101,12 @@ class LoadStaticDataTests(TestCase):
                 blogpost_url = "https://example.com/post1"
                 slides_url = "https://example.com/slides1"
                 skills_matter_url = ""
-
-                [talks.speaker]
-                name = "Jane Doe"
+                speakers = ["jane-doe"]
             """,
             )
-            self._call_with_toml(
+            self._call_with_dirs(
                 tmp_path,
+                speakers,
                 """
                 date = 2024-01-01T18:00:00+00:00
                 title = "January Meetup Updated"
@@ -109,9 +118,7 @@ class LoadStaticDataTests(TestCase):
                 blogpost_url = "https://example.com/post2"
                 slides_url = "https://example.com/slides2"
                 skills_matter_url = ""
-
-                [talks.speaker]
-                name = "Jane Doe"
+                speakers = ["jane-doe"]
             """,
             )
 
@@ -127,49 +134,69 @@ class LoadStaticDataTests(TestCase):
         assert talk.blogpost_url == "https://example.com/post2"
         assert talk.slides_url == "https://example.com/slides2"
 
-        assert Speaker.objects.filter(name="Jane Doe").count() == 1
+        assert Speaker.objects.filter(slug="jane-doe").count() == 1
+        assert set(talk.speakers.values_list("slug", flat=True)) == {"jane-doe"}
 
-    def test_speaker_with_two_talks(self):
+    def test_talk_with_multiple_speakers(self):
         with tempfile.TemporaryDirectory() as tmp_path:
-            self._call_with_toml(
-                tmp_path,
-                """
+            speakers = {
+                "jane-doe": 'name = "Jane Doe"\n',
+                "john-smith": 'name = "John Smith"\n',
+            }
+            meetup_toml = """
                 date = 2024-01-01T18:00:00+00:00
                 title = "January Meetup"
 
                 [[talks]]
-                title = "First Talk"
-
-                [talks.speaker]
-                name = "Jane Doe"
-
-                [[talks]]
-                title = "Second Talk"
-
-                [talks.speaker]
-                name = "Jane Doe"
-            """,
-            )
-            self._call_with_toml(
-                tmp_path,
-                """
-                date = 2024-01-01T18:00:00+00:00
-                title = "January Meetup"
-
-                [[talks]]
-                title = "First Talk"
-
-                [talks.speaker]
-                name = "Jane Doe"
-
-                [[talks]]
-                title = "Second Talk"
-
-                [talks.speaker]
-                name = "Jane Doe"
-            """,
-            )
+                title = "Joint Talk"
+                speakers = ["jane-doe", "john-smith"]
+            """
+            self._call_with_dirs(tmp_path, speakers, meetup_toml)
+            self._call_with_dirs(tmp_path, speakers, meetup_toml)
 
         meetup = Meetup.objects.get(date="2024-01-01T18:00:00+00:00")
-        assert Talk.objects.filter(meetup=meetup).count() == 2
-        assert Speaker.objects.filter(name="Jane Doe").count() == 1
+        assert Talk.objects.filter(meetup=meetup).count() == 1
+        talk = Talk.objects.get(meetup=meetup)
+        assert set(talk.speakers.values_list("slug", flat=True)) == {
+            "jane-doe",
+            "john-smith",
+        }
+
+    def test_unknown_speaker_slug_raises(self):
+        with (
+            tempfile.TemporaryDirectory() as tmp_path,
+            self.assertRaises(ValueError, msg="Unknown speaker slugs"),
+        ):
+            self._call_with_dirs(
+                tmp_path,
+                {},
+                """
+                    date = 2024-01-01T18:00:00+00:00
+                    title = "January Meetup"
+
+                    [[talks]]
+                    title = "My Talk"
+                    speakers = ["does-not-exist"]
+                    """,
+            )
+
+    def test_syncs_speaker_fields(self):
+        with tempfile.TemporaryDirectory() as tmp_path:
+            self._call_with_dirs(
+                tmp_path,
+                {"jane-doe": ('name = "Jane Doe"\ngithub_username = "janedoe"\n')},
+                """
+                date = 2024-01-01T18:00:00+00:00
+                title = "January Meetup"
+
+                [[talks]]
+                title = "My Talk"
+                speakers = ["jane-doe"]
+                """,
+            )
+
+        speaker = Speaker.objects.get(slug="jane-doe")
+        assert speaker.name == "Jane Doe"
+        assert speaker.github_username == "janedoe"
+        assert speaker.mastodon_url == ""
+        assert speaker.bluesky_handle == ""

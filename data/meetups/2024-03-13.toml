@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/299189999/"
 title = "WASM-powered Django apps with PyScript"
 description = "In this talk, I will talk about PyScript, WASM, web-workers and how this technology can be used to create awesome Django apps using Python in the browser. In the first part of the talk, I will provide a quick overview of the main features of PyScript; and how PyScript compares to other existing Python/WASM solutions. Afterwards, I will showcase an example Django app integrating PyScript, to demonstrate its potential and capabilities. I will also share a few tips, best practices, and lessons learnt when working on Django apps using PyScript."
 
-[talks.speaker]
-name = "Valerio Maggio"
+speakers = ["valerio-maggio"]
 
 [[talks]]
 title = "Navigating your job search in 2024"
 description = "Looking at the journey of searching for a Django job from initial thoughts through to the first day. The talk is aimed at Django Developers moving between jobs but will include tips for first-time Django job seekers too."
 
-[talks.speaker]
-name = "Jon Gould"
+speakers = ["jon-gould"]

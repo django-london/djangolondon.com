@@ -7,5 +7,4 @@ skills_matter_url = "https://skillsmatter.com/meetups/12719-london-django-meetup
 title = "What Makes us Passionate"
 description = "A non-technical talk about individual and team motivation. From debunking of the carrot-and-stick paradigm to the more modern approach of positive psychology."
 
-[talks.speaker]
-name = "Marco Alabruzzo"
+speakers = ["marco-alabruzzo"]

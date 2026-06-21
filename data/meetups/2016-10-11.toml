@@ -11,8 +11,7 @@ James is a server-side development contractor based in London. He works mainly w
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/9137-full-clean-factories"
 
-[talks.speaker]
-name = "James Cooke"
+speakers = ["james-cooke"]
 
 [[talks]]
 title = "Introducing django-perf-rec"
@@ -22,5 +21,4 @@ Adam Johnson is Head of Devops at YPlan and author of django-mysql library. Adam
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/9191-introducing-django-perf-rec"
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]

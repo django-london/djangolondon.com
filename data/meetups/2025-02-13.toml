@@ -10,8 +10,7 @@ Django is known to be very stable. How did it get its reputation? With lots of f
 Sage is a Wagtail CMS developer at Torchbox, GSoC contributor and mentor for Wagtail and Django
 """
 
-[talks.speaker]
-name = "Sage Abdullah"
+speakers = ["sage-abdullah"]
 
 [[talks]]
 title = "Keeping Django relevant for the next 20 years"
@@ -21,5 +20,4 @@ Django is a big, slow-moving object. Lots of people worry about how much tractio
 Thibaud works at Torchbox as developer, core contributor to the Wagtail CMS build on Django, and President of the Django Software Foundation.
 """
 
-[talks.speaker]
-name = "Thibaud Colas"
+speakers = ["thibaud-colas"]

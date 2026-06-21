@@ -15,5 +15,4 @@ In this talk we'll see how to create a web map with the Python based web framewo
 Through this intervention you can learn how to add a map on your website, starting from a simple map based on Spatialite/SQLite up to a more complex and interactive map based on PostGIS/PostgreSQL.
 """
 
-[talks.speaker]
-name = "Paolo Melchiorre"
+speakers = ["paolo-melchiorre"]

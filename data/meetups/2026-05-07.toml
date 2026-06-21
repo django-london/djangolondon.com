@@ -10,8 +10,7 @@ Learn how to use Django 5.0's GeneratedField through practical examples. This fi
 Paolo Melchiorre is a Python backend developer, Django contributor, and Python Software Foundation Fellow. He serves on the Django Software Foundation board, co-organises PyCon Italia, and is a coach for Django Girls and a navigator for the Djangonaut Space mentorship programme.
 """
 
-[talks.speaker]
-name = "Paolo Melchiorre"
+speakers = ["paolo-melchiorre"]
 
 [[talks]]
 title = "Django in the Lab: how web development is reshaping behavioural research"
@@ -21,5 +20,4 @@ Off-the-shelf platforms can't always keep up with the complexity of academic res
 Andy Woods is a Senior Research Engineer-Psychologist at CoSTAR & StoryFutures, Royal Holloway, University of London, and a Django Software Foundation Individual Member.
 """
 
-[talks.speaker]
-name = "Andy Woods"
+speakers = ["andy-woods"]

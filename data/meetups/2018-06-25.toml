@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/251051214/"
 title = "10 Lessons From 10 Years of Selling Dev Work"
 description = "Matthew will share 10 key lessons learnt on his journey, told from the perspective of a developer. You'll hear actionable tips and insight you can act on today, whether you're a freelancer, contractor or employee."
 
-[talks.speaker]
-name = "Matthew Hall"
+speakers = ["matthew-hall"]
 
 [[talks]]
 title = "pip install disaster-waiting-to-happen"
 description = "Open source packages and libraries save us time, money and some much needed sanity. But with every new dependency comes the chance you’re letting in more than you bargained for. We’ll take a look at the tools and techniques you can use today to make sure you’re not the one responsible for introducing a game ending security vulnerability."
 
-[talks.speaker]
-name = "Lili Kastilio"
+speakers = ["lili-kastilio"]

@@ -6,17 +6,14 @@ meetup_url = "https://www.meetup.com/djangolondon/events/237000068/"
 title = "Testing in Django"
 description = "In and out on Django testing framework internals, its evolution and some best practices."
 
-[talks.speaker]
-name = "Ana Balica"
+speakers = ["ana-balica"]
 
 [[talks]]
 title = "7Bridges and Django"
 
-[talks.speaker]
-name = "Matei Beremski"
+speakers = ["matei-beremski"]
 
 [[talks]]
 title = "Business Process Modelling in Django Viewflow"
 
-[talks.speaker]
-name = "Sam Ghosh"
+speakers = ["sam-ghosh"]

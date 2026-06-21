@@ -5,12 +5,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/306321928/"
 [[talks]]
 title = "Cursor IDE to build a comedy booking app in django htmx"
 
-[talks.speaker]
-name = "Samuel Joseph"
+speakers = ["samuel-joseph"]
 
 [[talks]]
 title = "Building GraphQL APIs with Django"
 description = "An introduction to GraphQL and an example API built with Django."
 
-[talks.speaker]
-name = "Yosuf Ali"
+speakers = ["yosuf-ali"]

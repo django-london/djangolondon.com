@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/244261754/"
 title = "Making Enterprise fun with Django"
 description = "Django is not only for new web apps, but also for integrating into existing systems as well. We will go over how to setup a project that integrates with common enterprise components such as Oracle and LDAP, and speed up development iterations with Docker."
 
-[talks.speaker]
-name = "Charlie Smith"
+speakers = ["charlie-smith"]

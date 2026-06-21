@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/253642800/"
 title = "Liberating Structures"
 description = "Rather than a talk, we will learn about and participate in Liberating Structures, which are a set of facilitation tools for understanding how to work better. We'll be applying these tools to working as Django developers. This will be an interactive session."
 
-[talks.speaker]
-name = "David Heath"
+speakers = ["david-heath"]

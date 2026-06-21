@@ -6,12 +6,10 @@ meetup_url = "https://www.meetup.com/djangolondon/events/292108418/"
 title = "No Holds Barred Web Framework Battle"
 description = "Which framework is better: Django, FastAPI, or Flask? What about the host of less well-known options? Also, does full stack matter or are smaller frameworks the way to go? This talk is a frank discussion of which frameworks you should consider using in 2023, and which frameworks should avoided. The frameworks covered will include at least Django, FastAPI, Flask, Pyramid, and Tornado. The speaker will share lessons learned and pain points revealed using these tools, providing opinions on the best tools for building projects in 2023."
 
-[talks.speaker]
-name = "Daniel Roy Greenfeld"
+speakers = ["daniel-roy-greenfeld"]
 
 [[talks]]
 title = "“We need to talk” - How to receive feedback like a boss"
 description = "In teamwork, a culture of feedback is necessary to archive good collaboration and high performance. This talk is a step-by-step guide to getting the best out of every feedback session. Each step will be explained, focusing on the concepts of collaboration and conflict resolution."
 
-[talks.speaker]
-name = "Marco Alabruzzo"
+speakers = ["marco-alabruzzo"]

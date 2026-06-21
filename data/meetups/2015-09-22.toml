@@ -9,22 +9,19 @@ description = "I've written a lot of Django code in my career, some slow, and so
 slides_url = "https://www.slideshare.net/JonAtkinson1/django-performance-recipes"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6628-django-performance-recipes"
 
-[talks.speaker]
-name = "Jon Atkinson"
+speakers = ["jon-atkinson"]
 
 [[talks]]
 title = "Throw away your database, use Elastic Search instead"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6808-throw-away-your-database"
 
-[talks.speaker]
-name = "Anand Kumria"
+speakers = ["anand-kumria"]
 
 [[talks]]
 title = "Tornado, OpenShift and Django"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6625-tornado-openshift-and-django"
 
-[talks.speaker]
-name = "Karolis Rušėnas"
+speakers = ["karolis-rusenas"]
 
 [[talks]]
 title = "Migration to Django 1.8 from Django 1.6"
@@ -32,5 +29,4 @@ description = "Pros and cons of migrating to Django 1.8 and the hurdles anyone s
 slides_url = "https://speakerdeck.com/somghosh/migrating-from-django-1-dot-6-to-django-1-dot-8"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6809-migration-to-django-1-8-from-django-1-6"
 
-[talks.speaker]
-name = "Som Ghosh"
+speakers = ["som-ghosh"]

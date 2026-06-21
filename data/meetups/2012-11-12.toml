@@ -5,5 +5,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/89775692/"
 [[talks]]
 title = "Django 1.5 Custom User models"
 
-[talks.speaker]
-name = "Ryan Kaskel"
+speakers = ["ryan-kaskel"]

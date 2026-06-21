@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/286919619/"
 title = "Hotwire and Django"
 description = "An introduction to using Basecamp's HTML-over-the-wire tools for building interactive server-rendered projects with Django."
 
-[talks.speaker]
-name = "Rupert Baker"
+speakers = ["rupert-baker"]

@@ -6,19 +6,16 @@ meetup_url = "https://www.meetup.com/djangolondon/events/226492998/"
 title = "Encapsulated Django: Keeping your apps small, focused and free of circular dependencies"
 description = "Keeping your apps small, focused and free of circular dependencies"
 
-[talks.speaker]
-name = "David Seddon"
+speakers = ["david-seddon"]
 
 [[talks]]
 title = "Django Under The Hood: The Summary"
 description = "A summary of the concepts covered in Django Under The Hood."
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]
 
 [[talks]]
 title = "Grepping Django models: showcasing django-grep-db"
 description = "Showcasing the use of django-grep-db for grepping Django models."
 
-[talks.speaker]
-name = "Michael Blatherwick"
+speakers = ["michael-blatherwick"]

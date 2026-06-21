@@ -2,9 +2,20 @@
 
 {% block main %}
 <h2>{{ speaker.name }}</h2>
+{% if speaker.github_username or speaker.mastodon_url or speaker.bluesky_handle %}
+<ul class=links-list>
+  {% if speaker.bluesky_handle %}<li><a href=https://bsky.app/profile/{{ speaker.bluesky_handle }}>Bluesky</a></li>{% endif %}
+  {% if speaker.github_username %}<li><a href=https://github.com/{{ speaker.github_username }}>GitHub</a></li>{% endif %}
+  {% if speaker.mastodon_url %}<li><a href={{ speaker.mastodon_url }}>Mastodon</a></li>{% endif %}
+</ul>
+{% endif %}
+<h3>Talks</h3>
+{% with talks=speaker.talk_set.all %}
+<p>{{ speaker.name }} has given {{ talks|length }} talk{{ talks|length|pluralize }} at Django London.</p>
 <ul>
-  {% for talk in speaker.talk_set.all %}
-  <li><a href=/meetups/{{ talk.meetup.date|date:"Y-m-d" }}/>{{ talk.title }}</a> &mdash; {{ talk.meetup.title }}</li>
+  {% for talk in talks %}
+  <li><strong>{{ talk.title }}</strong> &mdash; <a href=/meetups/{{ talk.meetup.date|date:"Y-m-d" }}/>{{ talk.meetup.date|date:"F Y" }}</a></li>
   {% endfor %}
 </ul>
+{% endwith %}
 {% endblock %}

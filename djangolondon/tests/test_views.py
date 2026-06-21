@@ -29,20 +29,21 @@ class MeetupListTests(TestCase):
         years = [year for year, _ in grouped]
         assert years == sorted(years, reverse=True)
         assert len(years) == len(set(years))
+        assert "Django London has held" in response.text
         assert "/meetups/2021-05-18/" in response.text
 
 
 class MeetupDetailTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.speaker = Speaker.objects.get(name="Paolo Melchiorre")
+        cls.speaker = Speaker.objects.get(slug="paolo-melchiorre")
 
     def test_success(self):
         response = self.client.get("/meetups/2021-05-18/")
         assert response.status_code == HTTPStatus.OK
         assert "May Django Meetup" in response.text
         assert "Maps with Django" in response.text
-        assert f"/speakers/{self.speaker.pk}/" in response.text
+        assert f"/speakers/{self.speaker.slug}/" in response.text
         assert "Paolo Melchiorre" in response.text
 
     def test_not_found(self):
@@ -57,20 +58,29 @@ class MeetupRedirectTests(TestCase):
         assert response["Location"] == "/meetups/2021-05-18/"
 
 
+class SpeakerListTests(TestCase):
+    def test_success(self):
+        response = self.client.get("/speakers/")
+        assert response.status_code == HTTPStatus.OK
+        assert "<title>Speakers | Django London</title>" in response.text
+        assert "Django London has hosted" in response.text
+        assert "/speakers/paolo-melchiorre/" in response.text
+
+
 class SpeakerDetailTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.speaker = Speaker.objects.get(name="Paolo Melchiorre")
+        cls.speaker = Speaker.objects.get(slug="paolo-melchiorre")
 
     def test_success(self):
-        response = self.client.get(f"/speakers/{self.speaker.pk}/")
+        response = self.client.get(f"/speakers/{self.speaker.slug}/")
         assert response.status_code == HTTPStatus.OK
         assert "<title>Paolo Melchiorre | Django London</title>" in response.text
         assert "Maps with Django" in response.text
         assert "/meetups/2021-05-18/" in response.text
 
     def test_not_found(self):
-        response = self.client.get("/speakers/999999/")
+        response = self.client.get("/speakers/does-not-exist/")
         assert response.status_code == HTTPStatus.NOT_FOUND
 
 

@@ -6,19 +6,16 @@ meetup_url = "https://www.meetup.com/djangolondon/events/242044236/"
 title = "Going out on a Lamb(da)"
 description = "How to make a mini (database free!) application in Django"
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]
 
 [[talks]]
 title = "Whitenoise:Static files done right"
 description = "whitenoise is a plugin that helps you get your static files done correctly."
 
-[talks.speaker]
-name = "Dave Evans"
+speakers = ["dave-evans"]
 
 [[talks]]
 title = "Development Process Questions"
 description = "We've recently started thinking about meta-level development and come up with a range of questions to ask during the process."
 
-[talks.speaker]
-name = "David Seddon"
+speakers = ["david-seddon"]

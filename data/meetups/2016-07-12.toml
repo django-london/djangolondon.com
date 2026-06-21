@@ -8,21 +8,18 @@ title = "Untangling Django, Typescript and Angular 2"
 description = "Angular 2 is coming - what does that mean for Django projects?"
 slides_url = "https://slides.com/jamespacileo/5-quick-tips-django-docker-4#/"
 
-[talks.speaker]
-name = "James Pacileo"
+speakers = ["james-pacileo"]
 
 [[talks]]
 title = "Project django-minipub"
 description = "Introducing a small Django project and discussing how it lead me to the philosophy of small, focussed, recombinable apps."
 slides_url = "https://www.slideshare.net/RichardBarran/minipub-lightningenglish-64835946"
 
-[talks.speaker]
-name = "Richard Barran"
+speakers = ["richard-barran"]
 
 [[talks]]
 title = "Django System Check Framework"
 description = "Even if you didn't realize it, you've used Django's System Check Framework. Here's a brief guide to how it works."
 slides_url = "https://slides.com/davidseddon/check-the-system"
 
-[talks.speaker]
-name = "David Seddon"
+speakers = ["david-seddon"]

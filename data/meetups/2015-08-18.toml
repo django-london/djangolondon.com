@@ -8,15 +8,13 @@ title = "Python 3 and Django"
 description = "Are you using Python 3 for your Django sites? Find out why you should be, how to get set-up your development environment and server for Python 3, and a couple of pitfalls to look out for."
 skills_matter_url = "https://skillsmatter.com/skillscasts/6509-london-django-august-2015-meetup"
 
-[talks.speaker]
-name = "Pete Graham"
+speakers = ["pete-graham"]
 
 [[talks]]
 title = "Introduction to Unicode"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6560-introduction-to-unicode"
 
-[talks.speaker]
-name = "Maciej Dziardziel"
+speakers = ["maciej-dziardziel"]
 
 [[talks]]
 title = "How to easily deploy a django app on PyPI in 5 minutes"
@@ -24,5 +22,4 @@ description = "Have you created a Django app and want people to install it easil
 slides_url = "https://romgar.github.io/presentations/pypi_deployment/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/6561-how-to-easily-deploy-a-django-app-on-pypi-in-5-minutes"
 
-[talks.speaker]
-name = "Romain Garrigues"
+speakers = ["romain-garrigues"]

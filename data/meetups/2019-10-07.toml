@@ -7,12 +7,10 @@ skills_matter_url = "https://skillsmatter.com/meetups/12966-data-transparency-on
 title = "Data transparency on Django with yourData"
 description = "yourData is an open-source project to develop data transparency features for websites with content personalisation. For example, if a given content-stream element is rendered on the basis of a user’s personal data, we seek to display, on the element, what data is in use to the user. The aim is to improve online transparency, trust and data fluency.<br>In this talk I will outline the project’s ambition to create patterns applicable to Django and other frameworks.<br>I will then showcase how we are implementing this on our own Wagtail Django site."
 
-[talks.speaker]
-name = "Matthew Linares"
+speakers = ["matthew-linares"]
 
 [[talks]]
 title = "Hiring a Personal Investigator for your app"
 description = "This is an intro to Application Performance Monitoring (APM). We'll talk a bit about the history of APM, look through a quick case study and walk through a simple vendor-agnostic approach to choosing an APM solution."
 
-[talks.speaker]
-name = "Emanuil Tolev"
+speakers = ["emanuil-tolev"]

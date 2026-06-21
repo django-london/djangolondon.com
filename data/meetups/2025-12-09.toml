@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/311957141/"
 title = "MongoDB Overview"
 description = "This 25-minute session covers: Learning basics about MongoDB architecture 10-question skill check to validate learning And then as tradition Django Quiz!"
 
-[talks.speaker]
-name = "Abigail Afi Gbadago"
+speakers = ["abigail-afi-gbadago"]

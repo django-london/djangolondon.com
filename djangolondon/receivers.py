@@ -11,6 +11,7 @@ from djangolondon.models import Meetup, Speaker, Talk
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "meetups"
+SPEAKERS_DIR = BASE_DIR / "data" / "speakers"
 
 
 def _dev_credentials():
@@ -40,6 +41,21 @@ def load_static_data(sender, **kwargs):
     if sender.name != "djangolondon":
         return
 
+    for toml_file in sorted(SPEAKERS_DIR.glob("*.toml")):
+        slug = toml_file.stem
+        with toml_file.open("rb") as f:
+            data = tomllib.load(f)
+
+        Speaker.objects.update_or_create(
+            slug=slug,
+            defaults={
+                "name": data["name"],
+                "github_username": data.get("github_username", ""),
+                "mastodon_url": data.get("mastodon_url", ""),
+                "bluesky_handle": data.get("bluesky_handle", ""),
+            },
+        )
+
     for toml_file in sorted(DATA_DIR.glob("*.toml")):
         with toml_file.open("rb") as f:
             data = tomllib.load(f)
@@ -54,12 +70,8 @@ def load_static_data(sender, **kwargs):
         )
 
         for talk_data in data.get("talks", []):
-            speaker_data = talk_data["speaker"]
-            speaker, _ = Speaker.objects.get_or_create(name=speaker_data["name"])
-
-            Talk.objects.update_or_create(
+            talk, _ = Talk.objects.update_or_create(
                 meetup=meetup,
-                speaker=speaker,
                 title=talk_data["title"],
                 defaults={
                     "description": talk_data.get("description", "").strip(),
@@ -68,3 +80,10 @@ def load_static_data(sender, **kwargs):
                     "skills_matter_url": talk_data.get("skills_matter_url", ""),
                 },
             )
+            speakers = Speaker.objects.filter(slug__in=talk_data["speakers"])
+            missing = set(talk_data["speakers"]) - set(
+                speakers.values_list("slug", flat=True)
+            )
+            if missing:
+                raise ValueError(f"Unknown speaker slugs: {missing}")
+            talk.speakers.set(speakers)

@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/152893542/"
 title = "What happened in Django 1.6 and what is coming in Django 1.7"
 description = "This is a talk about the changes and developments within Django 1.6 and the features expected in Django 1.7."
 
-[talks.speaker]
-name = "Andrew Godwin"
+speakers = ["andrew-godwin"]

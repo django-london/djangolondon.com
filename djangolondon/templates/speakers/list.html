@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>All Speakers</h2>
+<p>Django London has hosted {{ speakers|length }} speakers over the years.</p>
+<ul>
+  {% for speaker in speakers %}
+  <li><a href=/speakers/{{ speaker.slug }}/>{{ speaker.name }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

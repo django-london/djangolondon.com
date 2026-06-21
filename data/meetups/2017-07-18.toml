@@ -12,8 +12,7 @@ Yves is CTO and deputy CEO of CGscope, a data provider with a specific focus on 
 slides_url = "https://github.com/djangolondon/djangolondon.github.io/blob/main/_meetups/Slides/2017-07-18/DjangoCon-Europe-2017-Highlights.pdf"
 skills_matter_url = "https://skillsmatter.com/skillscasts/10409-london-django-july-meetup"
 
-[talks.speaker]
-name = "Yves Weissig"
+speakers = ["yves-weissig"]
 
 [[talks]]
 title = "Generic Foreign Keys: Why not?"
@@ -24,5 +23,4 @@ Gareth is CTO at Housekeep, London's biggest and best home cleaning platform. Be
 slides_url = "https://gitpitch.com/gareth-lloyd/generic-foreign-keys-why-not"
 skills_matter_url = "https://skillsmatter.com/skillscasts/10588-generic-foreign-keys-why-not"
 
-[talks.speaker]
-name = "Gareth Lloyd"
+speakers = ["gareth-lloyd"]

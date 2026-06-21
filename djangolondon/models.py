@@ -2,7 +2,11 @@ from django.db import models
 
 
 class Speaker(models.Model):
-    name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=200)
+    github_username = models.CharField(max_length=200, blank=True)
+    mastodon_url = models.URLField(blank=True)
+    bluesky_handle = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name
@@ -23,7 +27,7 @@ class Meetup(models.Model):
 
 class Talk(models.Model):
     meetup = models.ForeignKey(Meetup, on_delete=models.CASCADE)
-    speaker = models.ForeignKey(Speaker, on_delete=models.PROTECT)
+    speakers = models.ManyToManyField(Speaker)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     blogpost_url = models.URLField(blank=True)
@@ -33,7 +37,7 @@ class Talk(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["meetup", "speaker", "title"],
+                fields=["meetup", "title"],
                 name="%(app_label)s_%(class)s_unique_talk",
             ),
         ]

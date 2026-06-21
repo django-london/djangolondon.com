@@ -11,13 +11,11 @@ David is a Senior Developer at the FinTech startup Growth Street.
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/9254-london-django-meetup"
 
-[talks.speaker]
-name = "David Seddon"
+speakers = ["david-seddon"]
 
 [[talks]]
 title = "LXC with Django - Containerise your unicorns!"
 description = "A brief look at, and demonstration of, containerisation with LXC."
 skills_matter_url = "https://skillsmatter.com/skillscasts/9411-containerise-your-unicorns"
 
-[talks.speaker]
-name = "Jonathan Aylard"
+speakers = ["jonathan-aylard"]

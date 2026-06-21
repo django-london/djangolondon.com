@@ -7,12 +7,10 @@ skills_matter_url = "https://skillsmatter.com/meetups/12195-london-django-meetup
 title = "A Gentle Introduction to Experimentalism"
 description = "An overview of A/B testing and a Django module that may assist with this process."
 
-[talks.speaker]
-name = "Vaughan Allan"
+speakers = ["vaughan-allan"]
 
 [[talks]]
 title = "Lightning talk: Dependency Health Checkup for your Django Apps"
 description = "A demo of Depcheck, an open-source tool to check the health of your Python dependencies."
 
-[talks.speaker]
-name = "Andy Jones"
+speakers = ["andy-jones"]

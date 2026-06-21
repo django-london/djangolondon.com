@@ -11,8 +11,7 @@ Marco is a web guy that values process over technology and user experience over 
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/9249-london-django-meetup"
 
-[talks.speaker]
-name = "Marco Alabruzzo"
+speakers = ["marco-alabruzzo"]
 
 [[talks]]
 title = "Django Quiz"
@@ -22,5 +21,4 @@ Adam Johnson is Head of Devops at YPlan and author of django-mysql library. Adam
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/9475-django-under-the-hood-2016"
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]

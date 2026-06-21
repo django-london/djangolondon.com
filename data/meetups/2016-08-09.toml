@@ -11,16 +11,14 @@ This gave rise to a quick & dirty way to make file sharing safer whilst still no
 """
 skills_matter_url = "https://skillsmatter.com/skillscasts/8011-sharing-files-securely-with-korra"
 
-[talks.speaker]
-name = "Daniel Quinn"
+speakers = ["daniel-quinn"]
 
 [[talks]]
 title = "PyCharm"
 description = "A walkthrough of the PyCharm features that aid in Django development."
 skills_matter_url = "https://skillsmatter.com/skillscasts/8731-pycharm"
 
-[talks.speaker]
-name = "Antonio Martin"
+speakers = ["antonio-martin"]
 
 [[talks]]
 title = "A quick introduction to unit testing Django projects with tox"
@@ -28,5 +26,4 @@ description = "How and why you should use tox instead of manage.py to run Django
 slides_url = "https://slides.com/jerrytaylor/a-quick-introduction-to-unit-testing-django-projects-with-tox#/"
 skills_matter_url = "https://skillsmatter.com/skillscasts/8732-a-quick-introduction-to-unit-testing-django-projects-with-tox"
 
-[talks.speaker]
-name = "Jeremy Taylor"
+speakers = ["jeremy-taylor"]

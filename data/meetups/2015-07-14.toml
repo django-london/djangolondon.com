@@ -7,26 +7,22 @@ title = "Things I wish I'd known about Django"
 description = "All that stuff I'd wish I'd known when I started."
 slides_url = "https://speakerdeck.com/jamescooke/things-i-wish-id-known-about-django"
 
-[talks.speaker]
-name = "James Cooke"
+speakers = ["james-cooke"]
 
 [[talks]]
 title = "Django's Check Framework"
 description = "What is Django's [System Check Framework](https://docs.djangoproject.com/en/1.8/ref/checks/)? And how do you use it?"
 slides_url = "https://github.com/adamchainz/django-talk-system-checks/blob/main/django-talk-system-checks.pdf"
 
-[talks.speaker]
-name = "Adam Johnson"
+speakers = ["adam-johnson"]
 
 [[talks]]
 title = "Django meets Twilio task router"
 
-[talks.speaker]
-name = "Charalampos Papaloizou"
+speakers = ["charalampos-papaloizou"]
 
 [[talks]]
 title = "5 quick tips: Django + Docker"
 slides_url = "https://slides.com/jamespacileo/5-quick-tips-django-docker/fullscreen"
 
-[talks.speaker]
-name = "James Pacileo"
+speakers = ["james-pacileo"]

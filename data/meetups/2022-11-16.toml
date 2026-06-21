@@ -6,5 +6,4 @@ meetup_url = "https://www.meetup.com/djangolondon/events/289448806/"
 title = "Show off your schema; control your queries; move to mypy"
 description = "A quick exploration of my three most recent open source projects. You will learn how to interactively explore your database schema, how to mark parts of your code as off-limits for queries, and how to introduce mypy into an existing project incrementally."
 
-[talks.speaker]
-name = "Charlie Denton"
+speakers = ["charlie-denton"]
