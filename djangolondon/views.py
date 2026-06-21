@@ -99,3 +99,11 @@ def speaker_detail(request, slug: str):
 def favicon(request: HttpRequest) -> HttpResponse:
     file = (settings.BASE_DIR / "djangolondon/static/favicon.svg").open("rb")
     return FileResponse(file)
+
+
+@require_GET
+def atproto_did(request: HttpRequest) -> HttpResponse:
+    return HttpResponse(
+        "did:plc:r4l26ukwabszkecqnsv77jt3",
+        content_type="text/plain",
+    )

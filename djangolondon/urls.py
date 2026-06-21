@@ -27,6 +27,7 @@ urlpatterns = [
     path("speakers/", views.speaker_list),
     path("speakers/<slug:slug>/", views.speaker_detail),
     path("favicon.ico", views.favicon),
+    path(".well-known/atproto-did", views.atproto_did),
     path("organizers/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

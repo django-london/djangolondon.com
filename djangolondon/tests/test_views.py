@@ -88,3 +88,11 @@ class FaviconTests(TestCase):
     def test_success(self):
         response = self.client.get("/favicon.ico")
         assert response.status_code == HTTPStatus.OK
+
+
+class AtprotoDidTests(TestCase):
+    def test_success(self):
+        response = self.client.get("/.well-known/atproto-did")
+        assert response.status_code == HTTPStatus.OK
+        assert response["Content-Type"] == "text/plain"
+        assert response.text == "did:plc:r4l26ukwabszkecqnsv77jt3"
