@@ -12,4 +12,4 @@ speakers = ["cagl-ulusahin-sonmez"]
 title = "Committing 1 trillion lines of code to Github, and other fun things to do over the weekend"
 description = "This talk covers a side project I’ve been working on to commit every line of code published to PyPI into GitHub. I’ll go over the specifics of how this was done, what this enables and most importantly why I did this. I'll also talk a bit about what makes a good side project and how you can find interesting side projects that motivate you."
 
-speakers = ["thomas-forbes"]
+speakers = ["tom-forbes"]
