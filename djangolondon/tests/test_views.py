@@ -456,7 +456,7 @@ class PrizeDrawPollingTests(PrizeDrawTestCase):
 
         response = self.client.get("/prize-draws/june-2026/")
 
-        assert 'hx-trigger="every 10s"' in response.text
+        assert 'hx-trigger="every 5s"' in response.text
 
     def test_polls_quickly_once_the_draw_has_started(self):
         self.enter()
