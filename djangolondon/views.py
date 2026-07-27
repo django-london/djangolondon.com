@@ -224,6 +224,8 @@ def prize_draw_screen(request: HttpRequest, slug: str) -> HttpResponse:
         scale=8,
         dark="#092e20",
         light="#ffffff",
+        # A viewBox instead of a fixed size, so CSS can scale it to the screen.
+        omitsize=True,
     )
     return render(
         request,

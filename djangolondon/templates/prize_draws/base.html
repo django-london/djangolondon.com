@@ -1,0 +1,24 @@
+{% load django_htmx static %}
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+  <meta charset=UTF-8>
+
+  <title>{% if title %}{{ title }} | {% endif %}Django London</title>
+
+  <meta name=viewport content="width=device-width, initial-scale=1">
+
+  <link rel=stylesheet href="{% static 'style.css' %}">
+</head>
+
+<body class="prize-draw {% block body_class %}{% endblock %}">
+
+<main class="prize-draw-main flow">
+{% block main %}{% endblock %}
+</main>
+
+{% htmx_script version=4 %}
+
+</body>
+</html>

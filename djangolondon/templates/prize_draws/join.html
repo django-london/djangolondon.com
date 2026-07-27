@@ -1,11 +1,6 @@
-{% extends "base.html" %}
-{% load django_htmx %}
+{% extends "prize_draws/base.html" %}
 
 {% block main %}
-<h2>{{ draw.name }}</h2>
+<h1>{{ draw.name }}</h1>
 {% include "prize_draws/entry.html" %}
 {% endblock main %}
-
-{% block scripts %}
-{% htmx_script version=4 %}
-{% endblock scripts %}

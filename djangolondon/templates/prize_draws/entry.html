@@ -6,7 +6,7 @@ news to wait for, and stops once the attendee has won or the draw is over.
      {% if polling %}hx-get=/prize-draws/{{ draw.slug }}/status/ hx-trigger="every 3s" hx-swap=outerMorph{% endif %}>
 {% if entry %}
   {% if won_prize %}
-  <h3>You won! 🎉</h3>
+  <h2>You won! 🎉</h2>
   <p>Congratulations {{ entry.name }}, you won <strong>{{ won_prize.name }}</strong>.</p>
   {% if won_prize.description %}<p>{{ won_prize.description }}</p>{% endif %}
     {% if entry.email %}

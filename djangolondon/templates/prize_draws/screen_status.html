@@ -26,7 +26,7 @@ an updated copy whenever the draw button is pressed.
 {% endif %}
 
 {% for prize in won_prizes %}
-{% if forloop.first %}<h3>Winners</h3><ul class=prize-draw-winners>{% endif %}
+{% if forloop.first %}<h2>Winners</h2><ul class=prize-draw-winners>{% endif %}
   <li{% if forloop.first %} class=latest{% endif %}><strong>{{ prize.winner.name }}</strong> — {{ prize.name }}</li>
 {% if forloop.last %}</ul>{% endif %}
 {% endfor %}
