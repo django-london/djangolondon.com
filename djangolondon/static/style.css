@@ -418,3 +418,43 @@ nav {
     line-height: 1.2;
   }
 }
+
+.prize-draw-entrants {
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3em;
+  font-size: 0.75em;
+
+  & li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+    padding: 0.1em 0.3em 0.1em 0.7em;
+    border-radius: 1em;
+    background: var(--color-django-green-light);
+  }
+
+  /* So the remove button sits inside the chip rather than below it. */
+  & form {
+    display: contents;
+  }
+
+  & button {
+    width: auto;
+    margin: 0;
+    padding: 0 0.3em;
+    background: none;
+    color: var(--color-light);
+    font-size: 1em;
+    opacity: 0.6;
+
+    &:hover:enabled,
+    &:focus-visible:enabled {
+      background: none;
+      opacity: 1;
+    }
+  }
+}

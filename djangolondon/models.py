@@ -52,12 +52,6 @@ class Talk(models.Model):
 class PrizeDraw(models.Model):
     slug = models.SlugField(unique=True)
     name = models.CharField(max_length=200)
-    meetup = models.ForeignKey(
-        Meetup,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-    )
     entries_open = models.BooleanField(default=True)
 
     class Meta:
@@ -86,9 +80,16 @@ class PrizeDraw(models.Model):
         if not entries:
             return None
 
-        prize.winner = secrets.choice(entries)
-        prize.drawn_at = timezone.now()
-        prize.save(update_fields=["winner", "drawn_at"])
+        winner = secrets.choice(entries)
+        drawn_at = timezone.now()
+        # Conditional update, so that two presses of the draw button cannot
+        # both award this prize: whichever lands second draws nothing.
+        if not self.prizes.filter(pk=prize.pk, winner=None).update(
+            winner=winner, drawn_at=drawn_at
+        ):
+            return None
+        prize.winner = winner
+        prize.drawn_at = drawn_at
 
         if self.entries_open:
             self.entries_open = False

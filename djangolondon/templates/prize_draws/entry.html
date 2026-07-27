@@ -1,9 +1,12 @@
 {% comment %}
 The attendee’s view of the draw, on their phone. It polls itself while there is
 news to wait for, and stops once the attendee has won or the draw is over.
+
+Nothing can happen until the draw starts, so it waits a long time between polls
+until then. Every phone in the room is doing this.
 {% endcomment %}
-<div id=prize-draw-entry class=flow
-     {% if polling %}hx-get=/prize-draws/{{ draw.slug }}/status/ hx-trigger="every 3s" hx-swap=outerMorph{% endif %}>
+<div id=prize-draw-entry class=flow aria-live=polite
+     {% if polling %}hx-get=/prize-draws/{{ draw.slug }}/status/ hx-trigger="every {% if draw.entries_open %}10s{% else %}2s{% endif %}" hx-swap=outerMorph{% endif %}>
 {% if entry %}
   {% if won_prize %}
   <h2>You won! 🎉</h2>

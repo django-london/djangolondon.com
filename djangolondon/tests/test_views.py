@@ -324,6 +324,9 @@ class PrizeDrawScreenStatusTests(PrizeDrawTestCase):
         assert response.status_code == HTTPStatus.OK
         assert "1 entry" in response.text
         assert "disabled" not in response.text
+        # The room can see who is in.
+        assert "In the draw" in response.text
+        assert "Alice" in response.text
 
 
 class PrizeDrawDrawTests(PrizeDrawTestCase):
@@ -387,6 +390,85 @@ class PrizeDrawDrawTests(PrizeDrawTestCase):
         assert response["Location"] == "/prize-draws/june-2026/screen/"
         self.prize.refresh_from_db()
         assert self.prize.winner is not None
+
+
+class PrizeDrawRemoveEntryTests(PrizeDrawTestCase):
+    def remove_url(self, entry):
+        return f"/prize-draws/june-2026/screen/entries/{entry.pk}/remove/"
+
+    def test_requires_staff(self):
+        entry = self.enter()
+
+        response = self.client.post(self.remove_url(entry))
+
+        assert response.status_code == HTTPStatus.FOUND
+        assert Entry.objects.filter(pk=entry.pk).exists()
+
+    def test_success(self):
+        entry = self.enter()
+        self.client.logout()
+        self.login_organizer()
+
+        response = self.client.post(self.remove_url(entry), headers=HTMX_HEADERS)
+
+        assert response.status_code == HTTPStatus.OK
+        assert "0 entries" in response.text
+        assert not Entry.objects.exists()
+
+    def test_removing_a_winner_returns_the_prize_to_the_pot(self):
+        entry = self.enter()
+        self.draw.draw_prize()
+        self.client.logout()
+        self.login_organizer()
+
+        response = self.client.post(self.remove_url(entry), headers=HTMX_HEADERS)
+
+        assert response.status_code == HTTPStatus.OK
+        self.prize.refresh_from_db()
+        assert self.prize.winner is None
+        assert self.prize.drawn_at is None
+        assert "Draw Django Book" in response.text
+
+    def test_unknown_entry(self):
+        self.login_organizer()
+
+        response = self.client.post(
+            "/prize-draws/june-2026/screen/entries/404/remove/", headers=HTMX_HEADERS
+        )
+
+        assert response.status_code == HTTPStatus.OK
+
+    def test_without_htmx_redirects(self):
+        entry = self.enter()
+        self.client.logout()
+        self.login_organizer()
+
+        response = self.client.post(self.remove_url(entry))
+
+        assert response.status_code == HTTPStatus.FOUND
+        assert response["Location"] == "/prize-draws/june-2026/screen/"
+        assert not Entry.objects.exists()
+
+
+class PrizeDrawPollingTests(PrizeDrawTestCase):
+    def test_polls_slowly_while_entries_are_open(self):
+        self.enter()
+
+        response = self.client.get("/prize-draws/june-2026/")
+
+        assert 'hx-trigger="every 10s"' in response.text
+
+    def test_polls_quickly_once_the_draw_has_started(self):
+        self.enter()
+        Prize.objects.create(draw=self.draw, order=2, name="Django Mug")
+        # Someone else takes the first prize, so our attendee is still waiting.
+        self.prize.winner = Entry.objects.create(draw=self.draw, name="Bob")
+        self.prize.save()
+        PrizeDraw.objects.filter(pk=self.draw.pk).update(entries_open=False)
+
+        response = self.client.get("/prize-draws/june-2026/")
+
+        assert 'hx-trigger="every 2s"' in response.text
 
 
 class PrizeVoucherTests(PrizeDrawTestCase):

@@ -6,13 +6,19 @@ an updated copy whenever the draw button is pressed.
      hx-get=/prize-draws/{{ draw.slug }}/screen/status/
      hx-trigger="every 3s"
      hx-swap=outerMorph>
-<p class=prize-draw-count>{{ entry_count }} entr{{ entry_count|pluralize:"y,ies" }}</p>
+<p class=prize-draw-count aria-live=polite>{{ entry_count }} entr{{ entry_count|pluralize:"y,ies" }}</p>
 
 {% if next_prize %}
+{% comment %}
+hx-sync and hx-disable between them mean a double press draws one prize, not
+two. The draw itself is guarded again in PrizeDraw.draw_prize().
+{% endcomment %}
 <form method=post action=/prize-draws/{{ draw.slug }}/screen/draw/
       hx-post=/prize-draws/{{ draw.slug }}/screen/draw/
       hx-target=#prize-draw-status
-      hx-swap=outerMorph>
+      hx-swap=outerMorph
+      hx-sync="this:drop"
+      hx-disable="find button">
   {% csrf_token %}
   <button class=prize-draw-button {% if not can_draw %}disabled{% endif %}>
     Draw {{ next_prize.name }}
@@ -26,8 +32,26 @@ an updated copy whenever the draw button is pressed.
 {% endif %}
 
 {% for prize in won_prizes %}
-{% if forloop.first %}<h2>Winners</h2><ul class=prize-draw-winners>{% endif %}
+{% if forloop.first %}<h2>Winners</h2><ul class=prize-draw-winners aria-live=polite>{% endif %}
   <li{% if forloop.first %} class=latest{% endif %}><strong>{{ prize.winner.name }}</strong> — {{ prize.name }}</li>
 {% if forloop.last %}</ul>{% endif %}
 {% endfor %}
+
+{% if entries %}
+<h2>In the draw</h2>
+<ul class=prize-draw-entrants>
+  {% for entry in entries %}
+  <li>{{ entry.name }}
+    <form method=post action=/prize-draws/{{ draw.slug }}/screen/entries/{{ entry.pk }}/remove/
+          hx-post=/prize-draws/{{ draw.slug }}/screen/entries/{{ entry.pk }}/remove/
+          hx-target=#prize-draw-status
+          hx-swap=outerMorph
+          hx-confirm="Remove {{ entry.name }} from the draw?">
+      {% csrf_token %}
+      <button aria-label="Remove {{ entry.name }}">&times;</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
 </div>

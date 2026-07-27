@@ -61,8 +61,7 @@ class EntryInline(admin.TabularInline):
 
 @admin.register(PrizeDraw)
 class PrizeDrawAdmin(admin.ModelAdmin):
-    list_display = ["name", "meetup", "entries_open", "screen_link"]
-    list_select_related = ["meetup"]
+    list_display = ["name", "entries_open", "screen_link"]
     prepopulated_fields = {"slug": ["name"]}
     inlines = [PrizeInline, EntryInline]
 

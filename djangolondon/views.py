@@ -176,10 +176,12 @@ def prize_draw_enter(request: HttpRequest, slug: str) -> HttpResponse:
 
 def _screen_context(draw: PrizeDraw) -> dict:
     next_prize = draw.next_prize()
+    entries = list(draw.entries.all())
     return {
         "draw": draw,
         "next_prize": next_prize,
-        "entry_count": draw.entries.count(),
+        "entries": entries,
+        "entry_count": len(entries),
         "can_draw": next_prize is not None and draw.eligible_entries().exists(),
         "won_prizes": (
             draw.prizes.defer("voucher")
@@ -231,6 +233,21 @@ def prize_draw_screen_status(request: HttpRequest, slug: str) -> HttpResponse:
 def prize_draw_draw(request: HttpRequest, slug: str) -> HttpResponse:
     draw = get_object_or_404(PrizeDraw, slug=slug)
     draw.draw_prize()
+    if not request.htmx:
+        return redirect(f"/prize-draws/{draw.slug}/screen/")
+    return _screen_response(request, draw)
+
+
+@staff_member_required
+@require_POST
+def prize_draw_remove_entry(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
+    """Drop an entry from the draw, for when a name should not be on screen."""
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    entry = draw.entries.filter(pk=pk).first()
+    if entry is not None:
+        # Anything this entry won goes back in the pot.
+        draw.prizes.filter(winner=entry).update(drawn_at=None)
+        entry.delete()
     if not request.htmx:
         return redirect(f"/prize-draws/{draw.slug}/screen/")
     return _screen_response(request, draw)

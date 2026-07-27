@@ -84,6 +84,27 @@ class PrizeDrawTests(TestCase):
         assert self.draw.draw_prize() is None
         assert self.draw.entries_open is True
 
+    def test_draw_prize_when_another_press_got_there_first(self):
+        prize = Prize.objects.create(draw=self.draw, name="Book")
+        alice = Entry.objects.create(draw=self.draw, name="Alice")
+        Entry.objects.create(draw=self.draw, name="Bob")
+
+        # Stand in for a second press landing between the read and the write.
+        eligible_entries = self.draw.eligible_entries
+
+        def concurrent_draw():
+            Prize.objects.filter(pk=prize.pk).update(
+                winner=alice, drawn_at=timezone.now()
+            )
+            return eligible_entries()
+
+        self.draw.eligible_entries = concurrent_draw
+
+        assert self.draw.draw_prize() is None
+        # The press that got there first keeps the prize.
+        prize.refresh_from_db()
+        assert prize.winner == alice
+
     def test_draw_prize_never_picks_the_same_entry_twice(self):
         Prize.objects.create(draw=self.draw, order=1, name="Book")
         Prize.objects.create(draw=self.draw, order=2, name="Mug")

@@ -58,6 +58,10 @@ urlpatterns = [
                             path("", views.prize_draw_screen),
                             path("status/", views.prize_draw_screen_status),
                             path("draw/", views.prize_draw_draw),
+                            path(
+                                "entries/<int:pk>/remove/",
+                                views.prize_draw_remove_entry,
+                            ),
                         ]
                     ),
                 ),
