@@ -254,7 +254,7 @@ class PrizeDrawStatusTests(PrizeDrawTestCase):
         assert response.status_code == HTTPStatus.OK
         assert "You won!" in response.text
         assert "Django Book" in response.text
-        assert "Your email address" in response.text
+        assert "Come and see an organizer to collect it." in response.text
         # Winners have no more news to wait for.
         assert "hx-get=" not in response.text
         assert self.prize.pk == entry.prize.pk
@@ -277,74 +277,6 @@ class PrizeDrawStatusTests(PrizeDrawTestCase):
         response = self.client.get("/prize-draws/does-not-exist/status/")
 
         assert response.status_code == HTTPStatus.NOT_FOUND
-
-
-class PrizeDrawEmailTests(PrizeDrawTestCase):
-    def win(self):
-        entry = self.enter()
-        self.draw.draw_prize()
-        return entry
-
-    def test_success(self):
-        entry = self.win()
-
-        response = self.client.post(
-            "/prize-draws/june-2026/email/",
-            {"email": "alice@example.com"},
-            headers=HTMX_HEADERS,
-        )
-
-        assert response.status_code == HTTPStatus.OK
-        entry.refresh_from_db()
-        assert entry.email == "alice@example.com"
-        assert "alice@example.com" in response.text
-
-    def test_invalid(self):
-        self.win()
-
-        response = self.client.post(
-            "/prize-draws/june-2026/email/",
-            {"email": "not-an-email"},
-            headers=HTMX_HEADERS,
-        )
-
-        assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
-        assert "Enter a valid email address." in response.text
-        assert Entry.objects.get().email == ""
-
-    def test_without_htmx_redirects(self):
-        self.win()
-
-        response = self.client.post(
-            "/prize-draws/june-2026/email/",
-            {"email": "alice@example.com"},
-        )
-
-        assert response.status_code == HTTPStatus.FOUND
-        assert response["Location"] == "/prize-draws/june-2026/"
-        assert Entry.objects.get().email == ""
-
-    def test_without_entry(self):
-        response = self.client.post(
-            "/prize-draws/june-2026/email/",
-            {"email": "alice@example.com"},
-            headers=HTMX_HEADERS,
-        )
-
-        assert response.status_code == HTTPStatus.OK
-        assert "Enter the draw" in response.text
-
-    def test_without_winning(self):
-        self.enter()
-
-        response = self.client.post(
-            "/prize-draws/june-2026/email/",
-            {"email": "alice@example.com"},
-            headers=HTMX_HEADERS,
-        )
-
-        assert response.status_code == HTTPStatus.OK
-        assert Entry.objects.get().email == ""
 
 
 class PrizeDrawScreenTests(PrizeDrawTestCase):

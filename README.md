@@ -42,8 +42,8 @@ Each press picks a random entrant who has not already won, announces them on
 the screen, and records the win in the database.
 Entries close on the first press.
 
-**(5)** Winners see their win on their own phone, enter an email address to be
-contacted on, and can download their voucher PDF.
+**(5)** Winners see their win on their own phone, and can download their
+voucher PDF there and then.
 
 Uploaded vouchers live in `MEDIA_ROOT`, and are only downloadable by the winner
 or by a logged-in organizer.

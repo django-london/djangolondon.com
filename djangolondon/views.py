@@ -14,7 +14,7 @@ from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET, require_POST
 
-from djangolondon.forms import EntryEmailForm, EntryForm
+from djangolondon.forms import EntryForm
 from djangolondon.models import Meetup, Prize, PrizeDraw, Speaker, Talk
 
 
@@ -117,7 +117,6 @@ def _entry_context(
     draw: PrizeDraw,
     *,
     entry_form: EntryForm | None = None,
-    email_form: EntryEmailForm | None = None,
 ) -> dict:
     entry = _get_entry(request, draw)
     won_prize = entry.won_prize() if entry is not None else None
@@ -130,7 +129,6 @@ def _entry_context(
         # Attendees only need live updates while they are waiting to hear.
         "polling": entry is not None and won_prize is None and prizes_remaining,
         "entry_form": entry_form if entry_form is not None else EntryForm(),
-        "email_form": email_form if email_form is not None else EntryEmailForm(),
     }
 
 
@@ -174,25 +172,6 @@ def prize_draw_enter(request: HttpRequest, slug: str) -> HttpResponse:
     entry.draw = draw
     entry.save()
     request.session[_entry_session_key(draw)] = entry.pk
-    return _entry_response(request, _entry_context(request, draw))
-
-
-@require_POST
-def prize_draw_email(request: HttpRequest, slug: str) -> HttpResponse:
-    draw = get_object_or_404(PrizeDraw, slug=slug)
-    if not request.htmx:
-        return redirect(f"/prize-draws/{draw.slug}/")
-
-    entry = _get_entry(request, draw)
-    if entry is None or entry.won_prize() is None:
-        return _entry_response(request, _entry_context(request, draw))
-
-    form = EntryEmailForm(request.POST, instance=entry)
-    if not form.is_valid():
-        context = _entry_context(request, draw, email_form=form)
-        return _entry_response(request, context, status=HTTPStatus.UNPROCESSABLE_ENTITY)
-
-    form.save()
     return _entry_response(request, _entry_context(request, draw))
 
 

@@ -41,8 +41,8 @@ class PrizeInline(admin.TabularInline):
 class EntryInline(admin.TabularInline):
     model = Entry
     extra = 0
-    fields = ["name", "email", "created_at"]
-    readonly_fields = ["name", "email", "created_at"]
+    fields = ["name", "created_at"]
+    readonly_fields = ["name", "created_at"]
 
     def has_add_permission(self, request, obj):
         return False

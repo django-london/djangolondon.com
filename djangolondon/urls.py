@@ -51,7 +51,6 @@ urlpatterns = [
                 path("", views.prize_draw_join),
                 path("enter/", views.prize_draw_enter),
                 path("status/", views.prize_draw_status),
-                path("email/", views.prize_draw_email),
                 path(
                     "screen/",
                     include(

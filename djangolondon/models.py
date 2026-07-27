@@ -139,7 +139,6 @@ class Entry(models.Model):
         related_name="entries",
     )
     name = models.CharField(max_length=100)
-    email = models.EmailField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
