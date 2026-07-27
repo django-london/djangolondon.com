@@ -1,8 +1,6 @@
 from http import HTTPStatus
 
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from djangolondon.models import Entry, Prize, PrizeDraw, Speaker
@@ -393,9 +391,8 @@ class PrizeDrawDrawTests(PrizeDrawTestCase):
 
 class PrizeVoucherTests(PrizeDrawTestCase):
     def attach_voucher(self):
-        self.prize.voucher = SimpleUploadedFile(
-            "django-book.pdf", b"%PDF-1.7 fake voucher"
-        )
+        self.prize.voucher = b"%PDF-1.7 fake voucher"
+        self.prize.voucher_filename = "django-book.pdf"
         self.prize.save()
 
     def test_success(self):
@@ -440,40 +437,3 @@ class PrizeVoucherTests(PrizeDrawTestCase):
         response = self.client.get("/prizes/404/voucher/")
 
         assert response.status_code == HTTPStatus.NOT_FOUND
-
-
-class MediaFileTests(TestCase):
-    def setUp(self):
-        self.path = settings.MEDIA_ROOT / "vouchers/june-2026/django-book.pdf"
-        self.path.parent.mkdir(parents=True)
-        self.path.write_bytes(b"%PDF-1.7 fake voucher")
-
-    def test_requires_staff(self):
-        response = self.client.get("/media/vouchers/june-2026/django-book.pdf")
-
-        assert response.status_code == HTTPStatus.FOUND
-
-    def test_success(self):
-        User.objects.create_user("organizer", password="thames", is_staff=True)
-        self.client.login(username="organizer", password="thames")
-
-        response = self.client.get("/media/vouchers/june-2026/django-book.pdf")
-
-        assert response.status_code == HTTPStatus.OK
-        assert b"".join(response.streaming_content) == b"%PDF-1.7 fake voucher"
-
-    def test_not_found(self):
-        User.objects.create_user("organizer", password="thames", is_staff=True)
-        self.client.login(username="organizer", password="thames")
-
-        response = self.client.get("/media/vouchers/does-not-exist.pdf")
-
-        assert response.status_code == HTTPStatus.NOT_FOUND
-
-    def test_outside_media_root(self):
-        User.objects.create_user("organizer", password="thames", is_staff=True)
-        self.client.login(username="organizer", password="thames")
-
-        response = self.client.get("/media/../settings.py")
-
-        assert response.status_code == HTTPStatus.BAD_REQUEST

@@ -12,7 +12,6 @@ console_command = '/code/manage.py shell'
 [env]
   DATABASE_PATH = '/mnt/djangolondon/djangolondon.sqlite3'
   HTTPS = "1"
-  MEDIA_ROOT = '/mnt/djangolondon/media'
   PORT = '8000'
 
 [[mounts]]

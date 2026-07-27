@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
+from djangolondon.forms import PrizeForm
 from djangolondon.models import Entry, Meetup, Prize, PrizeDraw, Speaker, Talk
 
 
@@ -33,9 +34,19 @@ class TalkInline(admin.TabularInline):
 
 class PrizeInline(admin.TabularInline):
     model = Prize
-    extra = 1
-    fields = ["order", "name", "description", "voucher", "winner", "drawn_at"]
-    readonly_fields = ["winner", "drawn_at"]
+    form = PrizeForm
+    # Several blank rows, since adding more needs the admin's JavaScript.
+    extra = 3
+    fields = [
+        "order",
+        "name",
+        "description",
+        "voucher_upload",
+        "voucher_filename",
+        "winner",
+        "drawn_at",
+    ]
+    readonly_fields = ["voucher_filename", "winner", "drawn_at"]
 
 
 class EntryInline(admin.TabularInline):

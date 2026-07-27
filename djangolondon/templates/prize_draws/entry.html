@@ -9,7 +9,7 @@ news to wait for, and stops once the attendee has won or the draw is over.
   <h2>You won! 🎉</h2>
   <p>Congratulations {{ entry.name }}, you won <strong>{{ won_prize.name }}</strong>.</p>
   {% if won_prize.description %}<p>{{ won_prize.description }}</p>{% endif %}
-  {% if won_prize.voucher %}
+  {% if won_prize.voucher_filename %}
   <p><a href=/prizes/{{ won_prize.pk }}/voucher/>Download your voucher (PDF)</a></p>
   {% else %}
   <p>Come and see an organizer to collect it.</p>

@@ -1,7 +1,7 @@
 import datetime as dt
 from http import HTTPStatus
+from io import BytesIO
 from itertools import groupby
-from pathlib import Path
 
 import segno
 from django.conf import settings
@@ -9,7 +9,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Prefetch
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.utils._os import safe_join
 from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET, require_POST
@@ -183,7 +182,8 @@ def _screen_context(draw: PrizeDraw) -> dict:
         "entry_count": draw.entries.count(),
         "can_draw": next_prize is not None and draw.eligible_entries().exists(),
         "won_prizes": (
-            draw.prizes.filter(winner__isnull=False)
+            draw.prizes.defer("voucher")
+            .filter(winner__isnull=False)
             .select_related("winner")
             .order_by("-drawn_at")
         ),
@@ -243,19 +243,11 @@ def prize_voucher(request: HttpRequest, pk: int) -> HttpResponse:
     if not prize.voucher or entry is None or prize.winner_id != entry.pk:
         raise Http404
     return FileResponse(
-        prize.voucher.open("rb"),
+        BytesIO(bytes(prize.voucher)),
         as_attachment=True,
-        filename=Path(prize.voucher.name).name,
+        filename=prize.voucher_filename,
+        content_type="application/pdf",
     )
-
-
-@staff_member_required
-@require_GET
-def media_file(request: HttpRequest, path: str) -> HttpResponse:
-    file_path = Path(safe_join(settings.MEDIA_ROOT, path))
-    if not file_path.is_file():
-        raise Http404
-    return FileResponse(file_path.open("rb"))
 
 
 @require_GET

@@ -45,5 +45,5 @@ Entries close on the first press.
 **(5)** Winners see their win on their own phone, and can download their
 voucher PDF there and then.
 
-Uploaded vouchers live in `MEDIA_ROOT`, and are only downloadable by the winner
-or by a logged-in organizer.
+Uploaded vouchers are stored in the database, so they need no disk of their own
+and are covered by the same backups. They are only downloadable by the winner.

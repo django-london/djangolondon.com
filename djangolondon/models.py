@@ -1,6 +1,5 @@
 import secrets
 
-from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils import timezone
 
@@ -68,7 +67,7 @@ class PrizeDraw(models.Model):
         return self.name
 
     def next_prize(self):
-        return self.prizes.filter(winner=None).first()
+        return self.prizes.defer("voucher").filter(winner=None).first()
 
     def eligible_entries(self):
         # Nobody wins twice in the same draw.
@@ -98,10 +97,6 @@ class PrizeDraw(models.Model):
         return prize
 
 
-def voucher_upload_to(instance, filename):
-    return f"vouchers/{instance.draw.slug}/{filename}"
-
-
 class Prize(models.Model):
     draw = models.ForeignKey(
         PrizeDraw,
@@ -111,11 +106,10 @@ class Prize(models.Model):
     order = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    voucher = models.FileField(
-        upload_to=voucher_upload_to,
-        validators=[FileExtensionValidator(["pdf"])],
-        blank=True,
-    )
+    # Vouchers live in the database: the deployment has no durable disk, and
+    # this way they are covered by the same replication as everything else.
+    voucher = models.BinaryField(blank=True)
+    voucher_filename = models.CharField(max_length=200, blank=True)
     winner = models.OneToOneField(
         "Entry",
         on_delete=models.SET_NULL,
@@ -149,7 +143,5 @@ class Entry(models.Model):
         return self.name
 
     def won_prize(self):
-        try:
-            return self.prize
-        except Prize.DoesNotExist:
-            return None
+        # Deferred: the voucher itself is only read when it is downloaded.
+        return Prize.objects.defer("voucher").filter(winner=self).first()

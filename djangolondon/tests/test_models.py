@@ -1,15 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from djangolondon.models import (
-    Entry,
-    Meetup,
-    Prize,
-    PrizeDraw,
-    Speaker,
-    Talk,
-    voucher_upload_to,
-)
+from djangolondon.models import Entry, Meetup, Prize, PrizeDraw, Speaker, Talk
 
 
 class SpeakerTests(TestCase):
@@ -108,14 +100,6 @@ class PrizeTests(TestCase):
     def test_str(self):
         prize = Prize(name="Django Book")
         assert str(prize) == "Django Book"
-
-    def test_voucher_upload_to(self):
-        draw = PrizeDraw(slug="june-2026", name="June 2026 Draw")
-        prize = Prize(draw=draw, name="Django Book")
-
-        path = voucher_upload_to(prize, "voucher.pdf")
-
-        assert path == "vouchers/june-2026/voucher.pdf"
 
 
 class EntryTests(TestCase):

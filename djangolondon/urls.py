@@ -65,7 +65,6 @@ urlpatterns = [
         ),
     ),
     path("prizes/<int:pk>/voucher/", views.prize_voucher),
-    path("media/<path:path>", views.media_file),
     # Public files and other special routes
     path("favicon.ico", views.favicon),
     path(".well-known/atproto-did", views.atproto_did),
