@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<h2>{{ draw.name }}</h2>
+{% include "prize_draws/entry.html" %}
+{% endblock main %}
+
+{% block scripts %}
+<script src="{% static 'htmx.js' %}" nonce="{{ csp_nonce }}" defer></script>
+{% endblock scripts %}

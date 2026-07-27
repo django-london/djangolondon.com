@@ -274,3 +274,55 @@ nav {
     }
   }
 }
+
+/* Prize draws */
+.prize-draw-qr {
+  text-align: center;
+
+  & svg {
+    margin-inline: auto;
+    max-width: min(100%, 20em);
+    height: auto;
+  }
+}
+
+.prize-draw-count {
+  font-size: var(--size-step-2);
+  font-weight: 700;
+  text-align: center;
+}
+
+.prize-draw-button {
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  border: 0;
+  border-radius: 0.3em;
+  background: var(--color-django-green);
+  color: var(--color-light);
+  font-size: var(--size-step-3);
+
+  &:hover:enabled,
+  &:focus:enabled {
+    background: var(--color-django-green-light);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.prize-draw-winners {
+  padding-inline-start: 0;
+  font-size: var(--size-step-1);
+
+  & li {
+    list-style: none;
+  }
+
+  & .latest {
+    font-size: var(--size-step-3);
+    color: var(--color-django-green);
+  }
+}

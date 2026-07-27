@@ -13,6 +13,7 @@ dependencies = [
   "django-browser-reload",
   "gunicorn",
   "markdown-it-py>=4.2",
+  "segno>=1.6",
 ]
 
 [dependency-groups]

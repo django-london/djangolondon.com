@@ -48,6 +48,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+MEDIA_ROOT = os.environ.get("MEDIA_ROOT", BASE_DIR / "media")
+
+# Uploaded files are private: they are served by permission-checking views
+# rather than by the static file server.
+MEDIA_URL = "media/"
+
 MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django.middleware.csp.ContentSecurityPolicyMiddleware",
@@ -73,9 +79,10 @@ SECURE_CSP = {
 }
 
 STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
-    }
+    },
 }
 
 TEMPLATES = [

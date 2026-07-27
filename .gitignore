@@ -3,3 +3,4 @@
 *.sqlite3-wal
 /.coverage/
 /static_root/
+/media/

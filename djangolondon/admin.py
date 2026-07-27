@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django.utils.html import format_html
 
-from djangolondon.models import Meetup, Speaker, Talk
+from djangolondon.models import Entry, Meetup, Prize, PrizeDraw, Speaker, Talk
 
 
 class SpeakerTalkInline(admin.TabularInline):
@@ -28,6 +29,38 @@ class TalkInline(admin.TabularInline):
     @admin.display(description="speakers")
     def speakers_display(self, obj):
         return ", ".join(s.name for s in obj.speakers.all())
+
+
+class PrizeInline(admin.TabularInline):
+    model = Prize
+    extra = 1
+    fields = ["order", "name", "description", "voucher", "winner", "drawn_at"]
+    readonly_fields = ["winner", "drawn_at"]
+
+
+class EntryInline(admin.TabularInline):
+    model = Entry
+    extra = 0
+    fields = ["name", "email", "created_at"]
+    readonly_fields = ["name", "email", "created_at"]
+
+    def has_add_permission(self, request, obj):
+        return False
+
+
+@admin.register(PrizeDraw)
+class PrizeDrawAdmin(admin.ModelAdmin):
+    list_display = ["name", "meetup", "entries_open", "screen_link"]
+    list_select_related = ["meetup"]
+    prepopulated_fields = {"slug": ["name"]}
+    inlines = [PrizeInline, EntryInline]
+
+    @admin.display(description="screen")
+    def screen_link(self, obj):
+        return format_html(
+            '<a href="/prize-draws/{}/screen/">Run draw</a>',
+            obj.slug,
+        )
 
 
 @admin.register(Meetup)

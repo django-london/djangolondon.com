@@ -1,0 +1,52 @@
+{% comment %}
+The attendee’s view of the draw, on their phone. It polls itself while there is
+news to wait for, and stops once the attendee has won or the draw is over.
+{% endcomment %}
+<div id=prize-draw-entry class=flow
+     {% if polling %}hx-get=/prize-draws/{{ draw.slug }}/status/ hx-trigger="every 3s" hx-swap=outerMorph{% endif %}>
+{% if entry %}
+  {% if won_prize %}
+  <h3>You won! 🎉</h3>
+  <p>Congratulations {{ entry.name }}, you won <strong>{{ won_prize.name }}</strong>.</p>
+  {% if won_prize.description %}<p>{{ won_prize.description }}</p>{% endif %}
+    {% if entry.email %}
+    <p>We have your email address as {{ entry.email }}.</p>
+      {% if won_prize.voucher %}
+      <p><a href=/prizes/{{ won_prize.pk }}/voucher/>Download your voucher (PDF)</a></p>
+      {% endif %}
+    {% else %}
+    <form method=post action=/prize-draws/{{ draw.slug }}/email/
+          hx-post=/prize-draws/{{ draw.slug }}/email/
+          hx-target=#prize-draw-entry
+          hx-swap=outerMorph>
+      {% csrf_token %}
+      <p>
+        <label for={{ email_form.email.id_for_label }}>{{ email_form.email.label }}</label>
+        {{ email_form.email.errors }}
+        {{ email_form.email }}
+      </p>
+      <button>Claim your prize</button>
+    </form>
+    {% endif %}
+  {% elif prizes_remaining %}
+  <p>You’re in the draw, {{ entry.name }}. Watch the screen!</p>
+  {% else %}
+  <p>Sorry {{ entry.name }}, you didn’t win this time. See you at the next meetup!</p>
+  {% endif %}
+{% elif draw.entries_open %}
+<form method=post action=/prize-draws/{{ draw.slug }}/enter/
+      hx-post=/prize-draws/{{ draw.slug }}/enter/
+      hx-target=#prize-draw-entry
+      hx-swap=outerMorph>
+  {% csrf_token %}
+  <p>
+    <label for={{ entry_form.name.id_for_label }}>{{ entry_form.name.label }}</label>
+    {{ entry_form.name.errors }}
+    {{ entry_form.name }}
+  </p>
+  <button>Enter the draw</button>
+</form>
+{% else %}
+<p>Entries are closed — the draw has started.</p>
+{% endif %}
+</div>

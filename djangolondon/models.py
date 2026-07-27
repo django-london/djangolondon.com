@@ -1,4 +1,8 @@
+import secrets
+
+from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.utils import timezone
 
 
 class Speaker(models.Model):
@@ -44,3 +48,109 @@ class Talk(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class PrizeDraw(models.Model):
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=200)
+    meetup = models.ForeignKey(
+        Meetup,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+    entries_open = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.name
+
+    def next_prize(self):
+        return self.prizes.filter(winner=None).first()
+
+    def eligible_entries(self):
+        # Nobody wins twice in the same draw.
+        return self.entries.filter(prize=None)
+
+    def draw_prize(self):
+        """
+        Award the next undrawn prize to a random eligible entry.
+
+        Returns the prize, or None if there was nothing to draw.
+        """
+        prize = self.next_prize()
+        if prize is None:
+            return None
+        entries = list(self.eligible_entries())
+        if not entries:
+            return None
+
+        prize.winner = secrets.choice(entries)
+        prize.drawn_at = timezone.now()
+        prize.save(update_fields=["winner", "drawn_at"])
+
+        if self.entries_open:
+            self.entries_open = False
+            self.save(update_fields=["entries_open"])
+
+        return prize
+
+
+def voucher_upload_to(instance, filename):
+    return f"vouchers/{instance.draw.slug}/{filename}"
+
+
+class Prize(models.Model):
+    draw = models.ForeignKey(
+        PrizeDraw,
+        on_delete=models.CASCADE,
+        related_name="prizes",
+    )
+    order = models.PositiveIntegerField(default=0)
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    voucher = models.FileField(
+        upload_to=voucher_upload_to,
+        validators=[FileExtensionValidator(["pdf"])],
+        blank=True,
+    )
+    winner = models.OneToOneField(
+        "Entry",
+        on_delete=models.SET_NULL,
+        related_name="prize",
+        blank=True,
+        null=True,
+    )
+    drawn_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return self.name
+
+
+class Entry(models.Model):
+    draw = models.ForeignKey(
+        PrizeDraw,
+        on_delete=models.CASCADE,
+        related_name="entries",
+    )
+    name = models.CharField(max_length=100)
+    email = models.EmailField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at", "id"]
+        verbose_name_plural = "entries"
+
+    def __str__(self):
+        return self.name
+
+    def won_prize(self):
+        try:
+            return self.prize
+        except Prize.DoesNotExist:
+            return None

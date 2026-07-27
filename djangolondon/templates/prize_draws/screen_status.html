@@ -1,0 +1,33 @@
+{% comment %}
+The big screen everyone watches. It polls for new entries, and swaps itself for
+an updated copy whenever the draw button is pressed.
+{% endcomment %}
+<div id=prize-draw-status class=flow
+     hx-get=/prize-draws/{{ draw.slug }}/screen/status/
+     hx-trigger="every 3s"
+     hx-swap=outerMorph>
+<p class=prize-draw-count>{{ entry_count }} entr{{ entry_count|pluralize:"y,ies" }}</p>
+
+{% if next_prize %}
+<form method=post action=/prize-draws/{{ draw.slug }}/screen/draw/
+      hx-post=/prize-draws/{{ draw.slug }}/screen/draw/
+      hx-target=#prize-draw-status
+      hx-swap=outerMorph>
+  {% csrf_token %}
+  <button class=prize-draw-button {% if not can_draw %}disabled{% endif %}>
+    Draw {{ next_prize.name }}
+  </button>
+</form>
+{% if not can_draw %}
+<p>{% if entry_count %}Everyone in the draw has already won a prize.{% else %}Waiting for entries…{% endif %}</p>
+{% endif %}
+{% else %}
+<p class=prize-draw-count>All prizes drawn!</p>
+{% endif %}
+
+{% for prize in won_prizes %}
+{% if forloop.first %}<h3>Winners</h3><ul class=prize-draw-winners>{% endif %}
+  <li{% if forloop.first %} class=latest{% endif %}><strong>{{ prize.winner.name }}</strong> — {{ prize.name }}</li>
+{% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+</div>

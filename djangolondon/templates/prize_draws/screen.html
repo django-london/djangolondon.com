@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<h2>{{ draw.name }}</h2>
+
+<div class=prize-draw-qr>
+  {{ qr_svg }}
+  <p>Scan to enter, or visit<br><strong>{{ join_url }}</strong></p>
+</div>
+
+{% include "prize_draws/screen_status.html" %}
+{% endblock main %}
+
+{% block scripts %}
+<script src="{% static 'htmx.js' %}" nonce="{{ csp_nonce }}" defer></script>
+{% endblock scripts %}
