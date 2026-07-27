@@ -112,10 +112,6 @@ def _get_entry(request: HttpRequest, draw: PrizeDraw):
     return draw.entries.filter(pk=entry_id).first()
 
 
-def _from_htmx(request: HttpRequest) -> bool:
-    return request.headers.get("HX-Request") == "true"
-
-
 def _entry_context(
     request: HttpRequest,
     draw: PrizeDraw,
@@ -163,7 +159,7 @@ def prize_draw_status(request: HttpRequest, slug: str) -> HttpResponse:
 @require_POST
 def prize_draw_enter(request: HttpRequest, slug: str) -> HttpResponse:
     draw = get_object_or_404(PrizeDraw, slug=slug)
-    if not _from_htmx(request):
+    if not request.htmx:
         return redirect(f"/prize-draws/{draw.slug}/")
 
     if _get_entry(request, draw) is not None or not draw.entries_open:
@@ -184,7 +180,7 @@ def prize_draw_enter(request: HttpRequest, slug: str) -> HttpResponse:
 @require_POST
 def prize_draw_email(request: HttpRequest, slug: str) -> HttpResponse:
     draw = get_object_or_404(PrizeDraw, slug=slug)
-    if not _from_htmx(request):
+    if not request.htmx:
         return redirect(f"/prize-draws/{draw.slug}/")
 
     entry = _get_entry(request, draw)
@@ -254,7 +250,7 @@ def prize_draw_screen_status(request: HttpRequest, slug: str) -> HttpResponse:
 def prize_draw_draw(request: HttpRequest, slug: str) -> HttpResponse:
     draw = get_object_or_404(PrizeDraw, slug=slug)
     draw.draw_prize()
-    if not _from_htmx(request):
+    if not request.htmx:
         return redirect(f"/prize-draws/{draw.slug}/screen/")
     return _screen_response(request, draw)
 

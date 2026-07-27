@@ -99,6 +99,19 @@ wheels = [
 ]
 
 [[package]]
+name = "django-htmx"
+version = "1.28.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/47/d9/b31339fae8ede6a7cb0b9facaefe2ee4fc01d9f37a31a3dc03759765a2c3/django_htmx-1.28.0.tar.gz", hash = "sha256:699e229de0bbf19b3ee1a5d419702f5c154fa956e6921fec89faa7401b99e536", size = 100946, upload-time = "2026-07-12T22:19:19.589Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/20/d5/71b3a206f7a2135e2ab4a789be143a00222b52d22729c84f480915049e94/django_htmx-1.28.0-py3-none-any.whl", hash = "sha256:e6911acccf3e7905d511c4fd6ab86fe06572205e80a0f32ca7aa94a115ae0619", size = 98588, upload-time = "2026-07-12T22:19:18.225Z" },
+]
+
+[[package]]
 name = "djangolondon-com"
 version = "0"
 source = { virtual = "." }
@@ -106,6 +119,7 @@ dependencies = [
     { name = "dj-lite" },
     { name = "django" },
     { name = "django-browser-reload" },
+    { name = "django-htmx" },
     { name = "gunicorn" },
     { name = "markdown-it-py" },
     { name = "segno" },
@@ -124,6 +138,7 @@ requires-dist = [
     { name = "dj-lite", specifier = ">=1.3" },
     { name = "django" },
     { name = "django-browser-reload" },
+    { name = "django-htmx", specifier = ">=1.28" },
     { name = "gunicorn" },
     { name = "markdown-it-py", specifier = ">=4.2" },
     { name = "segno", specifier = ">=1.6" },

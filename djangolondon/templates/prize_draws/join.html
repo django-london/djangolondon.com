@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load django_htmx %}
 
 {% block main %}
 <h2>{{ draw.name }}</h2>
@@ -7,5 +7,5 @@
 {% endblock main %}
 
 {% block scripts %}
-<script src="{% static 'htmx.js' %}" nonce="{{ csp_nonce }}" defer></script>
+{% htmx_script version=4 %}
 {% endblock scripts %}

@@ -11,6 +11,7 @@ dependencies = [
   "dj-lite>=1.3",
   "django",
   "django-browser-reload",
+  "django-htmx>=1.28",
   "gunicorn",
   "markdown-it-py>=4.2",
   "segno>=1.6",

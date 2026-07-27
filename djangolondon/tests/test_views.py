@@ -143,7 +143,7 @@ class PrizeDrawJoinTests(PrizeDrawTestCase):
         assert response.status_code == HTTPStatus.OK
         assert "<title>June 2026 Draw | Django London</title>" in response.text
         assert "Enter the draw" in response.text
-        assert "/static/htmx.js" in response.text
+        assert "/static/django_htmx/htmx-4.min.js" in response.text
 
     def test_not_found(self):
         response = self.client.get("/prize-draws/does-not-exist/")
