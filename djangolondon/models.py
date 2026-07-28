@@ -142,7 +142,3 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.name
-
-    def won_prize(self):
-        # Deferred: the voucher itself is only read when it is downloaded.
-        return Prize.objects.defer("voucher").filter(winner=self).first()

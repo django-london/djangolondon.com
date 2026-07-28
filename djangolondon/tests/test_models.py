@@ -131,14 +131,3 @@ class EntryTests(TestCase):
     def test_str(self):
         entry = Entry(name="Alice")
         assert str(entry) == "Alice"
-
-    def test_won_prize_none(self):
-        entry = Entry.objects.create(draw=self.draw, name="Alice")
-
-        assert entry.won_prize() is None
-
-    def test_won_prize(self):
-        entry = Entry.objects.create(draw=self.draw, name="Alice")
-        prize = Prize.objects.create(draw=self.draw, name="Book", winner=entry)
-
-        assert entry.won_prize() == prize

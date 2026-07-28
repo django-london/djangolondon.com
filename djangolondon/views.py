@@ -6,6 +6,7 @@ from itertools import groupby
 import segno
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
+from django.db import transaction
 from django.db.models import Prefetch
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -118,15 +119,20 @@ def _entry_context(
     entry_form: EntryForm | None = None,
 ) -> dict:
     entry = _get_entry(request, draw)
-    won_prize = entry.won_prize() if entry is not None else None
-    prizes_remaining = draw.next_prize() is not None
+    # One query for the prizes: a draw only ever has a handful, and this page
+    # is polled by every phone in the room.
+    prizes = list(draw.prizes.defer("voucher"))
+    next_prize = next((p for p in prizes if p.winner_id is None), None)
+    won_prize = None
+    if entry is not None:
+        won_prize = next((p for p in prizes if p.winner_id == entry.pk), None)
     return {
         "draw": draw,
         "entry": entry,
         "won_prize": won_prize,
-        "prizes_remaining": prizes_remaining,
+        "prizes_remaining": next_prize is not None,
         # Attendees only need live updates while they are waiting to hear.
-        "polling": entry is not None and won_prize is None and prizes_remaining,
+        "polling": entry is not None and won_prize is None and next_prize is not None,
         "entry_form": entry_form if entry_form is not None else EntryForm(),
     }
 
@@ -137,6 +143,7 @@ def _entry_response(
     return render(request, "prize_draws/entry.html", context, status=status)
 
 
+@transaction.non_atomic_requests
 @require_GET
 def prize_draw_join(request: HttpRequest, slug: str) -> HttpResponse:
     draw = get_object_or_404(PrizeDraw, slug=slug)
@@ -147,6 +154,7 @@ def prize_draw_join(request: HttpRequest, slug: str) -> HttpResponse:
     )
 
 
+@transaction.non_atomic_requests
 @require_GET
 def prize_draw_status(request: HttpRequest, slug: str) -> HttpResponse:
     draw = get_object_or_404(PrizeDraw, slug=slug)
@@ -175,20 +183,27 @@ def prize_draw_enter(request: HttpRequest, slug: str) -> HttpResponse:
 
 
 def _screen_context(draw: PrizeDraw) -> dict:
-    next_prize = draw.next_prize()
+    # One query for the prizes and one for the entries. Everything the screen
+    # shows is derived from those two lists rather than queried separately.
+    prizes = list(draw.prizes.defer("voucher"))
     entries = list(draw.entries.all())
+    entries_by_id = {entry.pk: entry for entry in entries}
+
+    next_prize = next((p for p in prizes if p.winner_id is None), None)
+    winner_ids = {p.winner_id for p in prizes}
+    won = sorted(
+        (p for p in prizes if p.winner_id in entries_by_id),
+        key=lambda prize: prize.drawn_at,
+        reverse=True,
+    )
     return {
         "draw": draw,
         "next_prize": next_prize,
         "entries": entries,
         "entry_count": len(entries),
-        "can_draw": next_prize is not None and draw.eligible_entries().exists(),
-        "won_prizes": (
-            draw.prizes.defer("voucher")
-            .filter(winner__isnull=False)
-            .select_related("winner")
-            .order_by("-drawn_at")
-        ),
+        "can_draw": next_prize is not None
+        and any(entry.pk not in winner_ids for entry in entries),
+        "won_prizes": [(prize, entries_by_id[prize.winner_id]) for prize in won],
     }
 
 

@@ -31,9 +31,9 @@ two. The draw itself is guarded again in PrizeDraw.draw_prize().
 <p class=prize-draw-count>All prizes drawn!</p>
 {% endif %}
 
-{% for prize in won_prizes %}
+{% for prize, winner in won_prizes %}
 {% if forloop.first %}<h2>Winners</h2><ul class=prize-draw-winners aria-live=polite>{% endif %}
-  <li{% if forloop.first %} class=latest{% endif %}><strong>{{ prize.winner.name }}</strong> — {{ prize.name }}</li>
+  <li{% if forloop.first %} class=latest{% endif %}><strong>{{ winner.name }}</strong> — {{ prize.name }}</li>
 {% if forloop.last %}</ul>{% endif %}
 {% endfor %}
 
