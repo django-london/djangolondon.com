@@ -1,14 +1,21 @@
 import datetime as dt
+from http import HTTPStatus
+from io import BytesIO
 from itertools import groupby
 
+import segno
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
+from django.db import transaction
 from django.db.models import Prefetch
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_control
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 
-from djangolondon.models import Meetup, Speaker, Talk
+from djangolondon.forms import EntryForm
+from djangolondon.models import Meetup, Prize, PrizeDraw, Speaker, Talk
 
 
 def index(request):
@@ -91,6 +98,187 @@ def speaker_detail(request, slug: str):
             "title": speaker.name,
             "speaker": speaker,
         },
+    )
+
+
+def _entry_session_key(draw: PrizeDraw) -> str:
+    return f"prize_draw_entry_{draw.pk}"
+
+
+def _get_entry(request: HttpRequest, draw: PrizeDraw):
+    entry_id = request.session.get(_entry_session_key(draw))
+    if entry_id is None:
+        return None
+    return draw.entries.filter(pk=entry_id).first()
+
+
+def _entry_context(
+    request: HttpRequest,
+    draw: PrizeDraw,
+    *,
+    entry_form: EntryForm | None = None,
+) -> dict:
+    entry = _get_entry(request, draw)
+    # One query for the prizes: a draw only ever has a handful, and this page
+    # is polled by every phone in the room.
+    prizes = list(draw.prizes.defer("voucher"))
+    next_prize = next((p for p in prizes if p.winner_id is None), None)
+    won_prize = None
+    if entry is not None:
+        won_prize = next((p for p in prizes if p.winner_id == entry.pk), None)
+    return {
+        "draw": draw,
+        "entry": entry,
+        "won_prize": won_prize,
+        "prizes_remaining": next_prize is not None,
+        # Attendees only need live updates while they are waiting to hear.
+        "polling": entry is not None and won_prize is None and next_prize is not None,
+        "entry_form": entry_form if entry_form is not None else EntryForm(),
+    }
+
+
+def _entry_response(
+    request: HttpRequest, context: dict, *, status: int = HTTPStatus.OK
+) -> HttpResponse:
+    return render(request, "prize_draws/entry.html", context, status=status)
+
+
+@transaction.non_atomic_requests
+@require_GET
+def prize_draw_join(request: HttpRequest, slug: str) -> HttpResponse:
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    return render(
+        request,
+        "prize_draws/join.html",
+        {"title": draw.name, **_entry_context(request, draw)},
+    )
+
+
+@transaction.non_atomic_requests
+@require_GET
+def prize_draw_status(request: HttpRequest, slug: str) -> HttpResponse:
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    return _entry_response(request, _entry_context(request, draw))
+
+
+@require_POST
+def prize_draw_enter(request: HttpRequest, slug: str) -> HttpResponse:
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    if not request.htmx:
+        return redirect(f"/prize-draws/{draw.slug}/")
+
+    if _get_entry(request, draw) is not None or not draw.entries_open:
+        return _entry_response(request, _entry_context(request, draw))
+
+    form = EntryForm(request.POST)
+    if not form.is_valid():
+        context = _entry_context(request, draw, entry_form=form)
+        return _entry_response(request, context, status=HTTPStatus.UNPROCESSABLE_ENTITY)
+
+    entry = form.save(commit=False)
+    entry.draw = draw
+    entry.save()
+    request.session[_entry_session_key(draw)] = entry.pk
+    return _entry_response(request, _entry_context(request, draw))
+
+
+def _screen_context(draw: PrizeDraw) -> dict:
+    # One query for the prizes and one for the entries. Everything the screen
+    # shows is derived from those two lists rather than queried separately.
+    prizes = list(draw.prizes.defer("voucher"))
+    entries = list(draw.entries.all())
+    entries_by_id = {entry.pk: entry for entry in entries}
+
+    next_prize = next((p for p in prizes if p.winner_id is None), None)
+    winner_ids = {p.winner_id for p in prizes}
+    won = sorted(
+        (p for p in prizes if p.winner_id in entries_by_id),
+        key=lambda prize: prize.drawn_at,
+        reverse=True,
+    )
+    return {
+        "draw": draw,
+        "next_prize": next_prize,
+        "entries": entries,
+        "entry_count": len(entries),
+        "can_draw": next_prize is not None
+        and any(entry.pk not in winner_ids for entry in entries),
+        "won_prizes": [(prize, entries_by_id[prize.winner_id]) for prize in won],
+    }
+
+
+def _screen_response(request: HttpRequest, draw: PrizeDraw) -> HttpResponse:
+    return render(request, "prize_draws/screen_status.html", _screen_context(draw))
+
+
+@staff_member_required
+@require_GET
+def prize_draw_screen(request: HttpRequest, slug: str) -> HttpResponse:
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    join_url = request.build_absolute_uri(f"/prize-draws/{draw.slug}/")
+    qr_svg = segno.make(join_url, error="m").svg_inline(
+        scale=8,
+        dark="#092e20",
+        light="#ffffff",
+        # A viewBox instead of a fixed size, so CSS can scale it to the screen.
+        omitsize=True,
+    )
+    return render(
+        request,
+        "prize_draws/screen.html",
+        {
+            "title": draw.name,
+            "join_url": join_url,
+            # Safe: the SVG comes from segno, not from user input.
+            "qr_svg": mark_safe(qr_svg),
+            **_screen_context(draw),
+        },
+    )
+
+
+@staff_member_required
+@require_GET
+def prize_draw_screen_status(request: HttpRequest, slug: str) -> HttpResponse:
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    return _screen_response(request, draw)
+
+
+@staff_member_required
+@require_POST
+def prize_draw_draw(request: HttpRequest, slug: str) -> HttpResponse:
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    draw.draw_prize()
+    if not request.htmx:
+        return redirect(f"/prize-draws/{draw.slug}/screen/")
+    return _screen_response(request, draw)
+
+
+@staff_member_required
+@require_POST
+def prize_draw_remove_entry(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
+    """Drop an entry from the draw, for when a name should not be on screen."""
+    draw = get_object_or_404(PrizeDraw, slug=slug)
+    entry = draw.entries.filter(pk=pk).first()
+    if entry is not None:
+        # Anything this entry won goes back in the pot.
+        draw.prizes.filter(winner=entry).update(drawn_at=None)
+        entry.delete()
+    if not request.htmx:
+        return redirect(f"/prize-draws/{draw.slug}/screen/")
+    return _screen_response(request, draw)
+
+
+@require_GET
+def prize_voucher(request: HttpRequest, pk: int) -> HttpResponse:
+    prize = get_object_or_404(Prize.objects.select_related("draw"), pk=pk)
+    entry = _get_entry(request, prize.draw)
+    if not prize.voucher or entry is None or prize.winner_id != entry.pk:
+        raise Http404
+    return FileResponse(
+        BytesIO(bytes(prize.voucher)),
+        as_attachment=True,
+        filename=prize.voucher_filename,
+        content_type="application/pdf",
     )
 
 

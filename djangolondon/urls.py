@@ -43,6 +43,32 @@ urlpatterns = [
         ),
     ),
     path("slides/<str:date>/<str:filename>", views.meetup_slides),
+    # Prize draws
+    path(
+        "prize-draws/<slug:slug>/",
+        include(
+            [
+                path("", views.prize_draw_join),
+                path("enter/", views.prize_draw_enter),
+                path("status/", views.prize_draw_status),
+                path(
+                    "screen/",
+                    include(
+                        [
+                            path("", views.prize_draw_screen),
+                            path("status/", views.prize_draw_screen_status),
+                            path("draw/", views.prize_draw_draw),
+                            path(
+                                "entries/<int:pk>/remove/",
+                                views.prize_draw_remove_entry,
+                            ),
+                        ]
+                    ),
+                ),
+            ]
+        ),
+    ),
+    path("prizes/<int:pk>/voucher/", views.prize_voucher),
     # Public files and other special routes
     path("favicon.ico", views.favicon),
     path(".well-known/atproto-did", views.atproto_did),

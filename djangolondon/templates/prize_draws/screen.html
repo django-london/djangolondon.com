@@ -1,0 +1,16 @@
+{% extends "prize_draws/base.html" %}
+
+{% block body_class %}prize-draw-projected{% endblock %}
+
+{% block main %}
+<h1>{{ draw.name }}</h1>
+
+<div class=prize-draw-columns>
+  <div class=prize-draw-qr>
+    {{ qr_svg }}
+    <p>Scan to enter, or visit<br><strong>{{ join_url }}</strong></p>
+  </div>
+
+  {% include "prize_draws/screen_status.html" %}
+</div>
+{% endblock main %}

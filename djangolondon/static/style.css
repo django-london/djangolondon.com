@@ -274,3 +274,187 @@ nav {
     }
   }
 }
+
+/* Prize draws */
+
+/*
+ * Prize draw pages stand alone, with no site header or nav: the screen page
+ * goes up on a projector, and the entry page is held in one hand. Sizes are in
+ * em so that the whole page scales with the viewport-relative font size below.
+ */
+.prize-draw {
+  --flow-space: 0.8em;
+  min-height: 100dvh;
+  display: flex;
+  background: var(--color-django-green);
+  color: var(--color-light);
+  font-size: clamp(1.125rem, 2.6vmin, 2.5rem);
+  text-align: center;
+}
+
+.prize-draw-main {
+  width: 100%;
+  max-width: 34ch;
+  margin: auto;
+  padding: 1.5em 1em;
+}
+
+/* The screen page has two halves, so it needs the room for them. */
+.prize-draw-projected .prize-draw-main {
+  max-width: 68ch;
+}
+
+.prize-draw-columns {
+  display: grid;
+  gap: 1em;
+}
+
+/* Landscape and roomy: stand the QR code beside the draw itself, so both can
+   be read from the back of the room. Phones keep the single column. */
+@media (min-width: 45em) {
+  .prize-draw-columns {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 1.5em;
+  }
+}
+
+.prize-draw :is(h1, h2) {
+  max-width: none;
+  text-wrap: balance;
+}
+
+.prize-draw h1 {
+  font-size: 1.7em;
+}
+
+.prize-draw h2 {
+  font-size: 1.3em;
+}
+
+.prize-draw a {
+  text-decoration-color: var(--color-light);
+}
+
+/* Entry URLs are long, and must never push the page sideways. */
+.prize-draw-qr p {
+  overflow-wrap: anywhere;
+}
+
+.prize-draw label {
+  display: block;
+}
+
+.prize-draw input {
+  padding: 0.3em 0.4em;
+  border: 0.05em solid var(--color-light);
+  border-radius: 0.2em;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.prize-draw button {
+  display: block;
+  width: 100%;
+  margin-block-start: 0.6em;
+  padding: 0.4em 0.6em;
+  border: 0;
+  border-radius: 0.2em;
+  background: var(--color-light);
+  color: var(--color-django-green);
+  font-size: 1.3em;
+  font-weight: 700;
+  line-height: 1.2;
+
+  &:hover:enabled,
+  &:focus-visible:enabled {
+    background: #fff;
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+.prize-draw .errorlist {
+  padding-inline-start: 0;
+  color: #ffb4a2;
+  font-weight: 700;
+
+  & li {
+    list-style: none;
+  }
+}
+
+.prize-draw-qr svg {
+  /* segno draws the quiet zone, so the code needs no padding of its own. */
+  width: 100%;
+  max-width: 15em;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  border-radius: 0.2em;
+}
+
+.prize-draw-count {
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.prize-draw-button {
+  font-size: 1.8em;
+}
+
+.prize-draw-winners {
+  padding-inline-start: 0;
+
+  & li {
+    list-style: none;
+  }
+
+  & .latest {
+    font-size: 1.6em;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+}
+
+.prize-draw-entrants {
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3em;
+  font-size: 0.75em;
+
+  & li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+    padding: 0.1em 0.3em 0.1em 0.7em;
+    border-radius: 1em;
+    background: var(--color-django-green-light);
+  }
+
+  /* So the remove button sits inside the chip rather than below it. */
+  & form {
+    display: contents;
+  }
+
+  & button {
+    width: auto;
+    margin: 0;
+    padding: 0 0.3em;
+    background: none;
+    color: var(--color-light);
+    font-size: 1em;
+    opacity: 0.6;
+
+    &:hover:enabled,
+    &:focus-visible:enabled {
+      background: none;
+      opacity: 1;
+    }
+  }
+}

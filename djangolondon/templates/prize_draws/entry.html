@@ -1,0 +1,41 @@
+{% comment %}
+The attendee’s view of the draw, on their phone. It polls itself while there is
+news to wait for, and stops once the attendee has won or the draw is over.
+
+Nothing can happen until the draw starts, so it polls less often until then.
+Every phone in the room is doing this.
+{% endcomment %}
+<div id=prize-draw-entry class=flow aria-live=polite
+     {% if polling %}hx-get=/prize-draws/{{ draw.slug }}/status/ hx-trigger="every {% if draw.entries_open %}5s{% else %}2s{% endif %}" hx-swap=outerMorph{% endif %}>
+{% if entry %}
+  {% if won_prize %}
+  <h2>You won! 🎉</h2>
+  <p>Congratulations {{ entry.name }}, you won <strong>{{ won_prize.name }}</strong>.</p>
+  {% if won_prize.description %}<p>{{ won_prize.description }}</p>{% endif %}
+  {% if won_prize.voucher_filename %}
+  <p><a href=/prizes/{{ won_prize.pk }}/voucher/>Download your voucher (PDF)</a></p>
+  {% else %}
+  <p>Come and see an organizer to collect it.</p>
+  {% endif %}
+  {% elif prizes_remaining %}
+  <p>You’re in the draw, {{ entry.name }}. Watch the screen!</p>
+  {% else %}
+  <p>Sorry {{ entry.name }}, you didn’t win this time. See you at the next meetup!</p>
+  {% endif %}
+{% elif draw.entries_open %}
+<form method=post action=/prize-draws/{{ draw.slug }}/enter/
+      hx-post=/prize-draws/{{ draw.slug }}/enter/
+      hx-target=#prize-draw-entry
+      hx-swap=outerMorph>
+  {% csrf_token %}
+  <p>
+    <label for={{ entry_form.name.id_for_label }}>{{ entry_form.name.label }}</label>
+    {{ entry_form.name.errors }}
+    {{ entry_form.name }}
+  </p>
+  <button>Enter the draw</button>
+</form>
+{% else %}
+<p>Entries are closed — the draw has started.</p>
+{% endif %}
+</div>
