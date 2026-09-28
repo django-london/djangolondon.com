@@ -65,7 +65,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = "djangolondon.urls"
 
 # typos: off
-SECRET_KEY = "django-insecure-e9nx_t_p4i+ztp)56!c_mor^jhp5b)0v19=gahgy%=v9waboo%"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-e9nx_t_p4i+ztp)56!c_mor^jhp5b)0v19=gahgy%=v9waboo%",
+)
 # typos: on
 
 SECURE_CSP = {
