@@ -1,0 +1,15 @@
+title = "Django London Meetup July"
+date = 2026-07-14T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/315788543/"
+
+[[talks]]
+title = "Okmain: you have an image, but you want a colour"
+description = "How do you pick a colour that represents an image but also looks good? Dan will talk about his Okmain library, colour science, and his experience of bringing a Rust library into a Django backend with PyO3."
+
+speakers = ["dan-groshev"]
+
+[[talks]]
+title = "Replay Failed Python Runs: Reverse Debugging When Logs Aren’t Enough"
+description = "Django and Python failures are not always easy to reproduce from a traceback. The request is gone, the database state has moved on, or the CI failure only happened once. This talk introduces Retrace, an open-source reverse debugger for Python. We’ll show how to record a failing run, replay it locally in VS Code, and step backwards from the exception to inspect the runtime state that actually happened. The demo will focus on failed tests and CI workflows, with a look at how replayable executions can help both developers and AI coding agents debug from evidence rather than guesswork."
+
+speakers = ["nathan-matthews"]
