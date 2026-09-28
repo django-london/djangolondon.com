@@ -1,6 +1,8 @@
 # [djangolondon.com](https://djangolondon.com)
 
-Setup:
+The website for Django London, the monthly meetup for Django enthusiasts in London, established 2012.
+
+## Development setup
 
 **(1)** Install [uv](https://docs.astral.sh/uv/)
 
