@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>Organizers’ slides</h2>
+<p>The introduction slides shown by the organizers at the start of each meetup.</p>
+{% for year, dates in grouped_decks %}
+<h3>{{ year }}</h3>
+<ul>
+  {% for date in dates %}
+  <li><a href=/organizers/{{ date|date:"Y-m-d" }}/>{{ date|date:"j F" }}</a></li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endblock main %}

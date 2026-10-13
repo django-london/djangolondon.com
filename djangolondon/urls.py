@@ -72,8 +72,11 @@ urlpatterns = [
     # Public files and other special routes
     path("favicon.ico", views.favicon),
     path(".well-known/atproto-did", views.atproto_did),
+    # Organizers
+    path("organizers/", views.organizer_index),
+    path("organizers/<isodate:date>/", views.organizer_slides),
     # Admin
-    path("organizers/", admin.site.urls),
+    path("organizers-admin/", admin.site.urls),
     # django-browser-reload (development only)
     path("__reload__/", include("django_browser_reload.urls")),
 ]
