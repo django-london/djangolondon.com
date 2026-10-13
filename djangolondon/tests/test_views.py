@@ -1,17 +1,60 @@
+import datetime as dt
 from http import HTTPStatus
 
+import time_machine
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from djangolondon.models import Entry, Prize, PrizeDraw, Speaker
+from djangolondon.models import Entry, Meetup, Prize, PrizeDraw, Speaker
 
 
 class IndexTests(TestCase):
     def test_success(self):
         response = self.client.get("/")
         assert response.status_code == HTTPStatus.OK
-        assert len(response.context["meetups"]) <= 3
+        assert len(response.context["past_meetups"]) <= 3
         assert "/meetups/" in response.text
+
+    @time_machine.travel(dt.datetime(2040, 6, 10, 23, 30, tzinfo=dt.UTC), tick=False)
+    def test_today_month_and_future_meetups(self):
+        bst = dt.timezone(dt.timedelta(hours=1))
+        past = Meetup.objects.create(
+            title="Past", date=dt.datetime(2040, 6, 9, 18, 15, tzinfo=bst)
+        )
+        today = Meetup.objects.create(
+            title="Today", date=dt.datetime(2040, 6, 11, 18, 15, tzinfo=bst)
+        )
+        soon = Meetup.objects.create(
+            title="Soon", date=dt.datetime(2040, 6, 12, 18, 15, tzinfo=bst)
+        )
+        month_end = Meetup.objects.create(
+            title="Month end", date=dt.datetime(2040, 6, 30, 18, 15, tzinfo=bst)
+        )
+        later = Meetup.objects.create(
+            title="Later", date=dt.datetime(2040, 7, 9, 18, 15, tzinfo=bst)
+        )
+
+        response = self.client.get("/")
+
+        assert response.status_code == HTTPStatus.OK
+        assert list(response.context["today_meetups"]) == [today]
+        assert list(response.context["month_meetups"]) == [soon, month_end]
+        assert list(response.context["future_meetups"]) == [later]
+        assert list(response.context["past_meetups"])[0] == past
+        assert "<h2>Today's Meetup</h2>" in response.text
+        assert "<h2>This Month's Meetup</h2>" in response.text
+        assert "<h2>Future Meetups</h2>" in response.text
+        assert "<h2>Past Meetups</h2>" in response.text
+
+    @time_machine.travel(dt.datetime(2100, 1, 1, 12, 0, tzinfo=dt.UTC), tick=False)
+    def test_no_today_month_or_future_meetups(self):
+        response = self.client.get("/")
+
+        assert response.status_code == HTTPStatus.OK
+        assert "Today's Meetup" not in response.text
+        assert "This Month's Meetup" not in response.text
+        assert "Future Meetups" not in response.text
+        assert "<h2>Past Meetups</h2>" in response.text
 
 
 class CodeOfConductTests(TestCase):
