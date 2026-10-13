@@ -6,9 +6,36 @@
   Welcome to Django London, the monthly meetup for Django enthusiasts in London, established 2012.
 </p>
 
+{% if today_meetups %}
+<h2>Today's Meetup</h2>
+<ul>
+  {% for meetup in today_meetups %}
+  <li><a href=/meetups/{{ meetup.date|date:"Y-m-d" }}/>{{ meetup.date|date:"j F Y" }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if month_meetups %}
+<h2>This Month's Meetup</h2>
+<ul>
+  {% for meetup in month_meetups %}
+  <li><a href=/meetups/{{ meetup.date|date:"Y-m-d" }}/>{{ meetup.date|date:"j F Y" }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if future_meetups %}
+<h2>Future Meetups</h2>
+<ul>
+  {% for meetup in future_meetups %}
+  <li><a href=/meetups/{{ meetup.date|date:"Y-m-d" }}/>{{ meetup.date|date:"j F Y" }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
 <h2>Past Meetups</h2>
 <ul>
-  {% for meetup in meetups %}
+  {% for meetup in past_meetups %}
   <li><a href=/meetups/{{ meetup.date|date:"Y-m-d" }}/>{{ meetup.date|date:"j F Y" }}</a></li>
   {% endfor %}
 </ul>

@@ -23,6 +23,7 @@ dev = [
   "pytest>=9.0.3",
   "pytest-django>=4.12",
   "pytest-randomly>=4.1",
+  "time-machine>=3.5.1",
 ]
 
 [tool.ruff]

@@ -2,6 +2,7 @@ import datetime as dt
 from http import HTTPStatus
 from io import BytesIO
 from itertools import groupby
+from zoneinfo import ZoneInfo
 
 import segno
 from django.conf import settings
@@ -10,6 +11,7 @@ from django.db import transaction
 from django.db.models import Prefetch
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET, require_POST
@@ -17,10 +19,35 @@ from django.views.decorators.http import require_GET, require_POST
 from djangolondon.forms import EntryForm
 from djangolondon.models import Meetup, Prize, PrizeDraw, Speaker, Talk
 
+london_tz = ZoneInfo("Europe/London")
+
 
 def index(request):
-    meetups = Meetup.objects.all()[:3]
-    return render(request, "index.html", {"meetups": meetups})
+    today = timezone.now().astimezone(london_tz).date()
+    start_of_today = dt.datetime.combine(today, dt.time.min, tzinfo=london_tz)
+    start_of_tomorrow = dt.datetime.combine(
+        today + dt.timedelta(days=1), dt.time.min, tzinfo=london_tz
+    )
+    start_of_next_month = dt.datetime.combine(
+        (today.replace(day=1) + dt.timedelta(days=32)).replace(day=1),
+        dt.time.min,
+        tzinfo=london_tz,
+    )
+    meetups = list(Meetup.objects.only("date"))
+    past = [m for m in meetups if m.date < start_of_today]
+    today_meetups = [m for m in meetups if start_of_today <= m.date < start_of_tomorrow]
+    month = [m for m in meetups if start_of_tomorrow <= m.date < start_of_next_month]
+    future = [m for m in meetups if m.date >= start_of_next_month]
+    return render(
+        request,
+        "index.html",
+        {
+            "today_meetups": today_meetups,
+            "month_meetups": month[::-1],
+            "future_meetups": future[::-1],
+            "past_meetups": past[:3],
+        },
+    )
 
 
 def code_of_conduct(request):
