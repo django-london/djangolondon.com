@@ -1,0 +1,9 @@
+title = "Django London Meetup October"
+date = 2026-10-14T18:15:00+01:00
+meetup_url = "https://www.meetup.com/djangolondon/events/316661881/"
+
+[[talks]]
+title = "Who lost our customers? Investigating a human error"
+description = "There are always two stories looking into an incident. In this talk I will walk you through an incident exploring both views and why “human error” should never be the documented root cause of an incident."
+
+speakers = ["sofia-fischer"]
