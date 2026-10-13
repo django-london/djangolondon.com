@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+  <meta charset=UTF-8>
+
+  <title>Django London</title>
+
+  <meta name=apple-mobile-web-app-capable content=yes>
+  <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+  <meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel=stylesheet href="{% static 'slides/reveal.css' %}">
+  <link rel=stylesheet href="{% static 'slides/django.css' %}">
+  <link rel=stylesheet href="{% static 'slides/zenburn.css' %}">
+
+  <script nonce={{ csp_nonce }}>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '{% static 'slides/print/pdf.css' %}' : '{% static 'slides/print/paper.css' %}';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+<div class=reveal>
+  <div class=slides>
+{% block slides %}{% endblock %}
+  </div>
+</div>
+
+<script src="{% static 'slides/reveal.js' %}" nonce={{ csp_nonce }}></script>
+<script src="{% static 'slides/highlight.js' %}" nonce={{ csp_nonce }}></script>
+<script nonce={{ csp_nonce }}>
+  var chrome = {% block chrome %}true{% endblock %};
+  Reveal.initialize({
+    controls: chrome,
+    progress: chrome,
+    history: true,
+    center: true,
+    transition: 'slide'
+  });
+  hljs.initHighlightingOnLoad();
+</script>
+<script src="{% static 'slides/zoom.js' %}" nonce={{ csp_nonce }}></script>
+
+</body>
+</html>

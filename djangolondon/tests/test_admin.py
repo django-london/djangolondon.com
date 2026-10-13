@@ -56,13 +56,13 @@ class PrizeDrawAdminPageTests(TestCase):
         self.client.force_login(self.user)
 
     def test_changelist(self):
-        response = self.client.get("/organizers/djangolondon/prizedraw/")
+        response = self.client.get("/organizers-admin/djangolondon/prizedraw/")
 
         assert response.status_code == HTTPStatus.OK
         assert "/prize-draws/june-2026/screen/" in response.text
 
     def test_add(self):
-        response = self.client.get("/organizers/djangolondon/prizedraw/add/")
+        response = self.client.get("/organizers-admin/djangolondon/prizedraw/add/")
 
         assert response.status_code == HTTPStatus.OK
         assert 'enctype="multipart/form-data"' in response.text
@@ -76,7 +76,7 @@ class PrizeDrawAdminPageTests(TestCase):
         )
 
         response = self.client.get(
-            f"/organizers/djangolondon/prizedraw/{self.draw.pk}/change/"
+            f"/organizers-admin/djangolondon/prizedraw/{self.draw.pk}/change/"
         )
 
         assert response.status_code == HTTPStatus.OK

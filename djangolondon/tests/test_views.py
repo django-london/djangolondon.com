@@ -139,6 +139,29 @@ class MeetupSlidesTests(TestCase):
         assert response.status_code == HTTPStatus.NOT_FOUND
 
 
+class OrganizerIndexTests(TestCase):
+    def test_success(self):
+        response = self.client.get("/organizers/")
+        assert response.status_code == HTTPStatus.OK
+        assert "/organizers/2026-10-14/" in response.text
+        assert "14 October" in response.text
+
+
+class OrganizerSlidesTests(TestCase):
+    def test_success(self):
+        response = self.client.get("/organizers/2026-10-14/")
+        assert response.status_code == HTTPStatus.OK
+        assert "Who lost our customers?" in response.text
+        assert "/static/slides/reveal.js" in response.text
+        assert "<div class=slides>\n\n<section>" in response.text
+        nonce = response.context["csp_nonce"]
+        assert f"nonce={nonce}" in response.text
+
+    def test_not_found(self):
+        response = self.client.get("/organizers/2000-01-01/")
+        assert response.status_code == HTTPStatus.NOT_FOUND
+
+
 class FaviconTests(TestCase):
     def test_success(self):
         response = self.client.get("/favicon.ico")
@@ -325,7 +348,7 @@ class PrizeDrawScreenTests(PrizeDrawTestCase):
         response = self.client.get("/prize-draws/june-2026/screen/")
 
         assert response.status_code == HTTPStatus.FOUND
-        assert response["Location"].startswith("/organizers/login/")
+        assert response["Location"].startswith("/organizers-admin/login/")
 
     def test_success(self):
         self.login_organizer()

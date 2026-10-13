@@ -18,7 +18,7 @@ DEBUG=1 manage.py migrate
 DEBUG=1 manage.py runserver
 ```
 
-Visit `/organizers/` to log in.
+Visit `/organizers-admin/` to log in.
 In debug mode, the migration process automatically creates a superuser with these credentials:
 
 ```
@@ -30,7 +30,7 @@ password: thames
 
 To run a prize draw at a meetup:
 
-**(1)** Add a prize draw in the admin, at `/organizers/djangolondon/prizedraw/`.
+**(1)** Add a prize draw in the admin, at `/organizers-admin/djangolondon/prizedraw/`.
 Add one row per prize, in the order you want to give them away, attaching each
 prize’s voucher PDF.
 

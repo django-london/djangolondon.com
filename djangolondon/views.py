@@ -11,6 +11,7 @@ from django.db import transaction
 from django.db.models import Prefetch
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template import TemplateDoesNotExist
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_control
@@ -315,6 +316,29 @@ def meetup_slides(request: HttpRequest, date: str, filename: str) -> HttpRespons
     if not path.is_file():
         raise Http404
     return FileResponse(path.open("rb"))
+
+
+@require_GET
+def organizer_index(request: HttpRequest) -> HttpResponse:
+    decks_dir = settings.BASE_DIR / "djangolondon/templates/slides/decks"
+    dates = sorted(
+        (dt.date.fromisoformat(path.stem) for path in decks_dir.glob("*.html")),
+        reverse=True,
+    )
+    grouped = [(year, list(ds)) for year, ds in groupby(dates, key=lambda d: d.year)]
+    return render(
+        request,
+        "slides/index.html",
+        {"title": "Organizers’ slides", "grouped_decks": grouped},
+    )
+
+
+@require_GET
+def organizer_slides(request: HttpRequest, date: dt.date) -> HttpResponse:
+    try:
+        return render(request, f"slides/decks/{date.isoformat()}.html")
+    except TemplateDoesNotExist:
+        raise Http404
 
 
 @require_GET
