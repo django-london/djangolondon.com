@@ -60,6 +60,9 @@ class PrizeDraw(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return f"/prize-draws/{self.slug}/screen/"
+
     def next_prize(self):
         return self.prizes.defer("voucher").filter(winner=None).first()
 

@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import resolve
 from django.utils import timezone
 
 from djangolondon.models import Entry, Meetup, Prize, PrizeDraw, Speaker, Talk
@@ -30,6 +31,11 @@ class PrizeDrawTests(TestCase):
 
     def test_str(self):
         assert str(self.draw) == "June 2026 Draw"
+
+    def test_get_absolute_url(self):
+        url = self.draw.get_absolute_url()
+        assert url == f"/prize-draws/{self.draw.slug}/screen/"
+        assert resolve(url).func.__name__ == "prize_draw_screen"
 
     def test_next_prize(self):
         second = Prize.objects.create(draw=self.draw, order=2, name="Second")
