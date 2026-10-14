@@ -13,6 +13,7 @@ os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
+    "djangolondon.com",
     "www.djangolondon.com",
     "djangolondon-com.fly.dev",
 ]
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
-    "https://www.djangolondon.com",
+    "https://djangolondon.com",
     "https://djangolondon-com.fly.dev/",
 ]
 
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django.middleware.csp.ContentSecurityPolicyMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "djangolondon.middleware.WWWRedirectMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
