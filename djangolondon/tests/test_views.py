@@ -714,6 +714,8 @@ class QuizDetailTests(QuizTestCase):
         # Only the results, to swap in for the form.
         assert "<title>" not in response.text
         assert "You scored 1/2" in response.text
+        # Focus moves to the score, as the pressed button is gone.
+        assert "<p class=quiz-score tabindex=-1 autofocus>" in response.text
         assert "perfect" not in response.text
         assert "✓ Your answer" in response.text
         assert "✗ Your answer" in response.text
@@ -1116,6 +1118,7 @@ class QuizScreenTests(QuizTestCase):
 
         assert "Answer 1 of 2" in response.text
         assert "quiz-tile correct" in response.text
+        assert "<span class=visually-hidden>A, the answer</span>" in response.text
         assert "It’s <strong>the ORM</strong>." in response.text
         assert "Next answer" in response.text
 

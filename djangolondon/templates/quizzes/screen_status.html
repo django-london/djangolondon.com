@@ -46,7 +46,7 @@ quizmaster moves the quiz on or back.
 <ul class="quiz-grid quiz-revealed" role=list>
   {% for letter, text, count in live.choice_counts %}
   <li class="quiz-tile{% if letter == live.question.answer %} correct{% endif %}">
-    <span class=quiz-letter>{% if letter == live.question.answer %}✓{% else %}{{ letter|upper }}{% endif %}</span>
+    <span class=quiz-letter>{% if letter == live.question.answer %}<span aria-hidden=true>✓</span><span class=visually-hidden>{{ letter|upper }}, the answer</span>{% else %}{{ letter|upper }}{% endif %}</span>
     <span>{{ text|markdown_inline }}</span>
     <span class=quiz-count>{{ count }}</span>
   </li>

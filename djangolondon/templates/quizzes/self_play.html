@@ -5,7 +5,10 @@ of the form.
 {% endcomment %}
 <div id=quiz-self-play class=flow>
 {% if results %}
-<p class=quiz-score aria-live=polite>You scored {{ score }}/{{ results|length }}{% if score == results|length %} — perfect! 🎉{% endif %}</p>
+{% comment %}
+Focused when it swaps in, since the button that was pressed has gone.
+{% endcomment %}
+<p class=quiz-score tabindex=-1 autofocus>You scored {{ score }}/{{ results|length }}{% if score == results|length %} — perfect! 🎉{% endif %}</p>
 <ol class="quiz-questions flow">
   {% for result in results %}
   <li class="quiz-question flow">
