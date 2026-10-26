@@ -1,0 +1,106 @@
+title = "Django Quiz 2023"
+date = 2023-12-11
+description = """
+The quiz from our December 2023 meetup, presented by [Adam Johnson](/speakers/adam-johnson/).
+Questions refer to the time of the meetup.
+Originally posted [on Adam’s blog](https://adamj.eu/tech/2023/12/11/django-quiz-2023/).
+"""
+
+[[questions]]
+text = "What is the latest released version of Django?"
+choices = ["5.0", "4.2.8", "5 LTS", "2023.12"]
+answer = "a"
+explanation = """
+The latest release is 5.0, as [announced last Monday](https://www.djangoproject.com/weblog/2023/dec/04/django-50-released/) by new Django fellow Natalia Bidart.
+"""
+
+[[questions]]
+text = "Who is the framework named after?"
+choices = ["Django Freeman, protagonist of the Quentin Tarantino movie Django Unchained", "The Djanju, or Django, Aboriginal Australian people", "Django Reinhardt, jazz guitarist", "Django Tango, inspiration for Tango soda"]
+answer = "c"
+explanation = """
+The framework is named after [Django Reinhardt](https://en.wikipedia.org/wiki/Django_Reinhardt), the jazz guitarist, as noted [in the FAQ](https://docs.djangoproject.com/en/stable/faq/general/#what-does-django-mean-and-how-do-you-pronounce-it).
+"""
+
+[[questions]]
+text = "Which transport protocol does HTTP/3 use?"
+choices = ["QUIC", "QWIKER", "TCP/IP", "Cloudflare Pro"]
+answer = "a"
+explanation = """
+[HTTP/3](https://en.wikipedia.org/wiki/HTTP/3) uses QUIC, which doesn’t officially stand for anything but was initially proposed as “Quick UDP Internet Connections”.
+"""
+
+[[questions]]
+text = "What is the outer HTML element for a collapsible section?"
+choices = ["`<collapse>`", "`<summary>`", "`<details>`", "`<revelation>`"]
+answer = "c"
+explanation = """
+[The `<details>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) represents a collapsible section, within which a `<summary>` contains the content visible whilst the section is collapsed.
+"""
+
+[[questions]]
+text = "What is the name of the new database-computed field class?"
+choices = ["`VirtualColumn`", "`DBComputedField`", "`GeneratedField`", "`JustComputeItField`"]
+answer = "c"
+explanation = """
+`GeneratedField` is the field class for the new [Database generated model field](https://docs.djangoproject.com/en/5.0/releases/5.0/#database-generated-model-field).
+"""
+
+[[questions]]
+text = "How many years since Django’s first “Preparing for launch” blog post?"
+choices = ["7", "16", "18", "Innumerable"]
+answer = "c"
+explanation = """
+[“Preparing for launch”](https://www.djangoproject.com/weblog/2005/jul/14/prelaunch/) was published **18** years ago on the 14th July 2005.
+Yes, Django turned 18 this year!
+"""
+
+[[questions]]
+text = "What is the management command to create migrations files?"
+choices = ["`createmigrations`", "`gen_migrations`", "`makemigrations`", "`make-database-up-to-date --please`"]
+answer = "c"
+explanation = """
+[The `makemigrations` command](https://docs.djangoproject.com/en/stable/ref/django-admin/#makemigrations) creates migration files.
+"""
+
+[[questions]]
+text = "Which name did PostgreSQL have before 1996?"
+choices = ["Postgres", "GreSQL", "SQLite", "MyFirstSQL"]
+answer = "a"
+explanation = """
+PostgreSQL was [previously called Postgres](https://en.wikipedia.org/wiki/PostgreSQL#History), with the rename intending to reflect the new SQL support.
+People still say “Postgres” to refer to it, perhaps as a hangover and certainly easier to say.
+"""
+
+[[questions]]
+text = "Which Djangocon had its first conference this year?"
+choices = ["Asia", "Africa", "Antarctica", "Albuquerque"]
+answer = "b"
+explanation = """
+[Djangocon Africa](https://2023.djangocon.africa/), woohoo!
+"""
+
+[[questions]]
+text = "Which project received the Malcolm Tredinnick Memorial Prize this year?"
+choices = ["Django Ace Pilots", "Djangonaut Space", "Django FC", "Django Contributors PRO"]
+answer = "b"
+explanation = """
+Djangonaut Space, the mentoring initiative, collectively [won the memorial prize](https://www.djangoproject.com/weblog/2023/dec/08/2023-malcolm-tredinnick-memorial-prize-awarded-to/) this year.
+I am glad that such a fantastic team won it together, in Malcolm’s memory.
+"""
+
+[[questions]]
+text = "In which city will DjangoCon Europe 2024 be held?"
+choices = ["Vigo, Spain", "Paris, France", "Edinburgh, UK", "Aa, Estonia"]
+answer = "a"
+explanation = """
+[Vigo, Spain](https://2024.djangocon.eu/) - I’m looking forward to it, maybe see you there?
+"""
+
+[[questions]]
+text = "What does the name “Pip” come from?"
+choices = ["Python’s incredible packager", "package installer for Python", "Please install please", "Parmesan isn’t pimento"]
+answer = "b"
+explanation = """
+As noted at the [start of the Pip documentation](https://pip.pypa.io/en/stable/), the name is derived from “package installer for Python”.
+"""

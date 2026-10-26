@@ -1,12 +1,19 @@
 from django import forms
 from django.core.validators import FileExtensionValidator
 
-from djangolondon.models import Entry, Prize
+from djangolondon.models import Entry, Player, Prize
 
 
 class EntryForm(forms.ModelForm):
     class Meta:
         model = Entry
+        fields = ["name"]
+        labels = {"name": "Your name"}
+
+
+class PlayerForm(forms.ModelForm):
+    class Meta:
+        model = Player
         fields = ["name"]
         labels = {"name": "Your name"}
 

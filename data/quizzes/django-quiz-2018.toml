@@ -1,0 +1,49 @@
+title = "Django Quiz 2018"
+date = 2018-12-17
+description = """
+The quiz from our December 2018 meetup, presented by [Adam Johnson](/speakers/adam-johnson/).
+Questions refer to the time of the meetup.
+Originally posted [on Adam’s blog](https://adamj.eu/tech/2018/12/23/django-quiz-2018/).
+"""
+
+[[questions]]
+text = "What does DSF stand for?"
+choices = ["Django Sans Forms", "Django Server Forgery", "Django Software Foundation", "Database Sequence File"]
+answer = "c"
+explanation = """
+The Django Software Foundation is the [non-profit foundation](https://www.djangoproject.com/foundation/) that supports the development of Django and its community.
+"""
+
+[[questions]]
+text = "What does CSRF stand for?"
+choices = ["Cross Side Request Forms", "Cranky Server Rack Fire", "Crispy Sizzly Relished Forms", "Cross Site Request Forgery"]
+answer = "d"
+explanation = """
+Cross Site Request Forgery.
+Every Django developer should have some familiarity with the [CSRF protection features of Django](https://docs.djangoproject.com/en/2.1/ref/csrf/).
+"""
+
+[[questions]]
+text = "What does ORM stand for?"
+choices = ["Online Realtime Magic", "Object-Relational Mapper", "Objection Relationship Manager", "Ouch Random Methods"]
+answer = "b"
+explanation = """
+Object-Relational Mapper.
+Django doesn’t use this term for its database layer much in its documentation, but there’s [one on the page about querying](https://docs.djangoproject.com/en/2.1/topics/db/queries/#how-are-the-backward-relationships-possible).
+"""
+
+[[questions]]
+text = "What does CBV stand for?"
+choices = ["Classist Biased Views", "Classy Blinged View", "Class Based View", "Classic Basic View"]
+answer = "c"
+explanation = """
+[Class Based View](https://docs.djangoproject.com/en/2.1/topics/class-based-views/).
+"""
+
+[[questions]]
+text = "Which of these is true about `CommonMiddleware`?"
+choices = ["It was deprecated and will be removed in Django 2.2", "It whitelists user agents", "It sets the `Content-Length` header", "It handles the database connection"]
+answer = "c"
+explanation = """
+It sets the `Content-Length` header…and some other [“conveniences for perfectionists”](https://docs.djangoproject.com/en/2.1/ref/middleware/#django.middleware.common.CommonMiddleware).
+"""

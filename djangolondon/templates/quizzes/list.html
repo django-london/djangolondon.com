@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>Quizzes</h2>
+<p>Every December, Django London holds a quiz. Play the past ones here, on your own.</p>
+<ul>
+  {% for quiz in quizzes %}
+  <li><a href=/quizzes/{{ quiz.slug }}/>{{ quiz.title }}</a> — {{ quiz.date|date:"F Y" }}, {{ quiz.question_count }} question{{ quiz.question_count|pluralize }}</li>
+  {% empty %}
+  <li>No quizzes yet.</li>
+  {% endfor %}
+</ul>
+{% endblock main %}

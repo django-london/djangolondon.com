@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load django_htmx markdown %}
+
+{% block main %}
+<h2>{{ quiz.title }}</h2>
+{% if quiz.description %}
+<div class=flow>{{ quiz.description|markdown }}</div>
+{% endif %}
+{% include "quizzes/self_play.html" %}
+{% htmx_script version=4 %}
+{% endblock main %}

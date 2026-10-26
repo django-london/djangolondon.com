@@ -7,11 +7,12 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 
-from djangolondon.models import Meetup, Speaker, Talk
+from djangolondon.models import Meetup, Question, Quiz, Speaker, Talk
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "meetups"
 SPEAKERS_DIR = BASE_DIR / "data" / "speakers"
+QUIZZES_DIR = BASE_DIR / "data" / "quizzes"
 
 
 def _dev_credentials():
@@ -87,3 +88,53 @@ def load_static_data(sender, **kwargs):
             if missing:
                 raise ValueError(f"Unknown speaker slugs: {missing}")
             talk.speakers.set(speakers)
+
+    for toml_file in sorted(QUIZZES_DIR.glob("*.toml")):
+        with toml_file.open("rb") as f:
+            data = tomllib.load(f)
+        load_quiz(toml_file.stem, data)
+
+
+def load_quiz(slug: str, data: dict) -> Quiz:
+    """
+    Create or refresh a quiz from its data file.
+
+    Questions are matched up by position and updated in place, so that a live
+    quiz’s answers survive a typo fix.
+    """
+    fields = {
+        "title": data["title"],
+        "date": data["date"],
+        "description": data.get("description", "").strip(),
+        "imported": True,
+    }
+    quiz, _ = Quiz.objects.update_or_create(
+        slug=slug,
+        defaults=fields,
+        # Imported quizzes have already been played, so are listed from the
+        # start. After that, the admin decides.
+        create_defaults={**fields, "published": True},
+    )
+
+    for order, question_data in enumerate(data["questions"], start=1):
+        choices = question_data["choices"]
+        if not 2 <= len(choices) <= len(Question.LETTERS):
+            raise ValueError(f"{slug} question {order}: needs two to four choices")
+        if question_data["answer"] not in Question.LETTERS[: len(choices)]:
+            raise ValueError(f"{slug} question {order}: answer is not a choice")
+        padded = choices + [""] * (len(Question.LETTERS) - len(choices))
+        Question.objects.update_or_create(
+            quiz=quiz,
+            order=order,
+            defaults={
+                "text": question_data["text"],
+                **{
+                    f"choice_{letter}": text
+                    for letter, text in zip(Question.LETTERS, padded, strict=True)
+                },
+                "answer": question_data["answer"],
+                "explanation": question_data.get("explanation", "").strip(),
+            },
+        )
+    quiz.questions.filter(order__gt=len(data["questions"])).delete()
+    return quiz

@@ -1,0 +1,163 @@
+title = "Django Quiz 2025"
+date = 2025-12-09
+description = """
+The quiz from our December 2025 meetup, presented by [Adam Johnson](/speakers/adam-johnson/).
+Questions refer to the time of the meetup.
+Originally posted [on Adam’s blog](https://adamj.eu/tech/2026/01/03/django-quiz-2025/).
+"""
+
+[[questions]]
+text = "How old is Django this year?"
+choices = ["5 years", "15 years", "20 years", "It is as ageless as the stars"]
+answer = "c"
+explanation = """
+🎂 Django was released in December 2005, making it [20 years old this year](https://www.djangoproject.com/weblog/2025/jul/13/happy-20th-birthday-django/).
+"""
+
+[[questions]]
+text = "Which of these databases does core Django support?"
+choices = ["MongoDB", "Oracle", "Microsoft SQL Server", "A bunch of YAML files"]
+answer = "b"
+explanation = """
+Django has supported [Oracle](https://docs.djangoproject.com/en/stable/ref/databases/#oracle-notes) since 2006!
+"""
+
+[[questions]]
+text = "Which of the below names is *not* a current Django Fellow?"
+choices = ["Jacob Tyler Walls", "Natalia Bidart", "Sarah Boyce", "Django Reinhardt"]
+answer = "d"
+explanation = """
+Django Reinhardt was a jazz guitarist, from whom the framework takes its name.
+Jacob Tyler Walls, Natalia Bidart, and Sarah Boyce are the current [Django Fellows](https://www.djangoproject.com/foundation/teams/#django-fellows-team).
+"""
+
+[[questions]]
+text = "Who manages the Django project?"
+choices = ["The Python Software Foundation", "Adrian Holovaty", "The Django Software Foundation", "Anyone who lists Django as a skill on LinkedIn"]
+answer = "c"
+explanation = """
+The [Django Software Foundation](https://www.djangoproject.com/foundation/) is a US non-profit with the aim of promoting, supporting, and advancing the Django web framework.
+"""
+
+[[questions]]
+text = "What is the latest version of Django?"
+choices = ["5.6", "6.0", "60", "1.6"]
+answer = "b"
+explanation = """
+Django 6.0 is the latest version, as of [December 3rd, 2025](https://www.djangoproject.com/weblog/2025/dec/03/django-60-released/).
+See [my “what’s new post”](https://adamj.eu/tech/2025/12/03/django-whats-new-6.0/) for highlights.
+"""
+
+[[questions]]
+text = "What is the modern API for HTTP request headers?"
+choices = ["`request.h`", "`request.META`", "`request.headers`", "`request.get_me_a_header`"]
+answer = "c"
+explanation = """
+[`request.headers`](https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest.headers) is the new approach, added in Django 2.2 (2019), superseding the older `request.META` approach.
+It acts as a case-insensitive mapping.
+For example, to access the `User-Agent` header:
+
+```python
+def index(request):
+    user_agent = request.headers.get("user-agent", "")
+    ...
+```
+"""
+
+[[questions]]
+text = "What does CSP stand for?"
+choices = ["Content Security Policy", "Contributed Security Patches", "Callable Script Parameters", "Crazy Secure Python"]
+answer = "a"
+explanation = """
+CSP stands for Content Security Policy, a security feature that helps prevent XSS attacks, as [newly supported in Django 6.0](https://docs.djangoproject.com/en/6.0/releases/6.0/#content-security-policy-support)!
+"""
+
+[[questions]]
+text = "What is the new decorator to define a background task?"
+choices = ["`@task`", "`@background_task`", "`@background`", "`@do_it_later`"]
+answer = "a"
+explanation = """
+The [`@task`](https://docs.djangoproject.com/en/6.0/releases/6.0/#background-tasks) decorator is new in Django 6.0 for defining background tasks, which you can use like:
+
+```python
+from django.tasks import task
+
+from example.models import User
+
+
+@task
+def send_welcome_email(user_id):
+    user = User.objects.get(id=user_id)
+    ...
+```
+"""
+
+[[questions]]
+text = "In which city will DjangoCon Europe 2026 be held?"
+choices = ["Athens, Greece", "Zagreb, Croatia", "Dublin, Ireland", "Hell, Norway"]
+answer = "a"
+explanation = """
+[DjangoCon Europe 2026](https://2026.djangocon.eu/) will be held in Athens, Greece.
+See you there?
+"""
+
+[[questions]]
+text = "How do you use Django's test client to make a GET request?"
+choices = ["`Client.get(url)`", "`self.client.get(url)`", '`self.client.fetch("GET", url)`', '`llm.prompt(f"Check this URL with GET: {url}")`']
+answer = "b"
+explanation = """
+A testing classic!
+Use [`self.client.get(url)`](https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.Client.get) to make a GET request with Django's test client, like:
+
+```python
+from django.test import TestCase
+
+
+class IndexTests(TestCase):
+    def test_success(self):
+        response = self.client.get("/index/")
+
+        assert response.status_code == 200
+        ...
+```
+"""
+
+[[questions]]
+text = "Which ORM method returns a dictionary of PKs to model instances?"
+choices = ["`Model.objects.in_bulk()`", "`Model.objects.fetch_dict()`", "`Model.objects.bulk_get()`", "`Model.objects.plz_make_a_dict()`"]
+answer = "a"
+explanation = """
+The [`Model.objects.in_bulk()`](https://docs.djangoproject.com/en/stable/ref/models/querysets/#in-bulk) method returns a dictionary of primary keys to model instances.
+For example:
+
+```ipython
+In [1]: Book.objects.in_bulk([1, 2, 3])
+Out[1]:
+{1: <Book: Brave New World (id=1)>,
+ 2: <Book: Slaughterhouse-Five (id=2)>,
+ 3: <Book: 1984 (id=3)>}
+```
+"""
+
+[[questions]]
+text = "What's the HTML tag for a dialog?"
+choices = ["`<popover>`", "`<popup>`", "`<dialog>`", "`<from-future-import-dialog>`"]
+answer = "c"
+explanation = """
+[The `<dialog>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) has been available since 2022, and was extended by the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) this year.
+You can now make a `<dialog>` that is opened by a `<button>` without any JavaScript like so:
+
+```html
+<button commandfor=subscribers command=show-modal>
+  View subscribers
+</button>
+
+<dialog id=subscribers>
+  <button commandfor=subscribers command=close>Close</button>
+  <h2>Subscribers</h2>
+  <!-- Insert contents here -->
+</dialog>
+```
+
+Short, sweet, and powerful.
+"""

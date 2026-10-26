@@ -1,0 +1,100 @@
+title = "Django Quiz 4"
+date = 2020-01-15
+description = """
+The quiz from our January 2020 meetup, a month late for the usual December slot, presented by [Adam Johnson](/speakers/adam-johnson/).
+Questions refer to the time of the meetup.
+Originally posted [on Adam’s blog](https://adamj.eu/tech/2020/01/20/django-quiz-4/).
+"""
+
+[[questions]]
+text = "What creature is the Django pony?"
+choices = ["Unicorn", "Pegasus", "Horse", "Centaur"]
+answer = "b"
+explanation = """
+The Django Pony, the unofficial mascot of the framework is a [**Pegasus**](https://en.wikipedia.org/wiki/Pegasus).
+It has a dedicated site at [djangopony.com](https://www.djangopony.com/).
+"""
+
+[[questions]]
+text = "In which city will DjangoCon Europe 2020 be held?"
+choices = ["Prague, Czechia", "Porto, Portugal", "London, UK", "Vatican City"]
+answer = "b"
+explanation = """
+[DjangoCon Europe 2020](https://web.archive.org/web/20210307211156/https://2020.djangocon.eu/) will be in **Porto, Portugal,** from the 27th to 31st May.
+I hope to see you there!
+"""
+
+[[questions]]
+text = "What is the “code word” for the latest major Django release?"
+choices = ["“Salmagundi”", "“Smorgasbord”", "“Raft”", "“Range”"]
+answer = "c"
+explanation = """
+I previously blogged about the ‘code word’ phenomenon in [“A Salmagundi of Django Alpha Announcements”](https://adamj.eu/tech/2019/01/18/a-salmagundi-of-django-alpha-announcements/).
+Each Django release has used a different word to describe the “range” of new features.
+
+Last December’s [Django 3.0 release](https://www.djangoproject.com/weblog/2019/dec/02/django-3-released/) followed the trend and used the term **“raft”** for the release.
+"""
+
+[[questions]]
+text = "What is the Django Software Foundation funding goal for 2020 in US Dollars?"
+choices = ["$30,000", "$200,000", "$600,000", "$1,000,000"]
+answer = "b"
+explanation = """
+The DSF funding goal for 2020 is shown on the [fundraising page](https://www.djangoproject.com/fundraising/) at **$200,000**.
+If your organization isn’t already donating, please consider it!
+"""
+
+[[questions]]
+text = "What was the name of one of Django Reinhardt’s cousins?"
+choices = ["Ruby", "Python", "ECMAScript", "Pascal"]
+answer = "b"
+explanation = """
+This is an amazing coincidence [discovered last year by Adrian Holovaty](https://twitter.com/adrianholovaty/status/1089970621012955141), one of the original authors of Django.
+
+Adrian and others named the framework after jazz musician [Django Reinhardt](https://docs.djangoproject.com/en/3.0/faq/general/#what-does-django-mean-and-how-do-you-pronounce-it).
+Although they didn’t know it when they named the framework, it turns out Django Reinhardt had a direct cousin called **Python Reinhardt.**
+"""
+
+[[questions]]
+text = "The Django tutorial has you build a Django app called what?"
+choices = ["quizzes", "surveys", "polls", "testimonies"]
+answer = "c"
+explanation = """
+The [tutorial](https://docs.djangoproject.com/en/3.0/intro/tutorial01/) covers building a **polls** application.
+"""
+
+[[questions]]
+text = "What is the date for the final Python 2.7 minor version release?"
+choices = ["April 2019", "October 2019", "January 2020", "April 2020"]
+answer = "d"
+explanation = """
+As announced in a [Python Software Foundation blog post](https://pyfound.blogspot.com/2019/12/python-2-sunset.html) last December, the final official 2.7 release will be in **April 2020**.
+"""
+
+[[questions]]
+text = "According to crawler.ninja on 2020-01-14, what percentage of the Alexa top 1 million sites implemented HTTPS and redirected HTTP to HTTPS correctly?"
+choices = ["22%", "52%", "72%", "92%"]
+answer = "b"
+explanation = """
+[crawler.ninja](https://crawler.ninja/) is a project by security researcher [Scott Helme](https://scotthelme.co.uk/).
+It performs a daily scan of the Alexa top 1 million sites and makes the data available publicly.
+
+When I checked the results from 2020-01-14, **52%** of the scanned sites implemented HTTPS correctly with a redirect from HTTP to HTTPS.
+"""
+
+[[questions]]
+text = "What does URL stand for?"
+choices = ["Universal Resource Locator", "Uniform Resource Locator", "Uniform Range Location", "URLs aRen't Long"]
+answer = "b"
+explanation = """
+[Uniform Resource Locator](https://en.wikipedia.org/wiki/URL), although I think “URLs aRen’t Long” is a good design goal for a site structure.
+"""
+
+[[questions]]
+text = "What does the Django management command `inspectdb` do?"
+choices = ["Tells you scalability concerns for your current database server", "Checks the widget fill level with a db storage frobnicator", "Shows a live view of every query to your database", "Generates model code for an existing database schema"]
+answer = "d"
+explanation = """
+[The `inspectdb` command](https://docs.djangoproject.com/en/3.0/howto/legacy-databases/) **generates model code for an existing database schema**.
+Helpfully at the meetup, the previous talk covered how this had come in useful on a recent project.
+"""

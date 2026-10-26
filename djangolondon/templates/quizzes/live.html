@@ -1,0 +1,8 @@
+{% extends "prize_draws/base.html" %}
+
+{% block body_class %}quiz-live{% endblock %}
+
+{% block main %}
+<h1>{{ quiz.title }}</h1>
+{% include "quizzes/player.html" %}
+{% endblock main %}

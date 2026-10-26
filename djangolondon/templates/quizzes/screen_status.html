@@ -1,0 +1,121 @@
+{% load markdown %}
+{% comment %}
+The big screen everyone watches, with the quizmaster’s controls. It polls for
+new players and answers, and swaps itself for an updated copy whenever the
+quizmaster moves the quiz on or back.
+{% endcomment %}
+<div id=quiz-screen class=flow
+     hx-get=/quizzes/{{ quiz.slug }}/screen/status/
+     hx-trigger="every 2s"
+     hx-swap=outerMorph>
+
+{% if live.phase == "lobby" %}
+<h1>{{ quiz.title }}</h1>
+<div class=prize-draw-columns>
+  <div class=prize-draw-qr>
+    {{ qr_svg }}
+    <p>Scan to play, or visit<br><strong>{{ join_url }}</strong></p>
+  </div>
+  <div class=flow>
+    <p class=prize-draw-count aria-live=polite>{{ live.players|length }} player{{ live.players|length|pluralize }}</p>
+    <p>{{ live.question_count }} question{{ live.question_count|pluralize }}. Answer on your phone!</p>
+    {% include "quizzes/screen_players.html" %}
+  </div>
+</div>
+
+{% elif live.phase == "question" %}
+<p class=quiz-progress>Question {{ live.number }} of {{ live.question_count }}</p>
+<h1 class=quiz-question-text>{{ live.question.text|markdown_inline }}</h1>
+<ul class=quiz-grid role=list>
+  {% for letter, text in live.question.choices %}
+  <li class="quiz-tile quiz-letter-{{ letter }}"><span class=quiz-letter>{{ letter|upper }}</span> <span>{{ text|markdown_inline }}</span></li>
+  {% endfor %}
+</ul>
+<p class=prize-draw-count aria-live=polite>{{ live.answered_count }} of {{ live.players|length }} answered</p>
+{% if live.leaders %}
+<div class=quiz-standings>
+  {% include "quizzes/screen_standing.html" with label="In the lead" group=live.leaders %}
+  {% include "quizzes/screen_standing.html" with label="Catching up" group=live.trailers %}
+</div>
+{% endif %}
+<p class=quiz-join>Join at <strong>{{ join_url }}</strong></p>
+
+{% elif live.phase == "reveal" %}
+<p class=quiz-progress>Answer {{ live.number }} of {{ live.question_count }}</p>
+<h1 class=quiz-question-text>{{ live.question.text|markdown_inline }}</h1>
+<ul class="quiz-grid quiz-revealed" role=list>
+  {% for letter, text, count in live.choice_counts %}
+  <li class="quiz-tile quiz-letter-{{ letter }}{% if letter == live.question.answer %} correct{% endif %}">
+    <span class=quiz-letter>{% if letter == live.question.answer %}✓{% else %}{{ letter|upper }}{% endif %}</span>
+    <span>{{ text|markdown_inline }}</span>
+    <span class=quiz-count>{{ count }}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% if live.question.explanation %}
+<div class="quiz-explanation flow">{{ live.question.explanation|markdown }}</div>
+{% endif %}
+
+{% else %}
+<h1>{{ quiz.title }}: results</h1>
+{% if live.current_tier %}
+{% for tier in live.higher_tiers %}
+{% if forloop.first %}<ul class=quiz-higher-tiers role=list>{% endif %}
+  <li><strong>{{ tier.score }}/{{ live.question_count }}</strong> {% for player in tier.players %}{{ player.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>
+{% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+<div class=quiz-tier aria-live=polite>
+  <p class=quiz-tier-score>{{ live.current_tier.score }}/{{ live.question_count }}</p>
+  <ul class=quiz-tier-names role=list>
+    {% for player in live.current_tier.players %}<li>{{ player.name }}</li>{% endfor %}
+  </ul>
+</div>
+{% else %}
+<p class=prize-draw-count>Nobody played!</p>
+{% endif %}
+{% endif %}
+
+{% comment %}
+The quizmaster’s controls. Each button sends the step it was pressed on, so a
+double press, or two organizers pressing at once, moves the quiz one step,
+not two. hx-sync drops repeat presses before they are even sent.
+{% endcomment %}
+<div class=quiz-controls>
+  {% if live.can_go_back %}
+  <form method=post action=/quizzes/{{ quiz.slug }}/screen/back/
+        hx-post=/quizzes/{{ quiz.slug }}/screen/back/
+        hx-target=#quiz-screen
+        hx-swap=outerMorph
+        hx-sync="this:drop"
+        hx-disable="find button">
+    {% csrf_token %}
+    <input type=hidden name=step value={{ live.step }}>
+    <button class=quiz-back>Back</button>
+  </form>
+  {% endif %}
+  {% if live.next_label %}
+  <form method=post action=/quizzes/{{ quiz.slug }}/screen/next/
+        hx-post=/quizzes/{{ quiz.slug }}/screen/next/
+        hx-target=#quiz-screen
+        hx-swap=outerMorph
+        hx-sync="this:drop"
+        hx-disable="find button">
+    {% csrf_token %}
+    <input type=hidden name=step value={{ live.step }}>
+    <button class=prize-draw-button>{{ live.next_label }}</button>
+  </form>
+  {% elif live.phase == "results" %}
+  <p>That’s everyone. Thanks for playing!</p>
+  {% endif %}
+</div>
+{% if live.phase == "results" or live.phase == "lobby" and live.players %}
+<form method=post action=/quizzes/{{ quiz.slug }}/screen/reset/ class=quiz-reset
+      hx-post=/quizzes/{{ quiz.slug }}/screen/reset/
+      hx-target=#quiz-screen
+      hx-swap=outerMorph
+      hx-confirm="Remove every player and start the quiz over?">
+  {% csrf_token %}
+  <button>Start over</button>
+</form>
+{% endif %}
+</div>

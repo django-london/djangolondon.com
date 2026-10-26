@@ -69,6 +69,43 @@ urlpatterns = [
         ),
     ),
     path("prizes/<int:pk>/voucher/", views.prize_voucher),
+    # Quizzes
+    path(
+        "quizzes/",
+        include(
+            [
+                path("", views.quiz_list),
+                path(
+                    "<slug:slug>/",
+                    include(
+                        [
+                            path("", views.quiz_detail),
+                            path("live/", views.quiz_live),
+                            path("live/join/", views.quiz_live_join),
+                            path("live/status/", views.quiz_live_status),
+                            path("live/answer/", views.quiz_live_answer),
+                            path(
+                                "screen/",
+                                include(
+                                    [
+                                        path("", views.quiz_screen),
+                                        path("status/", views.quiz_screen_status),
+                                        path("next/", views.quiz_screen_next),
+                                        path("back/", views.quiz_screen_back),
+                                        path("reset/", views.quiz_screen_reset),
+                                        path(
+                                            "players/<int:pk>/remove/",
+                                            views.quiz_screen_remove_player,
+                                        ),
+                                    ]
+                                ),
+                            ),
+                        ]
+                    ),
+                ),
+            ]
+        ),
+    ),
     # Public files and other special routes
     path("favicon.ico", views.favicon),
     path(".well-known/atproto-did", views.atproto_did),

@@ -1,0 +1,80 @@
+title = "Django Quiz 2016"
+date = 2016-12-13
+description = """
+The quiz from our December 2016 meetup, presented by [Adam Johnson](/speakers/adam-johnson/).
+Questions refer to the time of the meetup.
+Originally posted [on Adam’s blog](https://adamj.eu/tech/2019/01/26/django-quiz-2016/).
+"""
+
+[[questions]]
+text = "In which city in Kansas was Django conceived?"
+choices = ["Newton", "Lawrence", "Pittsburg"]
+answer = "b"
+explanation = """
+[Lawrence, Kansas](https://en.wikipedia.org/wiki/Lawrence,_Kansas), as explained in the Django FAQ [“Who’s behind this?”](https://docs.djangoproject.com/en/2.1/faq/general/#who-s-behind-this)
+"""
+
+[[questions]]
+text = "In what year was Django first released?"
+choices = ["1999", "2001", "2005"]
+answer = "c"
+explanation = """
+2005, as per the Django FAQ [“Why does this project exist?”](https://docs.djangoproject.com/en/2.1/faq/general/#why-does-this-project-exist)
+"""
+
+[[questions]]
+text = "Where was Djangocon EU 2016 held?"
+choices = ["Cardiff", "Budapest", "Bucharest"]
+answer = "b"
+explanation = """
+Budapest, see [its site](https://web.archive.org/web/20220118201604/https://2016.djangocon.eu/).
+"""
+
+[[questions]]
+text = "When does Python 2.7 stop being supported?"
+choices = ["1 Jan 2018", "2020", "April 12 2020"]
+answer = "b"
+explanation = """
+2020, as per [PEP 0373](https://peps.python.org/pep-0373/).
+No day in the year is specified, though presumably it will be January 1st.
+"""
+
+[[questions]]
+text = "Which version of Django will drop Python 2 compatibility?"
+choices = ["1.12", "2.0", "2.1"]
+answer = "b"
+explanation = """
+Django 2.0 dropped support for Python 2, as per [its release notes](https://docs.djangoproject.com/en/2.0/releases/2.0/).
+"""
+
+[[questions]]
+text = "Which of these popular sites does not run on Django?"
+choices = ["Instagram", "Slideshare", "Bitbucket", "Disqus"]
+answer = "b"
+explanation = """
+Only Slideshare doesn't - Instagram, Bitbucket, and Disqus are all Django applications!
+"""
+
+[[questions]]
+text = "What is i18n short for?"
+choices = ["Internationalization", "International Code 18", "Internal operation"]
+answer = "a"
+explanation = """
+Internationalization - the 18 stands for “18 removed letters”.
+"""
+
+[[questions]]
+text = "Which official Django project offers websocket and asynchronous task support?"
+choices = ["Inputs", "Transmissions", "Channels"]
+answer = "c"
+explanation = """
+[Channels](https://channels.readthedocs.io/en/latest/).
+"""
+
+[[questions]]
+text = "What does SQL stand for?"
+choices = ["Standard Query Language", "Structured Query Language", "SQL’s a Query Language"]
+answer = "b"
+explanation = """
+[Structured Query Language](https://en.wikipedia.org/wiki/SQL).
+"""

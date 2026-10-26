@@ -1,0 +1,4 @@
+<div class=quiz-standing>
+  <h2>{{ label }} <span class=quiz-standing-score>{{ group.score }}/{{ live.number|add:"-1" }}</span></h2>
+  <p>{{ group.names|join:", " }}{% if group.more %} and {{ group.more }} more{% endif %}</p>
+</div>

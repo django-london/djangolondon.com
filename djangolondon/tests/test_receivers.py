@@ -1,3 +1,4 @@
+import datetime as dt
 import tempfile
 from pathlib import Path
 from unittest import mock
@@ -6,10 +7,11 @@ from django.apps import apps
 from django.contrib.auth.models import User
 from django.test import TestCase, override_settings
 
-from djangolondon.models import Meetup, Speaker, Talk
+from djangolondon.models import Meetup, Question, Quiz, Speaker, Talk
 from djangolondon.receivers import (
     _dev_credentials,
     create_dev_superuser,
+    load_quiz,
     load_static_data,
 )
 
@@ -200,3 +202,125 @@ class LoadStaticDataTests(TestCase):
         assert speaker.github_username == "janedoe"
         assert speaker.mastodon_url == ""
         assert speaker.bluesky_handle == ""
+
+
+class LoadQuizzesTests(TestCase):
+    def test_loads_data_files(self):
+        quiz = Quiz.objects.get(slug="django-quiz-2025")
+
+        assert quiz.title == "Django Quiz 2025"
+        assert quiz.date == dt.date(2025, 12, 9)
+        assert quiz.imported
+        assert quiz.published
+        assert quiz.questions.count() == 12
+        question = quiz.questions.first()
+        assert question.text == "How old is Django this year?"
+        assert question.answer == "c"
+
+    def test_every_data_file_is_valid(self):
+        for question in Question.objects.filter(quiz__imported=True):
+            question.full_clean()
+
+    def test_loads_from_quizzes_dir(self):
+        with tempfile.TemporaryDirectory() as tmp_path:
+            quizzes_dir = Path(tmp_path)
+            (quizzes_dir / "test-quiz.toml").write_text(
+                """
+                title = "Test Quiz"
+                date = 2026-12-08
+
+                [[questions]]
+                text = "Yes?"
+                choices = ["Yes", "No"]
+                answer = "a"
+                """
+            )
+            with mock.patch("djangolondon.receivers.QUIZZES_DIR", quizzes_dir):
+                load_static_data(sender=apps.get_app_config("djangolondon"))
+
+        quiz = Quiz.objects.get(slug="test-quiz")
+        assert quiz.description == ""
+        assert quiz.questions.get().explanation == ""
+
+
+class LoadQuizTests(TestCase):
+    def data(self, **kwargs):
+        return {
+            "title": "Test Quiz",
+            "date": dt.date(2026, 12, 8),
+            "description": "A quiz.\n",
+            "questions": [
+                {
+                    "text": "What is Django?",
+                    "choices": ["A web framework", "A guitarist", "A pony"],
+                    "answer": "a",
+                    "explanation": "It’s a framework.\n",
+                },
+                {
+                    "text": "What is a pony?",
+                    "choices": ["A horse", "A pegasus"],
+                    "answer": "b",
+                },
+            ],
+        } | kwargs
+
+    def test_creates(self):
+        quiz = load_quiz("test-quiz", self.data())
+
+        assert quiz.title == "Test Quiz"
+        assert quiz.description == "A quiz."
+        assert quiz.published
+        q1, q2 = quiz.questions.all()
+        assert q1.order == 1
+        assert q1.choices() == [
+            ("a", "A web framework"),
+            ("b", "A guitarist"),
+            ("c", "A pony"),
+        ]
+        assert q1.choice_d == ""
+        assert q1.explanation == "It’s a framework."
+        assert q2.answer == "b"
+
+    def test_updates_in_place(self):
+        quiz = load_quiz("test-quiz", self.data())
+        question = quiz.questions.first()
+        Quiz.objects.filter(pk=quiz.pk).update(published=False)
+        data = self.data(title="Test Quiz Updated")
+        data["questions"][0]["text"] = "What is Django, really?"
+        del data["questions"][1]
+
+        quiz = load_quiz("test-quiz", data)
+
+        assert quiz.title == "Test Quiz Updated"
+        # Publishing is left to the admin, once the quiz exists.
+        assert not quiz.published
+        assert list(quiz.questions.values_list("pk", "text")) == [
+            (question.pk, "What is Django, really?")
+        ]
+
+    def test_too_few_choices(self):
+        data = self.data()
+        data["questions"][1]["choices"] = ["A horse"]
+
+        with self.assertRaisesMessage(
+            ValueError, "test-quiz question 2: needs two to four choices"
+        ):
+            load_quiz("test-quiz", data)
+
+    def test_too_many_choices(self):
+        data = self.data()
+        data["questions"][0]["choices"] = ["1", "2", "3", "4", "5"]
+
+        with self.assertRaisesMessage(
+            ValueError, "test-quiz question 1: needs two to four choices"
+        ):
+            load_quiz("test-quiz", data)
+
+    def test_answer_not_a_choice(self):
+        data = self.data()
+        data["questions"][1]["answer"] = "c"
+
+        with self.assertRaisesMessage(
+            ValueError, "test-quiz question 2: answer is not a choice"
+        ):
+            load_quiz("test-quiz", data)

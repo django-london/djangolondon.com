@@ -1,0 +1,64 @@
+{% load markdown %}
+{% comment %}
+A player’s view of the live quiz, on their phone. It polls itself to follow the
+quizmaster through the quiz, and stops once the final scores are in.
+
+Every phone in the room is doing this, so it polls less often in the lobby,
+where nothing happens quickly.
+{% endcomment %}
+<div id=quiz-player class=flow aria-live=polite
+     {% if polling %}hx-get=/quizzes/{{ quiz.slug }}/live/status/ hx-trigger="every {% if live.phase == 'lobby' %}3s{% else %}2s{% endif %}" hx-swap=outerMorph{% endif %}>
+{% if player %}
+  {% if live.phase == "lobby" %}
+  <p>You’re in, {{ player.name }}! The quiz will start soon. Watch the screen.</p>
+  {% elif live.phase == "question" %}
+  <h2>Question {{ live.number }} of {{ live.question_count }}</h2>
+  <p>{{ live.question.text|markdown_inline }}</p>
+  <form method=post action=/quizzes/{{ quiz.slug }}/live/answer/
+        hx-post=/quizzes/{{ quiz.slug }}/live/answer/
+        hx-target=#quiz-player
+        hx-swap=outerMorph>
+    {% csrf_token %}
+    <input type=hidden name=question value={{ live.question.pk }}>
+    <div class=quiz-buttons>
+      {% for letter, text in live.question.choices %}
+      <button name=choice value={{ letter }} class="quiz-button quiz-letter-{{ letter }}" aria-pressed={% if letter == choice %}true{% else %}false{% endif %}>
+        <span class=quiz-letter>{{ letter|upper }}</span>
+        <span>{{ text|markdown_inline }}</span>
+      </button>
+      {% endfor %}
+    </div>
+  </form>
+  <p>{% if choice %}You chose <strong>{{ choice|upper }}</strong>. You can change your mind until the next question.{% else %}Tap your answer.{% endif %}</p>
+  {% elif live.phase == "reveal" %}
+  <h2>Answer {{ live.number }} of {{ live.question_count }}</h2>
+  {% if choice == live.question.answer %}
+  <p class=quiz-verdict>✓ Correct!</p>
+  <p>You chose <strong>{{ choice|upper }}</strong>.</p>
+  {% else %}
+  <p class=quiz-verdict>✗ {% if choice %}Not this time{% else %}No answer{% endif %}</p>
+  <p>{% if choice %}You chose <strong>{{ choice|upper }}</strong>, but the{% else %}The{% endif %} answer was <strong>{{ live.question.answer|upper }}</strong>.</p>
+  {% endif %}
+  <p>{{ score }}/{{ live.number }} so far.</p>
+  {% else %}
+  <p class=quiz-verdict>You scored {{ score }}/{{ live.question_count }}</p>
+  <p>Thanks for playing, {{ player.name }}! Watch the screen to see how everyone did.</p>
+  {% endif %}
+{% elif live.can_join %}
+<form method=post action=/quizzes/{{ quiz.slug }}/live/join/
+      hx-post=/quizzes/{{ quiz.slug }}/live/join/
+      hx-target=#quiz-player
+      hx-swap=outerMorph>
+  {% csrf_token %}
+  <p>
+    <label for={{ player_form.name.id_for_label }}>{{ player_form.name.label }}</label>
+    {{ player_form.name.errors }}
+    {{ player_form.name }}
+  </p>
+  <button>Join the quiz</button>
+</form>
+{% if live.phase == "question" %}<p>The quiz has started, but you can still join for the rest of it.</p>{% endif %}
+{% else %}
+<p>The questions are over, so it’s too late to join. Watch the screen!</p>
+{% endif %}
+</div>

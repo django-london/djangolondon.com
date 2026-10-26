@@ -10,3 +10,9 @@ _md = MarkdownIt()
 @register.filter
 def markdown(value):
     return mark_safe(_md.render(value))
+
+
+@register.filter
+def markdown_inline(value):
+    """Render Markdown that sits within a line, like a quiz question."""
+    return mark_safe(_md.renderInline(value))

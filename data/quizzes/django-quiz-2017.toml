@@ -1,0 +1,81 @@
+title = "Django Quiz 2017"
+date = 2017-12-12
+description = """
+The quiz from our December 2017 meetup, presented by [Adam Johnson](/speakers/adam-johnson/).
+Questions refer to the time of the meetup.
+Originally posted [on Adam’s blog](https://adamj.eu/tech/2017/12/13/django-quiz/).
+"""
+
+[[questions]]
+text = "What species is Django’s unofficial spirit animal?"
+choices = ["Pegasus", "Unicorn", "Pony", "Elephant"]
+answer = "a"
+explanation = """
+Although called the [Django Pony](https://www.djangopony.com), it’s a winged horse, aka pegasus.
+"""
+
+[[questions]]
+text = "Djangocon EU this year was in…"
+choices = ["Bologna", "Genoa", "Venice", "Florence"]
+answer = "d"
+explanation = """
+Florence. See [2017.djangocon.eu](https://web.archive.org/web/20250823093758/https://2017.djangocon.eu/).
+The [youtube channel](https://www.youtube.com/user/djangoconeurope) has some talks worth watching.
+"""
+
+[[questions]]
+text = "What does LTS stand for?"
+choices = ["Long Tail Support", "Long Term Support", "Life Time Support", "Life Term Support"]
+answer = "b"
+explanation = """
+Long Term Support. Though some would like it to last a life time :)
+"""
+
+[[questions]]
+text = "What does WSGI stand for?"
+choices = ["Web Socket Gateway Interface", "Web Server Gateway Interface", "Web Server Gated Interface", "WebS GuardIan"]
+answer = "b"
+explanation = """
+[Web Server Gateway Interface](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface).
+"""
+
+[[questions]]
+text = "What does ACID stand for?"
+choices = ["Atomicity Consistency Integrity Durability", "Atomicity Concurrency Isolation Durability", "Atomicity Consistency Isolation Durability", "All Carefully Inserted Data"]
+answer = "c"
+explanation = """
+[Atomicity Consistency Isolation Durability](https://en.wikipedia.org/wiki/ACID).
+"""
+
+[[questions]]
+text = "What’s the import for the new Django 2.0 URL syntax?"
+choices = ["`from django.paths import url`", "`from django.urls import path`", "`from django.urls import url`", "`from django.urls import fantastic_new_url`"]
+answer = "b"
+explanation = """
+`from django.urls import path`, as per the [release notes](https://docs.djangoproject.com/en/2.0/releases/2.0/), which are worth reading if you haven’t yet :)
+"""
+
+[[questions]]
+text = "When you run tests…"
+choices = ["`settings.DEBUG` is forced to `True`", "`settings.DEBUG` is forced to `False`", "They fail if `settings.DEBUG` is not `True`", "They fail if `settings.DEBUG` is not `False`"]
+answer = "b"
+explanation = """
+`settings.DEBUG` is forced to `False`, as per the [docs](https://docs.djangoproject.com/en/2.0/topics/testing/overview/#other-test-conditions).
+"""
+
+[[questions]]
+text = "The email addresses in `settings.ADMINS`…"
+choices = ["will be notified of 404 errors and exceptions", "will be notified of exceptions", "will be the only ones allowed to use the Admin", "will be notified of bots crawling the sites"]
+answer = "b"
+explanation = """
+They will be notified of exceptions, as per the [docs](https://docs.djangoproject.com/en/2.0/ref/settings/#admins).
+"""
+
+[[questions]]
+text = "What’s the minimum supported version of Python for Django 2.0?"
+choices = ["2.999999999999999", "3.3", "3.4", "3.5"]
+answer = "c"
+explanation = """
+Django 2.0 supports Python 3.4 and above.
+Again see the [2.0 release notes](https://docs.djangoproject.com/en/2.0/releases/2.0/)!
+"""

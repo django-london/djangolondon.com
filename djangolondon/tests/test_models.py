@@ -1,8 +1,22 @@
+import datetime as dt
+
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.urls import resolve
 from django.utils import timezone
 
-from djangolondon.models import Entry, Meetup, Prize, PrizeDraw, Speaker, Talk
+from djangolondon.models import (
+    Answer,
+    Entry,
+    Meetup,
+    Player,
+    Prize,
+    PrizeDraw,
+    Question,
+    Quiz,
+    Speaker,
+    Talk,
+)
 
 
 class SpeakerTests(TestCase):
@@ -137,3 +151,100 @@ class EntryTests(TestCase):
     def test_str(self):
         entry = Entry(name="Alice")
         assert str(entry) == "Alice"
+
+
+class QuizTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.quiz = Quiz.objects.create(
+            slug="quiz-2026", title="Django Quiz 2026", date=dt.date(2026, 12, 8)
+        )
+
+    def test_str(self):
+        assert str(self.quiz) == "Django Quiz 2026"
+
+    def test_get_absolute_url(self):
+        url = self.quiz.get_absolute_url()
+        assert url == "/quizzes/quiz-2026/screen/"
+        assert resolve(url).func.__name__ == "quiz_screen"
+
+    def test_advance(self):
+        assert self.quiz.advance(0, 1) is True
+        assert self.quiz.step == 1
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 1
+
+    def test_advance_from_the_wrong_step(self):
+        # A second press of the same button, landing after the first.
+        Quiz.objects.filter(pk=self.quiz.pk).update(step=1)
+
+        assert self.quiz.advance(0, 1) is False
+
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 1
+
+    def test_reset(self):
+        Player.objects.create(quiz=self.quiz, name="Alice")
+        Quiz.objects.filter(pk=self.quiz.pk).update(step=3)
+        self.quiz.step = 3
+
+        self.quiz.reset()
+
+        assert self.quiz.step == 0
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 0
+        assert not self.quiz.players.exists()
+
+
+class QuestionTests(TestCase):
+    def build(self, **kwargs):
+        return Question(
+            text="What is Django?",
+            **{"choice_a": "A web framework", "choice_b": "A guitarist", "answer": "a"}
+            | kwargs,
+        )
+
+    def test_str(self):
+        assert str(self.build()) == "What is Django?"
+
+    def test_choices(self):
+        question = self.build(choice_c="A pony")
+
+        assert question.choices() == [
+            ("a", "A web framework"),
+            ("b", "A guitarist"),
+            ("c", "A pony"),
+        ]
+
+    def test_clean(self):
+        self.build(choice_c="A pony", choice_d="All of the above").clean()
+
+    def test_clean_choice_d_without_c(self):
+        with self.assertRaises(ValidationError) as cm:
+            self.build(choice_d="All of the above").clean()
+
+        assert cm.exception.message_dict == {
+            "choice_c": ["Fill in choice C before choice D."]
+        }
+
+    def test_clean_answer_not_a_choice(self):
+        with self.assertRaises(ValidationError) as cm:
+            self.build(answer="c").clean()
+
+        assert cm.exception.message_dict == {
+            "answer": ["The answer must be one of the choices."]
+        }
+
+    def test_clean_without_answer(self):
+        # Left to the field’s own validation.
+        self.build(answer="").clean()
+
+
+class PlayerTests(TestCase):
+    def test_str(self):
+        assert str(Player(name="Alice")) == "Alice"
+
+
+class AnswerTests(TestCase):
+    def test_str(self):
+        assert str(Answer(choice="b")) == "B"

@@ -1,0 +1,18 @@
+{% if live.players %}
+<ul class=prize-draw-entrants>
+  {% for player in live.players %}
+  <li>{{ player.name }}
+    <form method=post action=/quizzes/{{ quiz.slug }}/screen/players/{{ player.pk }}/remove/
+          hx-post=/quizzes/{{ quiz.slug }}/screen/players/{{ player.pk }}/remove/
+          hx-target=#quiz-screen
+          hx-swap=outerMorph
+          hx-confirm="Remove {{ player.name }} from the quiz?">
+      {% csrf_token %}
+      <button aria-label="Remove {{ player.name }}">&times;</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Waiting for players…</p>
+{% endif %}

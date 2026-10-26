@@ -1,0 +1,64 @@
+{% load markdown %}
+{% comment %}
+Playing alone: every question at once, then the score and the answers in place
+of the form.
+{% endcomment %}
+<div id=quiz-self-play class=flow>
+{% if results %}
+<p class=quiz-score aria-live=polite>You scored {{ score }}/{{ results|length }}{% if score == results|length %} — perfect! 🎉{% endif %}</p>
+<ol class="quiz-questions flow">
+  {% for result in results %}
+  <li class="quiz-question flow">
+    <h3>{{ result.question.text|markdown_inline }}</h3>
+    <ul class=quiz-choices role=list>
+      {% for letter, text in result.question.choices %}
+      <li class="quiz-choice{% if letter == result.question.answer %} correct{% elif letter == result.chosen %} incorrect{% endif %}">
+        <span class=quiz-letter>{{ letter|upper }}</span>
+        <span>{{ text|markdown_inline }}</span>
+        {% if letter == result.question.answer %}<strong class=quiz-mark>✓ {% if letter == result.chosen %}Your answer{% else %}Answer{% endif %}</strong>
+        {% elif letter == result.chosen %}<strong class=quiz-mark>✗ Your answer</strong>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% if not result.chosen %}<p><em>You didn’t answer this one.</em></p>{% endif %}
+    {% if result.question.explanation %}
+    <div class=flow>{{ result.question.explanation|markdown }}</div>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ol>
+<ul class=links-list>
+  <li><a href=/quizzes/{{ quiz.slug }}/>Play again</a></li>
+  <li><a href=/quizzes/>More quizzes</a></li>
+</ul>
+{% else %}
+<form method=post action=/quizzes/{{ quiz.slug }}/ class=flow
+      hx-post=/quizzes/{{ quiz.slug }}/
+      hx-target=#quiz-self-play
+      hx-swap="outerHTML show:top showTarget:#quiz-self-play"
+      hx-disable="find button">
+  {% csrf_token %}
+  <ol class="quiz-questions flow">
+    {% for question in questions %}
+    <li class=quiz-question>
+      <fieldset class=flow>
+        <legend><h3>{{ question.text|markdown_inline }}</h3></legend>
+        <ul class=quiz-choices role=list>
+          {% for letter, text in question.choices %}
+          <li>
+            <label class=quiz-choice>
+              <input type=radio name=question-{{ question.pk }} value={{ letter }}>
+              <span class=quiz-letter>{{ letter|upper }}</span>
+              <span>{{ text|markdown_inline }}</span>
+            </label>
+          </li>
+          {% endfor %}
+        </ul>
+      </fieldset>
+    </li>
+    {% endfor %}
+  </ol>
+  <button class=quiz-submit>Check my answers</button>
+</form>
+{% endif %}
+</div>

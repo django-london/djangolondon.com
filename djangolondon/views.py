@@ -8,17 +8,28 @@ import segno
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db import transaction
-from django.db.models import Prefetch
+from django.db.models import Count, Prefetch
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_control
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
-from djangolondon.forms import EntryForm
-from djangolondon.models import Meetup, Prize, PrizeDraw, Speaker, Talk
+from djangolondon import live_quiz
+from djangolondon.forms import EntryForm, PlayerForm
+from djangolondon.live_quiz import LiveQuiz
+from djangolondon.models import (
+    Answer,
+    Meetup,
+    Player,
+    Prize,
+    PrizeDraw,
+    Quiz,
+    Speaker,
+    Talk,
+)
 
 london_tz = ZoneInfo("Europe/London")
 
@@ -235,6 +246,18 @@ def _screen_context(draw: PrizeDraw) -> dict:
     }
 
 
+def _qr_svg(url: str) -> str:
+    svg = segno.make(url, error="m").svg_inline(
+        scale=8,
+        dark="#092e20",
+        light="#ffffff",
+        # A viewBox instead of a fixed size, so CSS can scale it to the screen.
+        omitsize=True,
+    )
+    # Safe: the SVG comes from segno, not from user input.
+    return mark_safe(svg)
+
+
 def _screen_response(request: HttpRequest, draw: PrizeDraw) -> HttpResponse:
     return render(request, "prize_draws/screen_status.html", _screen_context(draw))
 
@@ -244,21 +267,13 @@ def _screen_response(request: HttpRequest, draw: PrizeDraw) -> HttpResponse:
 def prize_draw_screen(request: HttpRequest, slug: str) -> HttpResponse:
     draw = get_object_or_404(PrizeDraw, slug=slug)
     join_url = request.build_absolute_uri(f"/prize-draws/{draw.slug}/")
-    qr_svg = segno.make(join_url, error="m").svg_inline(
-        scale=8,
-        dark="#092e20",
-        light="#ffffff",
-        # A viewBox instead of a fixed size, so CSS can scale it to the screen.
-        omitsize=True,
-    )
     return render(
         request,
         "prize_draws/screen.html",
         {
             "title": draw.name,
             "join_url": join_url,
-            # Safe: the SVG comes from segno, not from user input.
-            "qr_svg": mark_safe(qr_svg),
+            "qr_svg": _qr_svg(join_url),
             **_screen_context(draw),
         },
     )
@@ -308,6 +323,246 @@ def prize_voucher(request: HttpRequest, pk: int) -> HttpResponse:
         filename=prize.voucher_filename,
         content_type="application/pdf",
     )
+
+
+def quiz_list(request: HttpRequest) -> HttpResponse:
+    quizzes = Quiz.objects.filter(published=True).annotate(
+        question_count=Count("questions")
+    )
+    return render(
+        request,
+        "quizzes/list.html",
+        {"title": "Quizzes", "quizzes": quizzes},
+    )
+
+
+@require_http_methods(["GET", "POST"])
+def quiz_detail(request: HttpRequest, slug: str) -> HttpResponse:
+    """Play a quiz alone: answer every question, then see how you did."""
+    # Organizers can try out a quiz before it is published.
+    quizzes = (
+        Quiz.objects.all()
+        if request.user.is_staff
+        else Quiz.objects.filter(published=True)
+    )
+    quiz = get_object_or_404(quizzes, slug=slug)
+    questions = list(quiz.questions.all())
+    context = {"title": quiz.title, "quiz": quiz, "questions": questions}
+
+    if request.method == "POST":
+        results = []
+        for question in questions:
+            chosen = request.POST.get(f"question-{question.pk}")
+            if chosen not in dict(question.choices()):
+                chosen = None
+            results.append(
+                {
+                    "question": question,
+                    "chosen": chosen,
+                    "correct": chosen == question.answer,
+                }
+            )
+        context["results"] = results
+        context["score"] = sum(1 for result in results if result["correct"])
+        if request.htmx:
+            return render(request, "quizzes/self_play.html", context)
+
+    return render(request, "quizzes/detail.html", context)
+
+
+def _player_session_key(quiz: Quiz) -> str:
+    return f"quiz_player_{quiz.pk}"
+
+
+def _get_player(request: HttpRequest, quiz: Quiz) -> Player | None:
+    player_id = request.session.get(_player_session_key(quiz))
+    if player_id is None:
+        return None
+    return quiz.players.filter(pk=player_id).first()
+
+
+def _player_context(
+    request: HttpRequest,
+    quiz: Quiz,
+    *,
+    player_form: PlayerForm | None = None,
+) -> dict:
+    player = _get_player(request, quiz)
+    live = LiveQuiz.load_for_player(quiz, player)
+    context = {
+        "quiz": quiz,
+        "live": live,
+        "player": player,
+        # Players only need live updates once they have joined, and until
+        # there is nothing left for their phone to show.
+        "polling": player is not None and live.phase != live_quiz.RESULTS,
+        "player_form": player_form if player_form is not None else PlayerForm(),
+    }
+    if player is not None:
+        context["choice"] = live.choice(player)
+        context["score"] = live.score(player, through=live.number)
+    return context
+
+
+def _player_response(
+    request: HttpRequest, context: dict, *, status: int = HTTPStatus.OK
+) -> HttpResponse:
+    return render(request, "quizzes/player.html", context, status=status)
+
+
+@transaction.non_atomic_requests
+@require_GET
+def quiz_live(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    return render(
+        request,
+        "quizzes/live.html",
+        {"title": quiz.title, **_player_context(request, quiz)},
+    )
+
+
+@transaction.non_atomic_requests
+@require_GET
+def quiz_live_status(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    return _player_response(request, _player_context(request, quiz))
+
+
+@require_POST
+def quiz_live_join(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    if not request.htmx:
+        return redirect(f"/quizzes/{quiz.slug}/live/")
+
+    live = LiveQuiz.load_for_player(quiz, None)
+    if _get_player(request, quiz) is not None or not live.can_join:
+        return _player_response(request, _player_context(request, quiz))
+
+    form = PlayerForm(request.POST)
+    if not form.is_valid():
+        context = _player_context(request, quiz, player_form=form)
+        return _player_response(
+            request, context, status=HTTPStatus.UNPROCESSABLE_ENTITY
+        )
+
+    player = form.save(commit=False)
+    player.quiz = quiz
+    player.save()
+    request.session[_player_session_key(quiz)] = player.pk
+    return _player_response(request, _player_context(request, quiz))
+
+
+@require_POST
+def quiz_live_answer(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    if not request.htmx:
+        return redirect(f"/quizzes/{quiz.slug}/live/")
+
+    player = _get_player(request, quiz)
+    live = LiveQuiz.load_for_player(quiz, player)
+    question = live.question
+    # The question is checked against the one on the player’s phone, so that a
+    # tap that lands just after the quizmaster moves on does not count as an
+    # answer to the next question.
+    if (
+        player is not None
+        and live.phase == live_quiz.QUESTION
+        and request.POST.get("question") == str(question.pk)
+        and (choice := request.POST.get("choice")) in dict(question.choices())
+    ):
+        Answer.objects.update_or_create(
+            player=player, question=question, defaults={"choice": choice}
+        )
+    return _player_response(request, _player_context(request, quiz))
+
+
+def _quiz_screen_response(request: HttpRequest, quiz: Quiz) -> HttpResponse:
+    return render(
+        request,
+        "quizzes/screen_status.html",
+        {"quiz": quiz, "live": LiveQuiz.load(quiz), **_join_context(request, quiz)},
+    )
+
+
+def _join_context(request: HttpRequest, quiz: Quiz) -> dict:
+    join_url = request.build_absolute_uri(f"/quizzes/{quiz.slug}/live/")
+    return {"join_url": join_url, "qr_svg": _qr_svg(join_url)}
+
+
+def _posted_step(request: HttpRequest) -> int | None:
+    """The step the quizmaster’s screen was on when they pressed a button."""
+    try:
+        return int(request.POST.get("step", ""))
+    except ValueError:
+        return None
+
+
+@staff_member_required
+@require_GET
+def quiz_screen(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    return render(
+        request,
+        "quizzes/screen.html",
+        {
+            "title": quiz.title,
+            "quiz": quiz,
+            "live": LiveQuiz.load(quiz),
+            **_join_context(request, quiz),
+        },
+    )
+
+
+@staff_member_required
+@require_GET
+def quiz_screen_status(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    return _quiz_screen_response(request, quiz)
+
+
+@staff_member_required
+@require_POST
+def quiz_screen_next(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    step = _posted_step(request)
+    if step is not None and step < LiveQuiz.load(quiz).last_step:
+        quiz.advance(step, step + 1)
+    if not request.htmx:
+        return redirect(f"/quizzes/{quiz.slug}/screen/")
+    return _quiz_screen_response(request, quiz)
+
+
+@staff_member_required
+@require_POST
+def quiz_screen_back(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    step = _posted_step(request)
+    if step is not None and step > 0:
+        quiz.advance(step, step - 1)
+    if not request.htmx:
+        return redirect(f"/quizzes/{quiz.slug}/screen/")
+    return _quiz_screen_response(request, quiz)
+
+
+@staff_member_required
+@require_POST
+def quiz_screen_reset(request: HttpRequest, slug: str) -> HttpResponse:
+    quiz = get_object_or_404(Quiz, slug=slug)
+    quiz.reset()
+    if not request.htmx:
+        return redirect(f"/quizzes/{quiz.slug}/screen/")
+    return _quiz_screen_response(request, quiz)
+
+
+@staff_member_required
+@require_POST
+def quiz_screen_remove_player(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
+    """Drop a player from the quiz, for when a name should not be on screen."""
+    quiz = get_object_or_404(Quiz, slug=slug)
+    quiz.players.filter(pk=pk).delete()
+    if not request.htmx:
+        return redirect(f"/quizzes/{quiz.slug}/screen/")
+    return _quiz_screen_response(request, quiz)
 
 
 @require_GET

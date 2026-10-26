@@ -162,6 +162,13 @@ pre {
   overflow-x: auto;
 }
 
+#quiz-self-play pre {
+  padding: 0.5em 0.75em;
+  border-radius: 0.3em;
+  background: #fff;
+  font-size: 0.9em;
+}
+
 /* Utilities */
 .flow > * + * {
   margin-block-start: var(--flow-space, 1em);
@@ -479,5 +486,392 @@ nav {
       background: none;
       opacity: 1;
     }
+  }
+}
+
+/* Quizzes */
+
+/*
+ * Each choice keeps its colour everywhere, on the big screen and on phones, so
+ * players can match them up at a glance from across the room.
+ */
+:root {
+  --color-quiz-a: #c0392b;
+  --color-quiz-b: #2471a3;
+  --color-quiz-c: #b7770f;
+  --color-quiz-d: #198058;
+}
+
+.quiz-letter-a { --quiz-color: var(--color-quiz-a); }
+.quiz-letter-b { --quiz-color: var(--color-quiz-b); }
+.quiz-letter-c { --quiz-color: var(--color-quiz-c); }
+.quiz-letter-d { --quiz-color: var(--color-quiz-d); }
+
+.quiz-letter {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 0.2em;
+  font-weight: 700;
+}
+
+/* Playing alone */
+
+.quiz-questions {
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+.quiz-question {
+  --flow-space: 2em;
+
+  & fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  & legend {
+    padding: 0;
+  }
+
+  & h3 {
+    font-size: var(--size-step-1);
+  }
+}
+
+.quiz-choices {
+  --flow-space: 0.5em;
+  padding-inline-start: 0;
+  display: grid;
+  gap: 0.5em;
+  margin-block-start: 0.5em;
+
+  & li {
+    margin: 0;
+  }
+}
+
+.quiz-choice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.4em 0.6em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.3em;
+  background: #fff;
+
+  & .quiz-letter {
+    background: var(--color-django-green);
+    color: var(--color-light);
+  }
+}
+
+label.quiz-choice {
+  font-weight: normal;
+  line-height: 1.5;
+  cursor: pointer;
+
+  & input {
+    /* The whole row is the target; the radio itself only shows focus. */
+    position: absolute;
+    opacity: 0;
+    width: auto;
+  }
+
+  &:hover {
+    border-color: var(--color-django-green-light);
+  }
+
+  &:has(input:focus-visible) {
+    outline: 0.15em solid currentColor;
+    outline-offset: 0.15em;
+  }
+
+  &:has(input:checked) {
+    border-color: var(--color-django-green);
+    background: #e3f1ea;
+    font-weight: 700;
+
+    & .quiz-letter {
+      background: var(--color-django-green-light);
+    }
+  }
+}
+
+.quiz-choice.correct {
+  border-color: var(--color-django-green-light);
+  background: #e3f1ea;
+
+  & .quiz-letter {
+    background: var(--color-django-green-light);
+  }
+}
+
+.quiz-choice.incorrect {
+  border-color: var(--color-quiz-a);
+  background: #fbeae8;
+
+  & .quiz-letter {
+    background: var(--color-quiz-a);
+  }
+}
+
+/* Choices can be long lines of code, which must never push the page sideways. */
+.quiz-choice > span:not(.quiz-letter),
+.quiz-tile > span:not(.quiz-letter),
+.quiz-button > span:not(.quiz-letter) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.quiz-mark {
+  margin-inline-start: auto;
+  white-space: nowrap;
+  font-size: 0.85em;
+}
+
+.quiz-score {
+  font-size: var(--size-step-2);
+  font-weight: 700;
+}
+
+.quiz-submit {
+  padding: 0.5em 1em;
+  border: 0;
+  border-radius: 0.3em;
+  background: var(--color-django-green);
+  color: var(--color-light);
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--color-django-green-light);
+  }
+}
+
+/* Playing live, on a phone */
+
+.quiz-buttons {
+  display: grid;
+  gap: 0.5em;
+
+  & .quiz-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    padding: 0.4em;
+    background: var(--quiz-color);
+    color: #fff;
+    font-size: 1em;
+    text-align: start;
+    border: 0.15em solid transparent;
+
+    &:hover:enabled,
+    &:focus-visible:enabled {
+      background: var(--quiz-color);
+      filter: brightness(1.15);
+    }
+
+    & .quiz-letter {
+      background: rgb(0 0 0 / 0.25);
+    }
+  }
+
+  /* Once a choice is made, the others fade back so it stands out. */
+  &:has([aria-pressed=true]) .quiz-button:not([aria-pressed=true]) {
+    opacity: 0.45;
+  }
+
+  & .quiz-button[aria-pressed=true] {
+    border-color: #fff;
+  }
+}
+
+.quiz-verdict {
+  font-size: 1.6em;
+  font-weight: 700;
+}
+
+/* The big screen */
+
+.quiz-screen .prize-draw-main {
+  max-width: 80ch;
+}
+
+.quiz-progress {
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.quiz-screen h1.quiz-question-text {
+  font-size: 1.8em;
+  line-height: 1.2;
+}
+
+.quiz-grid {
+  padding-inline-start: 0;
+  display: grid;
+  gap: 0.6em;
+  text-align: start;
+
+  & .quiz-tile {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.5em 0.7em;
+    border-radius: 0.3em;
+    background: var(--quiz-color);
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  & .quiz-letter {
+    background: rgb(0 0 0 / 0.25);
+  }
+}
+
+@media (width >= 45em) {
+  .quiz-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Revealed: the right answer stays bright, and the rest fade. */
+.quiz-revealed {
+  & .quiz-tile:not(.correct) {
+    opacity: 0.35;
+  }
+
+  & .quiz-tile.correct {
+    outline: 0.2em solid #fff;
+    outline-offset: 0.15em;
+  }
+}
+
+.quiz-count {
+  margin-inline-start: auto;
+  padding-inline-start: 0.5em;
+  font-size: 1.2em;
+}
+
+.quiz-explanation {
+  max-width: 60ch;
+  margin-inline: auto;
+  text-align: start;
+  font-size: 0.85em;
+
+  & code {
+    overflow-wrap: anywhere;
+  }
+
+  & pre {
+    padding: 0.5em;
+    border-radius: 0.2em;
+    background: rgb(0 0 0 / 0.25);
+    font-size: 0.85em;
+  }
+}
+
+.quiz-standings {
+  display: grid;
+  gap: 0.5em 1.5em;
+}
+
+@media (width >= 45em) {
+  .quiz-standings {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.quiz-standing {
+  & h2 {
+    font-size: 1em;
+    opacity: 0.8;
+  }
+
+  & p {
+    margin-block-start: 0.2em;
+    font-size: 1.2em;
+    font-weight: 700;
+  }
+}
+
+.quiz-standing-score {
+  font-weight: normal;
+}
+
+.quiz-join {
+  font-size: 0.8em;
+  opacity: 0.8;
+  overflow-wrap: anywhere;
+}
+
+.quiz-tier-score {
+  font-size: 4em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.quiz-tier-names {
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2em 0.8em;
+  font-size: 1.8em;
+  font-weight: 700;
+  line-height: 1.2;
+
+  & li {
+    margin: 0;
+  }
+}
+
+.quiz-higher-tiers {
+  padding-inline-start: 0;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.quiz-controls {
+  display: flex;
+  gap: 0.6em;
+  align-items: end;
+
+  & form {
+    flex: 1;
+  }
+
+  & .quiz-back {
+    font-size: 1em;
+  }
+
+  & form:has(.quiz-back) {
+    flex: 0 0 auto;
+  }
+}
+
+/* Out of the way, so it is not pressed by mistake. */
+.quiz-reset button {
+  width: auto;
+  margin-inline: auto;
+  background: none;
+  color: var(--color-light);
+  font-size: 0.7em;
+  opacity: 0.6;
+  text-decoration: underline;
+
+  &:hover:enabled,
+  &:focus-visible:enabled {
+    background: none;
+    opacity: 1;
   }
 }

@@ -1,0 +1,138 @@
+title = "Django Quiz 2024"
+date = 2024-12-17
+description = """
+The quiz from our December 2024 meetup, presented by [Adam Johnson](/speakers/adam-johnson/).
+Questions refer to the time of the meetup.
+Originally posted [on Adam’s blog](https://adamj.eu/tech/2024/12/18/django-quiz-2024/).
+"""
+
+[[questions]]
+text = "What is the default port that `runserver` uses?"
+choices = ["8080", "8000", "8888", "404"]
+answer = "b"
+explanation = """
+The [`runserver` command](https://docs.djangoproject.com/en/stable/ref/django-admin/#runserver) uses port 8000 by default.
+"""
+
+[[questions]]
+text = "In which month of this year was Django 5.1 released?"
+choices = ["May", "August", "October", "Undecember"]
+answer = "b"
+explanation = """
+Django 5.1 was [released in August](https://docs.djangoproject.com/en/5.1/releases/5.1/).
+"""
+
+[[questions]]
+text = "What company initially developed Django?"
+choices = ["Instagram", "Mozilla", "Lawrence Journal-World", "ACME Web Frameworks Inc."]
+answer = "c"
+explanation = """
+Django was initially developed within Lawrence Journal-World, a daily newspaper in Lawrence, Kansas.
+See Simon Willison’s [history of Django post](https://simonwillison.net/2010/Aug/24/what-is-the-history/) for the quite unusual story.
+"""
+
+[[questions]]
+text = "What is the CSS selector that ORs a list of selectors?"
+choices = ["`:is()`", "`:or()`", "`:any()`", "`:is-one-of-these()`"]
+answer = "a"
+explanation = """
+The CSS **pseudo-class function** that ORs a list of selectors is [`:is()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:is).
+For example, to affect all icons within any heading element, `<h1>` through `<h6>`, you could use:
+
+```css
+/* Icons in headings */
+:is(h1, h2, h3, h4, h5, h6) .icon {
+    margin-inline: 0.5em;
+}
+```
+"""
+
+[[questions]]
+text = "What is the name of the new middleware that requires authentication by default?"
+choices = ["`LoginRequiredMiddleware`", "`AuthenticationMiddleware`", "`PrivateEverywhereMiddleware`", "`FinallyNoMoreAccidentallyPublicViewsMiddleware`"]
+answer = "a"
+explanation = """
+The new middleware that requires authentication by default is [`LoginRequiredMiddleware`](https://docs.djangoproject.com/en/5.1/releases/5.1/#middleware-to-require-authentication-by-default).
+A really useful feature that fixes a longstanding criticism of Django’s security defaults.
+It is still opt-in, and will require many third-party packages to adapt their public views, but I’m excited.
+"""
+
+[[questions]]
+text = "What is the name of the Django contributor accelerator program?"
+choices = ["Djangonaut Space", "Pony Express", "Astronaut Django", "All Djangoes Go"]
+answer = "a"
+explanation = """
+The Django contributor accelerator program is called [Djangonaut Space](https://djangonaut.space/).
+They have done some amazing things helping new contributors get started with Django, and they even [collectively won the Malcolm Tredinnick Memorial Prize](https://www.djangoproject.com/weblog/2023/dec/08/2023-malcolm-tredinnick-memorial-prize-awarded-to/) last year.
+"""
+
+[[questions]]
+text = "Which model field would you use to store unbounded textual data?"
+choices = ["`CharField`", "`TextField`", "`BinaryField`", "`LongOrEvenInfiniteTextField`"]
+answer = "b"
+explanation = """
+To store unbounded textual data, use [`TextField`](https://docs.djangoproject.com/en/stable/ref/models/fields/#textfield).
+`CharField` has a limit, whilst `TextField` does not.
+"""
+
+[[questions]]
+text = "Which of these is not a real Django contributor team?"
+choices = ["Accessibility", "Oops", "Security", "Triage & Review"]
+answer = "b"
+explanation = """
+The team that is not a real Django contributor team is "Oops".
+It’s actually "Ops", for operations—they keep the website and other infrastructure running!
+"""
+
+[[questions]]
+text = "What is the new template tag to modify a URL’s query parameters?"
+choices = ["`{% alterqueryparams %}`", "`{% urlparams %}`", "`{% querystring %}`", "`{% q %}`"]
+answer = "c"
+explanation = """
+The new-in-Django-5.1 template tag to modify a URL’s query parameters is [`{% querystring %}`](https://docs.djangoproject.com/en/5.1/releases/5.1/#querystring-template-tag).
+For example, you can use it like this when paginating:
+
+```django
+<a href="{% querystring page=page.next_page_number %}">Next page</a>
+```
+
+If the URL was already `/whatever/?search=biscuits&page=1`, the above would output a link where `page` was replaced with the next number:
+
+```html
+<a href="/whatever/?search=biscuits&page=2">Next page</a>
+```
+"""
+
+[[questions]]
+text = "Which class would you extend to create a custom management command?"
+choices = ["`BaseCommand`", "`ManagePyCommand`", "`AdminCommand`", "`Custom`"]
+answer = "a"
+explanation = """
+To create a custom management command, you would extend the `BaseCommand` class, per the [custom management commands tutorial](https://docs.djangoproject.com/en/5.1/howto/custom-management-commands/).
+"""
+
+[[questions]]
+text = "In which city will DjangoCon Europe 2025 be held?"
+choices = ["Trondheim, Norway", "Porto, Portugal", "Dublin, Ireland", "Canberra, Australia"]
+answer = "c"
+explanation = """
+[DjangoCon Europe 2025](https://2025.djangocon.eu/) will be held in Dublin, Ireland.
+See you there?
+"""
+
+[[questions]]
+text = "Which model class attribute contains the public API for metadata?"
+choices = ["`_meta`", "`meta`", "`Meta`", "`metadata_please`"]
+answer = "a"
+explanation = """
+The model class attribute that contains the public API for metadata is `_meta`, per the [Model `_meta` API documentation](https://docs.djangoproject.com/en/stable/ref/models/meta/).
+The underscore prefix is typically used in Python to mark things as “private” or “internal”.
+In this case, Django had the API for some number of versions, third-party packages started using it, and so parts were formalized as public [in Django 1.8](https://docs.djangoproject.com/en/stable/releases/1.8/#model-meta-api).
+
+Use this API to get details defined in internal `Meta` classes, like the [plural verbose name](https://docs.djangoproject.com/en/stable/ref/models/options/#django.db.models.Options.verbose_name_plural):
+
+```pycon
+>>> Octopus._meta.verbose_name_plural
+'octopuses'
+```
+"""

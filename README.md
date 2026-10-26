@@ -49,3 +49,36 @@ voucher PDF there and then.
 
 Uploaded vouchers are stored in the database, so they need no disk of their own
 and are covered by the same backups. They are only downloadable by the winner.
+
+## Quizzes
+
+Past quizzes are listed at `/quizzes/`, where anyone can play them on their own.
+
+To run a live quiz at a meetup:
+
+**(1)** Add a quiz in the admin, at `/organizers-admin/djangolondon/quiz/`, with
+its multiple choice questions. Leave it unpublished, so nobody can see the
+answers early.
+
+**(2)** Put `/quizzes/<slug>/screen/` up on the projector.
+It shows a QR code for the play page and the players who have joined.
+
+**(3)** Attendees scan the QR code, enter their name, and wait.
+
+**(4)** Press the big button to step through the quiz:
+
+* Each question, which players answer on their phones. They can change their
+  minds until you move on. The screen shows who is in the lead and who is
+  behind, on the questions so far.
+* Each answer, highlighted, with how many people chose each option.
+* The results: the names of everyone with a perfect score, then the next score
+  down, and so on, until you stop.
+
+Use the back button if you press on too soon, and “Start over” to clear out
+the players and run the quiz again.
+
+**(5)** Afterwards, publish the quiz to list it at `/quizzes/`.
+
+Past quizzes are imported from `data/quizzes/`, one TOML file each, and are
+refreshed from those files on every deploy, so edit them there rather than in
+the admin.
