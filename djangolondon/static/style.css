@@ -157,15 +157,10 @@ blockquote {
   font-size: var(--size-step-1);
 }
 
-/* Talk descriptions are Markdown, so may contain code blocks. */
+/* Talk descriptions and quiz explanations are Markdown, so may contain code
+   blocks. They wrap rather than scroll, since a scrolling box would need its
+   own keyboard focus. */
 pre {
-  overflow-x: auto;
-}
-
-/* Explanations wrap their code rather than scroll it, since a scrolling box
-   would need its own keyboard focus. */
-#quiz-self-play pre,
-.quiz-explanation pre {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
