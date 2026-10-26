@@ -491,22 +491,6 @@ nav {
 
 /* Quizzes */
 
-/*
- * Each choice keeps its colour everywhere, on the big screen and on phones, so
- * players can match them up at a glance from across the room.
- */
-:root {
-  --color-quiz-a: #c0392b;
-  --color-quiz-b: #2471a3;
-  --color-quiz-c: #b7770f;
-  --color-quiz-d: #198058;
-}
-
-.quiz-letter-a { --quiz-color: var(--color-quiz-a); }
-.quiz-letter-b { --quiz-color: var(--color-quiz-b); }
-.quiz-letter-c { --quiz-color: var(--color-quiz-c); }
-.quiz-letter-d { --quiz-color: var(--color-quiz-d); }
-
 .quiz-letter {
   flex: none;
   display: inline-grid;
@@ -612,11 +596,11 @@ label.quiz-choice {
 }
 
 .quiz-choice.incorrect {
-  border-color: var(--color-quiz-a);
+  border-color: #b03a2e;
   background: #fbeae8;
 
   & .quiz-letter {
-    background: var(--color-quiz-a);
+    background: #b03a2e;
   }
 }
 
@@ -665,7 +649,7 @@ label.quiz-choice {
     gap: 0.5em;
     margin: 0;
     padding: 0.4em;
-    background: var(--quiz-color);
+    background: var(--color-django-green-light);
     color: #fff;
     font-size: 1em;
     text-align: start;
@@ -673,7 +657,7 @@ label.quiz-choice {
 
     &:hover:enabled,
     &:focus-visible:enabled {
-      background: var(--quiz-color);
+      background: var(--color-django-green-light);
       filter: brightness(1.15);
     }
 
@@ -726,7 +710,7 @@ label.quiz-choice {
     gap: 0.6em;
     padding: 0.5em 0.7em;
     border-radius: 0.3em;
-    background: var(--quiz-color);
+    background: var(--color-django-green-light);
     color: #fff;
     font-size: 1.2em;
     font-weight: 700;

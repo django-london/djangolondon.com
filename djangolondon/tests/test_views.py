@@ -1115,7 +1115,7 @@ class QuizScreenTests(QuizTestCase):
         response = self.client.get("/quizzes/quiz-2026/screen/")
 
         assert "Answer 1 of 2" in response.text
-        assert "quiz-letter-a correct" in response.text
+        assert "quiz-tile correct" in response.text
         assert "It’s <strong>the ORM</strong>." in response.text
         assert "Next answer" in response.text
 

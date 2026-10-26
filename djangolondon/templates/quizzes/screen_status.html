@@ -28,7 +28,7 @@ quizmaster moves the quiz on or back.
 <h1 class=quiz-question-text>{{ live.question.text|markdown_inline }}</h1>
 <ul class=quiz-grid role=list>
   {% for letter, text in live.question.choices %}
-  <li class="quiz-tile quiz-letter-{{ letter }}"><span class=quiz-letter>{{ letter|upper }}</span> <span>{{ text|markdown_inline }}</span></li>
+  <li class="quiz-tile"><span class=quiz-letter>{{ letter|upper }}</span> <span>{{ text|markdown_inline }}</span></li>
   {% endfor %}
 </ul>
 <p class=prize-draw-count aria-live=polite>{{ live.answered_count }} of {{ live.players|length }} answered</p>
@@ -45,7 +45,7 @@ quizmaster moves the quiz on or back.
 <h1 class=quiz-question-text>{{ live.question.text|markdown_inline }}</h1>
 <ul class="quiz-grid quiz-revealed" role=list>
   {% for letter, text, count in live.choice_counts %}
-  <li class="quiz-tile quiz-letter-{{ letter }}{% if letter == live.question.answer %} correct{% endif %}">
+  <li class="quiz-tile{% if letter == live.question.answer %} correct{% endif %}">
     <span class=quiz-letter>{% if letter == live.question.answer %}✓{% else %}{{ letter|upper }}{% endif %}</span>
     <span>{{ text|markdown_inline }}</span>
     <span class=quiz-count>{{ count }}</span>

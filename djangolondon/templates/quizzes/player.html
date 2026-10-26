@@ -22,7 +22,7 @@ where nothing happens quickly.
     <input type=hidden name=question value={{ live.question.pk }}>
     <div class=quiz-buttons>
       {% for letter, text in live.question.choices %}
-      <button name=choice value={{ letter }} class="quiz-button quiz-letter-{{ letter }}" aria-pressed={% if letter == choice %}true{% else %}false{% endif %}>
+      <button name=choice value={{ letter }} class="quiz-button" aria-pressed={% if letter == choice %}true{% else %}false{% endif %}>
         <span class=quiz-letter>{{ letter|upper }}</span>
         <span>{{ text|markdown_inline }}</span>
       </button>
