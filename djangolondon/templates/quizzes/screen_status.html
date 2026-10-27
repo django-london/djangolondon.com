@@ -7,7 +7,8 @@ quizmaster moves the quiz on or back.
 <div id=quiz-screen class=flow
      hx-get=/quizzes/{{ quiz.slug }}/screen/status/
      hx-trigger="every 2s"
-     hx-swap=outerMorph>
+     hx-swap=outerMorph
+     hx-sync="this:abort">
 
 {% if live.phase == "lobby" %}
 <h1>{{ quiz.title }}</h1>
@@ -78,7 +79,12 @@ quizmaster moves the quiz on or back.
 {% comment %}
 The quizmaster’s controls. Each button sends the step it was pressed on, so a
 double press, or two organizers pressing at once, moves the quiz one step,
-not two. hx-sync drops repeat presses before they are even sent.
+not two.
+
+The buttons share a request queue with the poll above. A press aborts any poll
+in flight, so a poll from before the press cannot land after it and put the
+old step back. Polls, and repeat presses, are dropped while a press is in
+flight.
 {% endcomment %}
 <div class=quiz-controls>
   {% if live.can_go_back %}
@@ -86,7 +92,7 @@ not two. hx-sync drops repeat presses before they are even sent.
         hx-post=/quizzes/{{ quiz.slug }}/screen/back/
         hx-target=#quiz-screen
         hx-swap=outerMorph
-        hx-sync="this:drop"
+        hx-sync="closest #quiz-screen:drop"
         hx-disable="find button">
     {% csrf_token %}
     <input type=hidden name=step value={{ live.step }}>
@@ -98,7 +104,7 @@ not two. hx-sync drops repeat presses before they are even sent.
         hx-post=/quizzes/{{ quiz.slug }}/screen/next/
         hx-target=#quiz-screen
         hx-swap=outerMorph
-        hx-sync="this:drop"
+        hx-sync="closest #quiz-screen:drop"
         hx-disable="find button">
     {% csrf_token %}
     <input type=hidden name=step value={{ live.step }}>
@@ -113,6 +119,7 @@ not two. hx-sync drops repeat presses before they are even sent.
       hx-post=/quizzes/{{ quiz.slug }}/screen/reset/
       hx-target=#quiz-screen
       hx-swap=outerMorph
+      hx-sync="closest #quiz-screen:drop"
       hx-confirm="Remove every player and start the quiz over?">
   {% csrf_token %}
   <button>Start over</button>

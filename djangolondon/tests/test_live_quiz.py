@@ -101,7 +101,6 @@ class PhaseTests(LiveQuizTestCase):
         live = self.at_step(6)
 
         assert live.tier_index == 1
-        assert live.last_step == 6
         assert live.next_label is None
 
 
@@ -246,8 +245,6 @@ class TierTests(LiveQuizTestCase):
 
         assert live.tiers == []
         assert live.current_tier is None
-        # Still a results step, to say nobody played.
-        assert live.last_step == 5
         assert live.next_label is None
 
 
@@ -280,4 +277,42 @@ class EmptyQuizTests(TestCase):
 
         assert live.phase == live_quiz.LOBBY
         assert live.question_count == 0
-        assert live.last_step == 1
+        # Straight to the results, to say nobody played.
+        assert live.next_label == "Start the quiz"
+
+
+class ResultsStepTests(LiveQuizTestCase):
+    def setUp(self):
+        self.carol = Player.objects.create(quiz=self.quiz, name="Carol")
+        self.answer(self.alice, self.q1, "a")
+        self.answer(self.alice, self.q2, "b")
+        self.answer(self.bob, self.q1, "a")
+
+    def test_score_with_players(self):
+        live = LiveQuiz.load(self.quiz)
+
+        assert live.results_step(2) == 5
+        assert live.results_step(1) == 6
+        assert live.results_step(0) == 7
+
+    def test_score_without_players_goes_down(self):
+        self.bob.delete()
+
+        live = LiveQuiz.load(self.quiz)
+
+        assert live.results_step(1) == 6
+        assert live.tiers[1].score == 0
+
+    def test_score_below_everyone(self):
+        self.carol.delete()
+
+        live = LiveQuiz.load(self.quiz)
+
+        assert live.results_step(0) == 6
+
+    def test_nobody_left(self):
+        Player.objects.all().delete()
+
+        live = LiveQuiz.load(self.quiz)
+
+        assert live.results_step(1) == 5

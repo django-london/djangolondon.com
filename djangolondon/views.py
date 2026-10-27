@@ -382,20 +382,19 @@ def _get_player(request: HttpRequest, quiz: Quiz) -> Player | None:
 
 
 def _player_context(
-    request: HttpRequest,
     quiz: Quiz,
+    player: Player | None,
+    live: LiveQuiz,
     *,
     player_form: PlayerForm | None = None,
 ) -> dict:
-    player = _get_player(request, quiz)
-    live = LiveQuiz.load_for_player(quiz, player)
     context = {
         "quiz": quiz,
         "live": live,
         "player": player,
-        # Players only need live updates once they have joined, and until
-        # there is nothing left for their phone to show.
-        "polling": player is not None and live.phase != live_quiz.RESULTS,
+        # Players need live updates once they have joined. That includes the
+        # results, which the quizmaster can step back from, or start over.
+        "polling": player is not None,
         "player_form": player_form if player_form is not None else PlayerForm(),
     }
     if player is not None:
@@ -405,8 +404,17 @@ def _player_context(
 
 
 def _player_response(
-    request: HttpRequest, context: dict, *, status: int = HTTPStatus.OK
+    request: HttpRequest,
+    quiz: Quiz,
+    player: Player | None,
+    live: LiveQuiz | None = None,
+    *,
+    player_form: PlayerForm | None = None,
+    status: int = HTTPStatus.OK,
 ) -> HttpResponse:
+    if live is None:
+        live = LiveQuiz.load_for_player(quiz, player)
+    context = _player_context(quiz, player, live, player_form=player_form)
     return render(request, "quizzes/player.html", context, status=status)
 
 
@@ -414,10 +422,12 @@ def _player_response(
 @require_GET
 def quiz_live(request: HttpRequest, slug: str) -> HttpResponse:
     quiz = get_object_or_404(Quiz, slug=slug)
+    player = _get_player(request, quiz)
+    live = LiveQuiz.load_for_player(quiz, player)
     return render(
         request,
         "quizzes/live.html",
-        {"title": quiz.title, **_player_context(request, quiz)},
+        {"title": quiz.title, **_player_context(quiz, player, live)},
     )
 
 
@@ -425,7 +435,7 @@ def quiz_live(request: HttpRequest, slug: str) -> HttpResponse:
 @require_GET
 def quiz_live_status(request: HttpRequest, slug: str) -> HttpResponse:
     quiz = get_object_or_404(Quiz, slug=slug)
-    return _player_response(request, _player_context(request, quiz))
+    return _player_response(request, quiz, _get_player(request, quiz))
 
 
 @require_POST
@@ -434,22 +444,33 @@ def quiz_live_join(request: HttpRequest, slug: str) -> HttpResponse:
     if not request.htmx:
         return redirect(f"/quizzes/{quiz.slug}/live/")
 
+    player = _get_player(request, quiz)
+    if player is not None:
+        return _player_response(request, quiz, player)
+
     live = LiveQuiz.load_for_player(quiz, None)
-    if _get_player(request, quiz) is not None or not live.can_join:
-        return _player_response(request, _player_context(request, quiz))
+    if not live.can_join:
+        return _player_response(request, quiz, None, live)
 
     form = PlayerForm(request.POST)
     if not form.is_valid():
-        context = _player_context(request, quiz, player_form=form)
         return _player_response(
-            request, context, status=HTTPStatus.UNPROCESSABLE_ENTITY
+            request,
+            quiz,
+            None,
+            live,
+            player_form=form,
+            status=HTTPStatus.UNPROCESSABLE_ENTITY,
         )
 
     player = form.save(commit=False)
     player.quiz = quiz
     player.save()
     request.session[_player_session_key(quiz)] = player.pk
-    return _player_response(request, _player_context(request, quiz))
+    # A new player has no answers, so the questions loaded above still serve.
+    return _player_response(
+        request, quiz, player, LiveQuiz(quiz, live.questions, [player], [])
+    )
 
 
 @require_POST
@@ -473,20 +494,26 @@ def quiz_live_answer(request: HttpRequest, slug: str) -> HttpResponse:
         Answer.objects.update_or_create(
             player=player, question=question, defaults={"choice": choice}
         )
-    return _player_response(request, _player_context(request, quiz))
+        live.choices[player.pk][question.pk] = choice
+    return _player_response(request, quiz, player, live)
+
+
+def _quiz_screen_context(request: HttpRequest, quiz: Quiz) -> dict:
+    live = LiveQuiz.load(quiz)
+    join_url = request.build_absolute_uri(f"/quizzes/{quiz.slug}/live/")
+    return {
+        "quiz": quiz,
+        "live": live,
+        "join_url": join_url,
+        # Only the lobby shows the QR code, and the screen polls all quiz long.
+        "qr_svg": _qr_svg(join_url) if live.phase == live_quiz.LOBBY else None,
+    }
 
 
 def _quiz_screen_response(request: HttpRequest, quiz: Quiz) -> HttpResponse:
     return render(
-        request,
-        "quizzes/screen_status.html",
-        {"quiz": quiz, "live": LiveQuiz.load(quiz), **_join_context(request, quiz)},
+        request, "quizzes/screen_status.html", _quiz_screen_context(request, quiz)
     )
-
-
-def _join_context(request: HttpRequest, quiz: Quiz) -> dict:
-    join_url = request.build_absolute_uri(f"/quizzes/{quiz.slug}/live/")
-    return {"join_url": join_url, "qr_svg": _qr_svg(join_url)}
 
 
 def _posted_step(request: HttpRequest) -> int | None:
@@ -504,12 +531,7 @@ def quiz_screen(request: HttpRequest, slug: str) -> HttpResponse:
     return render(
         request,
         "quizzes/screen.html",
-        {
-            "title": quiz.title,
-            "quiz": quiz,
-            "live": LiveQuiz.load(quiz),
-            **_join_context(request, quiz),
-        },
+        {"title": quiz.title, **_quiz_screen_context(request, quiz)},
     )
 
 
@@ -525,7 +547,7 @@ def quiz_screen_status(request: HttpRequest, slug: str) -> HttpResponse:
 def quiz_screen_next(request: HttpRequest, slug: str) -> HttpResponse:
     quiz = get_object_or_404(Quiz, slug=slug)
     step = _posted_step(request)
-    if step is not None and step < LiveQuiz.load(quiz).last_step:
+    if step == quiz.step and LiveQuiz.load(quiz).next_label is not None:
         quiz.advance(step, step + 1)
     if not request.htmx:
         return redirect(f"/quizzes/{quiz.slug}/screen/")
@@ -559,7 +581,13 @@ def quiz_screen_reset(request: HttpRequest, slug: str) -> HttpResponse:
 def quiz_screen_remove_player(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
     """Drop a player from the quiz, for when a name should not be on screen."""
     quiz = get_object_or_404(Quiz, slug=slug)
+    current_tier = LiveQuiz.load(quiz).current_tier
     quiz.players.filter(pk=pk).delete()
+    if current_tier is not None:
+        # The results go down by score, and removing a player can empty a
+        # score that has a step of its own. Stay on the same score.
+        step = LiveQuiz.load(quiz).results_step(current_tier.score)
+        quiz.advance(quiz.step, step)
     if not request.htmx:
         return redirect(f"/quizzes/{quiz.slug}/screen/")
     return _quiz_screen_response(request, quiz)

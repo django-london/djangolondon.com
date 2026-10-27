@@ -1,13 +1,14 @@
 {% load markdown %}
 {% comment %}
 A player’s view of the live quiz, on their phone. It polls itself to follow the
-quizmaster through the quiz, and stops once the final scores are in.
+quizmaster through the quiz, including the results, since the quizmaster can
+step back from them or start over.
 
-Every phone in the room is doing this, so it polls less often in the lobby,
-where nothing happens quickly.
+Every phone in the room is doing this, so it polls less often in the lobby and
+results, where nothing happens quickly.
 {% endcomment %}
 <div id=quiz-player class=flow aria-live=polite
-     {% if polling %}hx-get=/quizzes/{{ quiz.slug }}/live/status/ hx-trigger="every {% if live.phase == 'lobby' %}3s{% else %}2s{% endif %}" hx-swap=outerMorph{% endif %}>
+     {% if polling %}hx-get=/quizzes/{{ quiz.slug }}/live/status/ hx-trigger="every {% if live.phase == 'lobby' or live.phase == 'results' %}3s{% else %}2s{% endif %}" hx-swap=outerMorph{% endif %}>
 {% if player %}
   {% if live.phase == "lobby" %}
   <p>You’re in, {{ player.name }}! The quiz will start soon. Watch the screen.</p>

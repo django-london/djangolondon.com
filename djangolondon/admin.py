@@ -185,7 +185,7 @@ class QuizAdmin(admin.ModelAdmin):
 
     @admin.display(description="live")
     def screen_link(self, obj):
-        return format_html('<a href="/quizzes/{}/screen/">Run live</a>', obj.slug)
+        return format_html('<a href="{}">Run live</a>', obj.get_absolute_url())
 
     @admin.display(description="play")
     def play_link(self, obj):

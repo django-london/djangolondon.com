@@ -204,12 +204,6 @@ class LiveQuiz:
         return self.step - 2 * self.question_count - 1
 
     @property
-    def last_step(self) -> int:
-        # With nobody playing there are no tiers, but still a results step to
-        # say so.
-        return 2 * self.question_count + max(len(self.tiers), 1)
-
-    @property
     def can_go_back(self) -> bool:
         return self.step > 0
 
@@ -217,14 +211,15 @@ class LiveQuiz:
     def next_label(self) -> str | None:
         """What the quizmaster’s next button does, or None at the very end."""
         n = self.question_count
-        if self.step >= self.last_step:
-            return None
         if self.phase == LOBBY:
             return "Start the quiz"
         if self.phase == QUESTION:
             return "Next question" if self.number < n else "Reveal the answers"
         if self.phase == REVEAL:
             return "Next answer" if self.number < n else "Show the results"
+        # Scoring everyone is only needed here, at the end.
+        if self.tier_index + 1 >= len(self.tiers):
+            return None
         return f"Show {self.tiers[self.tier_index + 1].score}/{n}"
 
     @property
@@ -239,3 +234,15 @@ class LiveQuiz:
         if self.tier_index is None:
             return []
         return self.tiers[: self.tier_index]
+
+    def results_step(self, score: int) -> int:
+        """
+        The step that shows the players on `score`, or if nobody has it, the
+        next score down.
+        """
+        scores = [tier.score for tier in self.tiers]
+        index = next(
+            (i for i, s in enumerate(scores) if s <= score),
+            max(len(scores) - 1, 0),
+        )
+        return 2 * self.question_count + 1 + index

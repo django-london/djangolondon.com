@@ -868,8 +868,19 @@ class QuizLiveTests(QuizTestCase):
         response = self.client.get("/quizzes/quiz-2026/live/")
 
         assert "You scored 1/2" in response.text
-        # Nothing more for the phone to show.
-        assert "hx-get=" not in response.text
+        # Still following, in case the quizmaster steps back or starts over.
+        assert 'hx-trigger="every 3s"' in response.text
+
+    def test_after_start_over(self):
+        self.join()
+        self.set_step(5)
+        self.quiz.reset()
+
+        response = self.client.get(
+            "/quizzes/quiz-2026/live/status/", headers=HTMX_HEADERS
+        )
+
+        assert "Join the quiz" in response.text
 
 
 class QuizLiveStatusTests(QuizTestCase):
@@ -1131,6 +1142,24 @@ class QuizScreenTests(QuizTestCase):
         assert "quiz-explanation" not in response.text
         assert "Show the results" in response.text
 
+    def test_question_has_no_qr_code(self):
+        self.set_step(1)
+        self.login_organizer()
+
+        response = self.client.get("/quizzes/quiz-2026/screen/")
+
+        assert "<svg" not in response.text
+        assert "http://testserver/quizzes/quiz-2026/live/" in response.text
+
+    def test_presses_abort_polls(self):
+        self.set_step(1)
+        self.login_organizer()
+
+        response = self.client.get("/quizzes/quiz-2026/screen/")
+
+        assert 'hx-sync="this:abort"' in response.text
+        assert response.text.count('hx-sync="closest #quiz-screen:drop"') == 2
+
     def test_results(self):
         alice = self.join()
         Answer.objects.create(player=alice, question=self.q1, choice="a")
@@ -1236,6 +1265,18 @@ class QuizScreenNextTests(QuizTestCase):
 
         self.quiz.refresh_from_db()
         assert self.quiz.step == 5
+
+    def test_stale_step(self):
+        # Pressed on a screen that had not caught up.
+        self.set_step(2)
+        self.login_organizer()
+
+        self.client.post(
+            "/quizzes/quiz-2026/screen/next/", {"step": 1}, headers=HTMX_HEADERS
+        )
+
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 2
 
     def test_invalid_step(self):
         self.login_organizer()
@@ -1367,6 +1408,63 @@ class QuizScreenRemovePlayerTests(QuizTestCase):
         assert response.status_code == HTTPStatus.OK
         assert "0 players" in response.text
         assert not Player.objects.exists()
+
+    def results_at(self, name):
+        """Score Alice 2/2, Bob 1/2, Carol 0/2, and show the given player."""
+        players = {
+            name: Player.objects.create(quiz=self.quiz, name=name)
+            for name in ["Alice", "Bob", "Carol"]
+        }
+        Answer.objects.create(player=players["Alice"], question=self.q1, choice="a")
+        Answer.objects.create(player=players["Alice"], question=self.q2, choice="b")
+        Answer.objects.create(player=players["Bob"], question=self.q1, choice="a")
+        self.set_step({"Alice": 5, "Bob": 6, "Carol": 7}[name])
+        self.login_organizer()
+        return players
+
+    def test_during_results_from_a_higher_score(self):
+        players = self.results_at("Bob")
+
+        response = self.client.post(
+            self.remove_url(players["Alice"]), headers=HTMX_HEADERS
+        )
+
+        # Still on Bob, now the first score down.
+        assert "<li>Bob</li>" in response.text
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 5
+
+    def test_during_results_from_the_score_on_screen(self):
+        players = self.results_at("Bob")
+
+        response = self.client.post(
+            self.remove_url(players["Bob"]), headers=HTMX_HEADERS
+        )
+
+        # On to the next score down.
+        assert "<li>Carol</li>" in response.text
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 6
+
+    def test_during_results_from_the_last_score(self):
+        players = self.results_at("Carol")
+
+        response = self.client.post(
+            self.remove_url(players["Carol"]), headers=HTMX_HEADERS
+        )
+
+        assert "<li>Bob</li>" in response.text
+        assert "Nobody played!" not in response.text
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 6
+
+    def test_during_results_from_a_lower_score(self):
+        players = self.results_at("Alice")
+
+        self.client.post(self.remove_url(players["Carol"]), headers=HTMX_HEADERS)
+
+        self.quiz.refresh_from_db()
+        assert self.quiz.step == 5
 
     def test_without_htmx_redirects(self):
         player = self.join()

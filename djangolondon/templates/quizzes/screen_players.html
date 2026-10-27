@@ -6,6 +6,7 @@
           hx-post=/quizzes/{{ quiz.slug }}/screen/players/{{ player.pk }}/remove/
           hx-target=#quiz-screen
           hx-swap=outerMorph
+          hx-sync="closest #quiz-screen:drop"
           hx-confirm="Remove {{ player.name }} from the quiz?">
       {% csrf_token %}
       <button aria-label="Remove {{ player.name }}">&times;</button>
