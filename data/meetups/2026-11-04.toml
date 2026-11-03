@@ -1,0 +1,15 @@
+title = "Django London Meetup November"
+date = 2026-11-04T18:15:00+00:00
+meetup_url = "https://www.meetup.com/djangolondon/events/317129285/"
+
+[[talks]]
+title = "Is It Django or django? Paths Into Open Source"
+description = "It can be hard to know where to begin with open source contribution - what should one contribute to, what process to follow, and is it 'Django' or 'django'? This talk covers some approaches that I can vouch for, including attending the Django on the Med sprints and participating in the Djangonaut Space programme."
+
+speakers = ["alex-hatfield"]
+
+[[talks]]
+title = "Tech Hiring Has a Fraud Problem"
+description = "Fake profiles and AI-generated applications are becoming more common in tech hiring. This talk shares what’s happening, how it affects real developers, and why community, reputation, and trust matter more than ever."
+
+speakers = ["jon-gould"]
