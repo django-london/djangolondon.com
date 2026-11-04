@@ -11,3 +11,4 @@ extend-ignore-re = [
 
 [default.extend-words]
   Som = "Som"
+  certifi = "certifi"
