@@ -2,8 +2,10 @@ import datetime as dt
 from http import HTTPStatus
 
 import time_machine
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase
+from unittest_parametrize import ParametrizedTestCase, param, parametrize
 
 from djangolondon.models import Entry, Meetup, Prize, PrizeDraw, Speaker
 
@@ -147,11 +149,21 @@ class OrganizerIndexTests(TestCase):
         assert "14 October" in response.text
 
 
-class OrganizerSlidesTests(TestCase):
-    def test_success(self):
-        response = self.client.get("/organizers/2026-10-14/")
+DECK_DATES = sorted(
+    path.stem
+    for path in (settings.BASE_DIR / "djangolondon/templates/slides/decks").glob(
+        "*.html"
+    )
+)
+
+
+class OrganizerSlidesTests(ParametrizedTestCase, TestCase):
+    @parametrize(
+        "date", [param(date, id=date.replace("-", "_")) for date in DECK_DATES]
+    )
+    def test_success(self, date):
+        response = self.client.get(f"/organizers/{date}/")
         assert response.status_code == HTTPStatus.OK
-        assert "Who lost our customers?" in response.text
         assert "/static/slides/reveal.js" in response.text
         assert "<div class=slides>\n\n<section>" in response.text
         nonce = response.context["csp_nonce"]
